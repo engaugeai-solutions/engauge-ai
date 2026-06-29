@@ -1505,20 +1505,51 @@ fadeEls.forEach(el => {
   observer.observe(el);
 });
 
+// ── EmailJS init ─────────────────────────────
+(function(){
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+  script.onload = function() { emailjs.init('VAX_jo4J1n7_BeYjb'); };
+  document.head.appendChild(script);
+})();
+
 // ── Contact form ──────────────────────────────
 const form = document.getElementById('contactForm');
-form.addEventListener('submit', e => {
+form.addEventListener('submit', function(e) {
   e.preventDefault();
   const btn = form.querySelector('button[type="submit"]');
-  btn.textContent = '✓ Message Sent!';
-  btn.style.background = '#1A8F4B';
+  btn.textContent = 'Sending...';
   btn.disabled = true;
-  setTimeout(() => {
-    btn.textContent = 'Send Message →';
-    btn.style.background = '';
-    btn.disabled = false;
-    form.reset();
-  }, 4000);
+
+  const params = {
+    name:     document.getElementById('name').value,
+    email:    document.getElementById('email').value,
+    business: document.getElementById('business').value,
+    service:  document.getElementById('service').value,
+    message:  document.getElementById('message').value,
+  };
+
+  emailjs.send('service_pd0i0sa', 'template_18haxfi', params)
+    .then(function() {
+      btn.textContent = '✓ Message Sent!';
+      btn.style.background = '#1A8F4B';
+      form.reset();
+      setTimeout(function() {
+        btn.textContent = 'Send Message →';
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 5000);
+    })
+    .catch(function(err) {
+      console.error('EmailJS error:', err);
+      btn.textContent = '✗ Failed — Try Again';
+      btn.style.background = '#8F1A1A';
+      btn.disabled = false;
+      setTimeout(function() {
+        btn.textContent = 'Send Message →';
+        btn.style.background = '';
+      }, 4000);
+    });
 });
 
 </script>
