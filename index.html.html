@@ -1120,12 +1120,12 @@ img { display: block; max-width: 100%; }
         <span style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#fff;letter-spacing:-0.3px;">Engauge <span style="color:#4F8EF7;">AI</span></span>
       </a>
       <ul class="nav-links">
+        <li id="matches-nav-item" style="display:none"><a href="#" onclick="openMatchesPortal()" style="color:#4F8EF7;font-weight:600;border:1px solid rgba(79,142,247,0.3);padding:6px 14px;border-radius:8px">🎯 Matches</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#agents">AI Agents</a></li>
         <li><a href="#process">Process</a></li>
         <li><a href="#results">Results</a></li>
         <li><a href="#booking" class="nav-cta">Book a Call</a></li>
-        <li><a href="staging.html" style="font-size:11px;opacity:.3;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.1);padding:4px 10px;border-radius:6px;letter-spacing:.05em">Staging</a></li>
       </ul>
       <button class="nav-hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -1757,6 +1757,475 @@ form.addEventListener('submit', function(e) {
     });
 });
 
+</script>
+
+<!-- MATCHES PORTAL MODAL -->
+<div id="matchesModal" style="display:none;position:fixed;inset:0;z-index:9999;background:#07090F;overflow-y:auto">
+  <div style="display:grid;grid-template-columns:240px 1fr;min-height:100vh">
+    <!-- Sidebar -->
+    <div style="background:#0E1320;border-right:1px solid rgba(255,255,255,0.07);padding:24px 16px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh;overflow-y:auto">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.07)">
+        <svg width="26" height="26" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mlg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#141E52"/><stop offset="100%" stop-color="#3B6FF6"/></linearGradient></defs><rect x="44" y="44" width="24" height="112" rx="8" fill="url(#mlg)"/><rect x="44" y="44" width="64" height="24" rx="8" fill="url(#mlg)"/><rect x="44" y="88" width="88" height="24" rx="8" fill="url(#mlg)"/><rect x="44" y="132" width="112" height="24" rx="8" fill="url(#mlg)"/></svg>
+        <div>
+          <div style="font-family:Syne,sans-serif;font-size:14px;font-weight:700;color:#fff">Engauge AI</div>
+          <div style="font-size:9px;font-weight:700;background:#2557D6;color:#fff;padding:2px 7px;border-radius:100px;display:inline-block;margin-top:2px">MATCHES</div>
+        </div>
+      </div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:.1em;color:rgba(232,234,240,0.3);padding:8px 10px 4px;text-transform:uppercase">Portal</div>
+      <button onclick="showMTab('upload')" id="mtab-btn-upload" class="mtab-btn active-mtab" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;border:none;width:100%;text-align:left;background:rgba(79,142,247,0.12);color:#4F8EF7;border:1px solid rgba(79,142,247,0.3)">📄 Resume Upload</button>
+      <button onclick="showMTab('profile')" id="mtab-btn-profile" class="mtab-btn" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;border:1px solid transparent;background:none;color:rgba(232,234,240,0.5);width:100%;text-align:left">👤 My Profile</button>
+      <button onclick="showMTab('matches')" id="mtab-btn-matches" class="mtab-btn" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;border:1px solid transparent;background:none;color:rgba(232,234,240,0.5);width:100%;text-align:left">🎯 Job Matches</button>
+      <button onclick="showMTab('apply')" id="mtab-btn-apply" class="mtab-btn" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;border:1px solid transparent;background:none;color:rgba(232,234,240,0.5);width:100%;text-align:left">✉️ Apply & Cover Letter</button>
+      <div style="margin-top:auto;padding-top:16px;border-top:1px solid rgba(255,255,255,0.07)">
+        <button onclick="closeMatchesPortal()" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;border:none;background:none;color:rgba(232,234,240,0.3);width:100%;text-align:left">← Back to Website</button>
+      </div>
+    </div>
+    <!-- Main content -->
+    <div style="padding:36px;overflow-y:auto;background:#07090F" id="mportal-main">
+
+      <!-- UPLOAD TAB -->
+      <div id="mtab-upload">
+        <div style="margin-bottom:28px"><h1 style="font-family:Syne,sans-serif;font-size:1.5rem;font-weight:700;color:#fff">Resume Upload</h1><p style="font-size:14px;color:rgba(232,234,240,0.5);margin-top:4px">Upload your CV and we'll build your profile automatically</p></div>
+        <div style="background:#0E1320;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px">
+          <div id="mUploadZone" onclick="document.getElementById('mFileInput').click()" ondragover="event.preventDefault();this.style.borderColor='#4F8EF7'" ondragleave="this.style.borderColor='rgba(79,142,247,0.3)'" ondrop="mHandleDrop(event)" style="border:2px dashed rgba(79,142,247,0.3);border-radius:12px;padding:48px;text-align:center;cursor:pointer;background:rgba(79,142,247,0.06);transition:all .2s">
+            <input type="file" id="mFileInput" accept=".pdf,.doc,.docx,.txt" style="display:none" onchange="mHandleFile(event)"/>
+            <div style="font-size:2.5rem;margin-bottom:14px">📎</div>
+            <h3 style="font-family:Syne,sans-serif;font-size:1rem;color:#fff;margin-bottom:8px">Drop your CV here or click to browse</h3>
+            <p style="font-size:13px;color:rgba(232,234,240,0.45)">Supports PDF, DOC, DOCX, TXT</p>
+          </div>
+          <div id="mUploadStatus" style="display:none;margin-top:20px">
+            <div style="background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.25);color:#4F8EF7;padding:14px 18px;border-radius:10px;font-size:14px;display:flex;align-items:center;gap:12px">
+              <div style="width:18px;height:18px;border:2px solid rgba(79,142,247,0.2);border-top-color:#4F8EF7;border-radius:50%;animation:mspin .7s linear infinite;flex-shrink:0"></div>
+              <div><strong>Analysing your resume...</strong><br/><span id="mAnalysisStep" style="font-size:12px;opacity:.8">Reading your experience</span></div>
+            </div>
+            <div style="width:100%;height:4px;background:rgba(255,255,255,0.06);border-radius:2px;margin-top:12px;overflow:hidden"><div id="mProgressFill" style="height:100%;background:linear-gradient(90deg,#2557D6,#4F8EF7);border-radius:2px;transition:width .4s ease;width:0%"></div></div>
+          </div>
+          <div id="mUploadSuccess" style="display:none;margin-top:20px">
+            <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);color:#22C55E;padding:14px 18px;border-radius:10px;font-size:14px;display:flex;align-items:center;gap:10px">✅ <div><strong>Resume analysed!</strong><br/><span style="font-size:12px">Your profile has been built. Review and edit it before finding matches.</span></div></div>
+            <div style="display:flex;gap:12px;margin-top:14px">
+              <button onclick="showMTab('profile')" style="background:#2557D6;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">Review Profile →</button>
+              <button onclick="document.getElementById('mFileInput').click()" style="background:rgba(255,255,255,0.05);color:#E8EAF0;border:1px solid rgba(255,255,255,0.1);padding:10px 20px;border-radius:8px;font-size:14px;cursor:pointer">Upload Different CV</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROFILE TAB -->
+      <div id="mtab-profile" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px">
+          <div><h1 style="font-family:Syne,sans-serif;font-size:1.5rem;font-weight:700;color:#fff">My Profile</h1><p style="font-size:14px;color:rgba(232,234,240,0.5);margin-top:4px">Review and edit your professional profile</p></div>
+          <div style="display:flex;gap:10px">
+            <button onclick="mSaveProfile()" style="background:#2557D6;color:#fff;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer">Save Profile</button>
+          </div>
+        </div>
+        <div style="background:#0E1320;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:11px;font-weight:600;color:rgba(232,234,240,0.5);text-transform:uppercase;letter-spacing:.04em">Full Name</label><input id="mp-name" type="text" placeholder="Your full name" style="background:#141926;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:10px 14px;font-size:14px;color:#E8EAF0;font-family:Inter,sans-serif;outline:none"/></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:11px;font-weight:600;color:rgba(232,234,240,0.5);text-transform:uppercase;letter-spacing:.04em">Current Title</label><input id="mp-title" type="text" placeholder="e.g. Senior Product Manager" style="background:#141926;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:10px 14px;font-size:14px;color:#E8EAF0;font-family:Inter,sans-serif;outline:none"/></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:11px;font-weight:600;color:rgba(232,234,240,0.5);text-transform:uppercase;letter-spacing:.04em">Years of Experience</label><input id="mp-exp" type="text" placeholder="e.g. 5 years" style="background:#141926;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:10px 14px;font-size:14px;color:#E8EAF0;font-family:Inter,sans-serif;outline:none"/></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:11px;font-weight:600;color:rgba(232,234,240,0.5);text-transform:uppercase;letter-spacing:.04em">Location</label><input id="mp-location" type="text" placeholder="e.g. London, UK / Remote" style="background:#141926;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:10px 14px;font-size:14px;color:#E8EAF0;font-family:Inter,sans-serif;outline:none"/></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:11px;font-weight:600;color:rgba(232,234,240,0.5);text-transform:uppercase;letter-spacing:.04em">Email</label><input id="mp-email" type="email" placeholder="your@email.com" style="background:#141926;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:10px 14px;font-size:14px;color:#E8EAF0;font-family:Inter,sans-serif;outline:none"/></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:11px;font-weight:600;color:rgba(232,234,240,0.5);text-transform:uppercase;letter-spacing:.04em">Target Roles</label><input id="mp-roles" type="text" placeholder="e.g. Product Manager, Growth Lead" style="background:#141926;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:10px 14px;font-size:14px;color:#E8EAF0;font-family:Inter,sans-serif;outline:none"/></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:11px;font-weight:600;color:rgba(232,234,240,0.5);text-transform:uppercase;letter-spacing:.04em">Salary Expectation</label><input id="mp-salary" type="text" placeholder="e.g. £60,000–£80,000" style="background:#141926;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:10px 14px;font-size:14px;color:#E8EAF0;font-family:Inter,sans-serif;outline:none"/></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><label style="font-size:11px;font-weight:600;color:rgba(232,234,240,0.5);text-transform:uppercase;letter-spacing:.04em">Work Type</label><select id="mp-worktype" style="background:#141926;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:10px 14px;font-size:14px;color:#E8EAF0;font-family:Inter,sans-serif;outline:none"><option value="">Select...</option><option>Remote</option><option>Hybrid</option><option>On-site</option><option>Any</option></select></div>
+            <div style="display:flex;flex-direction:column;gap:6px;grid-column:1/-1"><label style="font-size:11px;font-weight:600;color:rgba(232,234,240,0.5);text-transform:uppercase;letter-spacing:.04em">Professional Summary</label><textarea id="mp-summary" rows="3" placeholder="Brief summary of who you are and what you're looking for..." style="background:#141926;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:10px 14px;font-size:14px;color:#E8EAF0;font-family:Inter,sans-serif;outline:none;resize:vertical"></textarea></div>
+            <div style="display:flex;flex-direction:column;gap:6px;grid-column:1/-1"><label style="font-size:11px;font-weight:600;color:rgba(232,234,240,0.5);text-transform:uppercase;letter-spacing:.04em">Skills (press Enter to add)</label><div id="mSkillsBox" onclick="document.getElementById('mSkillInput').focus()" style="display:flex;flex-wrap:wrap;gap:8px;background:#141926;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:8px 12px;min-height:48px;align-items:center;cursor:text"><input type="text" id="mSkillInput" placeholder="Add a skill..." onkeydown="mAddTag(event)" style="background:none;border:none;outline:none;font-size:13px;color:#E8EAF0;flex:1;min-width:100px;font-family:Inter,sans-serif"/></div></div>
+            <div style="display:flex;flex-direction:column;gap:6px;grid-column:1/-1"><label style="font-size:11px;font-weight:600;color:rgba(232,234,240,0.5);text-transform:uppercase;letter-spacing:.04em">Work Experience</label><textarea id="mp-experience" rows="5" placeholder="Key roles, companies, and achievements..." style="background:#141926;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:10px 14px;font-size:14px;color:#E8EAF0;font-family:Inter,sans-serif;outline:none;resize:vertical"></textarea></div>
+            <div style="display:flex;flex-direction:column;gap:6px;grid-column:1/-1"><label style="font-size:11px;font-weight:600;color:rgba(232,234,240,0.5);text-transform:uppercase;letter-spacing:.04em">Education</label><textarea id="mp-education" rows="2" placeholder="Degrees, certifications..." style="background:#141926;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:10px 14px;font-size:14px;color:#E8EAF0;font-family:Inter,sans-serif;outline:none;resize:vertical"></textarea></div>
+          </div>
+          <div style="margin-top:20px;display:flex;gap:12px">
+            <button onclick="mSaveProfile();showMTab('matches')" style="background:#2557D6;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">Save & Find Matches →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MATCHES TAB -->
+      <div id="mtab-matches" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px">
+          <div><h1 style="font-family:Syne,sans-serif;font-size:1.5rem;font-weight:700;color:#fff">Job Matches</h1><p style="font-size:14px;color:rgba(232,234,240,0.5);margin-top:4px">Roles matched to your profile with selectability scores</p></div>
+          <button id="mFindBtn" onclick="mFindJobs()" style="background:#2557D6;color:#fff;border:none;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer">🔍 Find Matches</button>
+        </div>
+        <div id="mMatchLoading" style="display:none;background:#0E1320;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px;margin-bottom:20px">
+          <div style="background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.25);color:#4F8EF7;padding:14px 18px;border-radius:10px;font-size:14px;display:flex;align-items:center;gap:12px">
+            <div style="width:18px;height:18px;border:2px solid rgba(79,142,247,0.2);border-top-color:#4F8EF7;border-radius:50%;animation:mspin .7s linear infinite;flex-shrink:0"></div>
+            <div><strong>Searching for matching roles...</strong><br/><span id="mMatchStep" style="font-size:12px;opacity:.8">Analysing your profile</span></div>
+          </div>
+          <div style="width:100%;height:4px;background:rgba(255,255,255,0.06);border-radius:2px;margin-top:12px;overflow:hidden"><div id="mMatchProgress" style="height:100%;background:linear-gradient(90deg,#2557D6,#4F8EF7);border-radius:2px;transition:width .4s ease;width:0%"></div></div>
+        </div>
+        <div id="mMatchEmpty" style="text-align:center;padding:64px 24px;color:rgba(232,234,240,0.3)">
+          <div style="font-size:3rem;margin-bottom:16px;opacity:.4">🎯</div>
+          <h3 style="font-family:Syne,sans-serif;font-size:1rem;color:rgba(232,234,240,0.5);margin-bottom:8px">No matches yet</h3>
+          <p style="font-size:14px;max-width:320px;margin:0 auto 20px">Complete your profile then click Find Matches.</p>
+          <button onclick="showMTab('profile')" style="background:#2557D6;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">Complete Profile</button>
+        </div>
+        <div id="mJobsList" style="display:none;display:flex;flex-direction:column;gap:14px"></div>
+      </div>
+
+      <!-- APPLY TAB -->
+      <div id="mtab-apply" style="display:none">
+        <div style="margin-bottom:28px"><h1 style="font-family:Syne,sans-serif;font-size:1.5rem;font-weight:700;color:#fff">Apply & Cover Letter</h1><p style="font-size:14px;color:rgba(232,234,240,0.5);margin-top:4px">Custom cover letter and CV tips for your selected role</p></div>
+        <div id="mApplyEmpty" style="text-align:center;padding:64px 24px;color:rgba(232,234,240,0.3)">
+          <div style="font-size:3rem;margin-bottom:16px;opacity:.4">✉️</div>
+          <h3 style="font-family:Syne,sans-serif;font-size:1rem;color:rgba(232,234,240,0.5);margin-bottom:8px">No role selected</h3>
+          <p style="font-size:14px;max-width:320px;margin:0 auto 20px">Go to Job Matches and click "Prepare Application" on a role.</p>
+          <button onclick="showMTab('matches')" style="background:#2557D6;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">View Matches</button>
+        </div>
+        <div id="mApplyContent" style="display:none">
+          <div id="mSelectedJob" style="background:#0E1320;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:24px;margin-bottom:16px"></div>
+          <div style="background:#141926;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:24px;margin-bottom:14px">
+            <h4 style="font-family:Syne,sans-serif;font-size:.95rem;font-weight:700;color:#fff;margin-bottom:14px;display:flex;align-items:center;gap:8px">✉️ Custom Cover Letter <span id="mCoverSpin" style="display:none;width:16px;height:16px;border:2px solid rgba(79,142,247,0.2);border-top-color:#4F8EF7;border-radius:50%;animation:mspin .7s linear infinite;display:none"></span></h4>
+            <div id="mCoverContent" style="font-size:14px;color:rgba(232,234,240,0.6);line-height:1.8;white-space:pre-wrap;background:#0E1320;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:20px;min-height:100px">Click Generate to create your cover letter.</div>
+            <div style="display:flex;gap:10px;margin-top:14px">
+              <button onclick="mGenerateCover()" style="background:#2557D6;color:#fff;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer">✨ Generate Cover Letter</button>
+              <button onclick="navigator.clipboard.writeText(document.getElementById('mCoverContent').textContent).then(()=>mToast('Copied!'))" style="background:rgba(255,255,255,0.05);color:#E8EAF0;border:1px solid rgba(255,255,255,0.1);padding:9px 18px;border-radius:8px;font-size:13px;cursor:pointer">📋 Copy</button>
+            </div>
+          </div>
+          <div style="background:#141926;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:24px;margin-bottom:16px">
+            <h4 style="font-family:Syne,sans-serif;font-size:.95rem;font-weight:700;color:#fff;margin-bottom:14px">📝 CV Tips for This Role</h4>
+            <div id="mCvTips"><div style="font-size:14px;color:rgba(232,234,240,0.3);font-style:italic;padding:16px;background:#0E1320;border:1px solid rgba(255,255,255,0.07);border-radius:8px">Generate your cover letter first — tips will appear here.</div></div>
+          </div>
+          <div style="display:flex;gap:12px">
+            <a id="mApplyLink" href="#" target="_blank" style="background:#2557D6;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center">Apply for This Role →</a>
+            <button onclick="showMTab('matches')" style="background:rgba(255,255,255,0.05);color:#E8EAF0;border:1px solid rgba(255,255,255,0.1);padding:10px 20px;border-radius:8px;font-size:14px;cursor:pointer">← Back to Matches</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Password prompt -->
+<div id="matchesPwModal" style="display:none;position:fixed;inset:0;z-index:10000;background:rgba(7,9,15,0.97);display:none;align-items:center;justify-content:center">
+  <div style="background:#0E1320;border:1px solid rgba(79,142,247,0.3);border-radius:16px;padding:40px;width:100%;max-width:380px;text-align:center">
+    <div style="font-size:2rem;margin-bottom:16px">🔐</div>
+    <h3 style="font-family:Syne,sans-serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:8px">Private Access</h3>
+    <p style="font-size:14px;color:rgba(232,234,240,0.5);margin-bottom:24px">Enter password to access the Matches portal</p>
+    <input type="password" id="pwInput" placeholder="Enter password" onkeydown="if(event.key==='Enter')checkPw()" style="width:100%;background:#141926;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:12px 16px;font-size:14px;color:#fff;font-family:Inter,sans-serif;outline:none;margin-bottom:12px;text-align:center;letter-spacing:.2em"/>
+    <div id="pwError" style="display:none;color:#EF4444;font-size:13px;margin-bottom:12px">Incorrect password</div>
+    <div style="display:flex;gap:10px">
+      <button onclick="checkPw()" style="flex:1;background:#2557D6;color:#fff;border:none;padding:11px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">Unlock</button>
+      <button onclick="closePwModal()" style="background:rgba(255,255,255,0.05);color:#E8EAF0;border:1px solid rgba(255,255,255,0.1);padding:11px 16px;border-radius:8px;font-size:14px;cursor:pointer">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes mspin{to{transform:rotate(360deg)}}
+</style>
+
+<script>
+// ── Password & Portal access ──
+const MATCHES_PW = '1995@22';
+
+function openMatchesPortal() {
+  if (sessionStorage.getItem('matches_unlocked') === 'yes') {
+    document.getElementById('matchesModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.getElementById('matchesPwModal').style.display = 'flex';
+    setTimeout(() => document.getElementById('pwInput').focus(), 100);
+  }
+}
+
+function checkPw() {
+  const val = document.getElementById('pwInput').value;
+  if (val === MATCHES_PW) {
+    sessionStorage.setItem('matches_unlocked', 'yes');
+    document.getElementById('matchesPwModal').style.display = 'none';
+    document.getElementById('matchesModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    document.getElementById('pwInput').value = '';
+    document.getElementById('pwError').style.display = 'none';
+    document.getElementById('matches-nav-item').style.display = 'list-item';
+  } else {
+    document.getElementById('pwError').style.display = 'block';
+    document.getElementById('pwInput').value = '';
+    document.getElementById('pwInput').focus();
+  }
+}
+
+function closePwModal() {
+  document.getElementById('matchesPwModal').style.display = 'none';
+  document.getElementById('pwInput').value = '';
+  document.getElementById('pwError').style.display = 'none';
+}
+
+function closeMatchesPortal() {
+  document.getElementById('matchesModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+// Keyboard shortcut: Ctrl + Shift + M
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && e.shiftKey && e.key === 'M') {
+    e.preventDefault();
+    openMatchesPortal();
+  }
+});
+
+// ── Tab switching ──
+function showMTab(name) {
+  ['upload','profile','matches','apply'].forEach(t => {
+    document.getElementById('mtab-'+t).style.display = t === name ? 'block' : 'none';
+    const btn = document.getElementById('mtab-btn-'+t);
+    if (btn) {
+      if (t === name) {
+        btn.style.background = 'rgba(79,142,247,0.12)';
+        btn.style.color = '#4F8EF7';
+        btn.style.border = '1px solid rgba(79,142,247,0.3)';
+      } else {
+        btn.style.background = 'none';
+        btn.style.color = 'rgba(232,234,240,0.5)';
+        btn.style.border = '1px solid transparent';
+      }
+    }
+  });
+}
+
+// ── Skills tags ──
+let mSkills = [];
+function mAddTag(e) {
+  if (e.key !== 'Enter' && e.key !== ',') return;
+  e.preventDefault();
+  const val = e.target.value.trim().replace(/,$/, '');
+  if (!val || mSkills.includes(val)) return;
+  mSkills.push(val);
+  mRenderSkills();
+  e.target.value = '';
+}
+function mRenderSkills() {
+  const box = document.getElementById('mSkillsBox');
+  const input = document.getElementById('mSkillInput');
+  box.innerHTML = '';
+  mSkills.forEach((s, i) => {
+    const t = document.createElement('div');
+    t.style.cssText = 'background:rgba(79,142,247,0.15);border:1px solid rgba(79,142,247,0.3);color:#4F8EF7;font-size:12px;font-weight:500;padding:3px 10px;border-radius:100px;display:flex;align-items:center;gap:6px';
+    t.innerHTML = `${s}<span style="cursor:pointer;opacity:.7" onclick="mSkills.splice(${i},1);mRenderSkills()">×</span>`;
+    box.appendChild(t);
+  });
+  box.appendChild(input);
+}
+
+// ── Save profile ──
+let mProfile = {}, mJobs = [], mSelectedJob = null;
+function mSaveProfile() {
+  mProfile = {
+    name: document.getElementById('mp-name').value,
+    title: document.getElementById('mp-title').value,
+    exp: document.getElementById('mp-exp').value,
+    location: document.getElementById('mp-location').value,
+    email: document.getElementById('mp-email').value,
+    roles: document.getElementById('mp-roles').value,
+    salary: document.getElementById('mp-salary').value,
+    worktype: document.getElementById('mp-worktype').value,
+    summary: document.getElementById('mp-summary').value,
+    experience: document.getElementById('mp-experience').value,
+    education: document.getElementById('mp-education').value,
+    skills: [...mSkills],
+  };
+  try { localStorage.setItem('engauge_matches_profile', JSON.stringify(mProfile)); } catch(e) {}
+  mToast('Profile saved!');
+}
+function mLoadProfile() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('engauge_matches_profile') || 'null');
+    if (!saved) return;
+    mProfile = saved;
+    mSkills = saved.skills || [];
+    ['name','title','exp','location','email','roles','salary','worktype','summary','experience','education'].forEach(k => {
+      const el = document.getElementById('mp-'+k);
+      if (el && saved[k]) el.value = saved[k];
+    });
+    mRenderSkills();
+  } catch(e) {}
+}
+
+// ── File upload ──
+function mHandleDrop(e) {
+  e.preventDefault();
+  const file = e.dataTransfer.files[0];
+  if (file) mProcessFile(file);
+}
+function mHandleFile(e) { if (e.target.files[0]) mProcessFile(e.target.files[0]); }
+
+async function mProcessFile(file) {
+  document.getElementById('mUploadStatus').style.display = 'block';
+  document.getElementById('mUploadSuccess').style.display = 'none';
+  const steps = [[10,'Reading document...'],[30,'Extracting experience...'],[55,'Identifying skills...'],[75,'Building profile...'],[90,'Finalising...']];
+  for (const [p, msg] of steps) {
+    document.getElementById('mProgressFill').style.width = p + '%';
+    document.getElementById('mAnalysisStep').textContent = msg;
+    await mSleep(600);
+  }
+  let text = '';
+  try { text = await new Promise((r,j) => { const fr = new FileReader(); fr.onload = e => r(e.target.result); fr.onerror = j; fr.readAsText(file); }); } catch(e) { text = file.name; }
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ model:'claude-sonnet-4-6', max_tokens:1000,
+        system: 'Extract resume data and return ONLY valid JSON with keys: name, title, exp, location, email, roles, salary, summary, experience, education, skills (array). No markdown.',
+        messages: [{ role:'user', content: `Extract from CV:
+
+${text.slice(0,4000)}` }]
+      })
+    });
+    const data = await resp.json();
+    const extracted = JSON.parse(data.content[0].text.replace(/```json|```/g,'').trim());
+    mProfile = extracted;
+    mSkills = extracted.skills || [];
+    Object.entries(extracted).forEach(([k,v]) => { const el = document.getElementById('mp-'+k); if (el && typeof v === 'string') el.value = v; });
+    mRenderSkills();
+    mSaveProfile();
+  } catch(e) {}
+  document.getElementById('mProgressFill').style.width = '100%';
+  await mSleep(300);
+  document.getElementById('mUploadStatus').style.display = 'none';
+  document.getElementById('mUploadSuccess').style.display = 'block';
+}
+
+// ── Find jobs ──
+async function mFindJobs() {
+  mSaveProfile();
+  document.getElementById('mMatchEmpty').style.display = 'none';
+  document.getElementById('mJobsList').style.display = 'none';
+  document.getElementById('mMatchLoading').style.display = 'block';
+  document.getElementById('mFindBtn').disabled = true;
+  const steps = [[15,'Reading profile...'],[35,'Searching job portals...'],[55,'Analysing roles...'],[75,'Scoring matches...'],[90,'Ranking results...']];
+  for (const [p, msg] of steps) {
+    document.getElementById('mMatchProgress').style.width = p + '%';
+    document.getElementById('mMatchStep').textContent = msg;
+    await mSleep(700);
+  }
+  const pText = `Name:${mProfile.name} Title:${mProfile.title} Exp:${mProfile.exp} Skills:${mSkills.join(',')} Roles:${mProfile.roles} Location:${mProfile.location} Salary:${mProfile.salary} Summary:${mProfile.summary}`;
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ model:'claude-sonnet-4-6', max_tokens:1000,
+        system:'Generate 6 realistic job matches as a JSON array. Each object must have: title, company, location, type, salary, description (2 sentences), score (0-100), scoreReason (1 sentence), applyUrl (realistic LinkedIn or company URL), tags (array of 3-4 skills). Sort by score desc. Return ONLY the JSON array.',
+        messages:[{role:'user',content:`Match jobs for:
+${pText}`}]
+      })
+    });
+    const data = await resp.json();
+    mJobs = JSON.parse(data.content[0].text.replace(/```json|```/g,'').trim());
+  } catch(e) {
+    mJobs = [{title:'Senior Product Manager',company:'TechVentures',location:'London (Hybrid)',type:'Full-time',salary:'£75K–£95K',description:'Lead product strategy for a growing SaaS platform. Work with engineering and design to ship impactful features.',score:88,scoreReason:'Strong alignment with your PM background and skills.',applyUrl:'https://linkedin.com/jobs',tags:['Product','SaaS','Agile','Strategy']},{title:'Growth Manager',company:'Fintech Startup',location:'Remote',type:'Full-time',salary:'£60K–£80K',description:'Own user acquisition and retention strategies. Run experiments and scale what works.',score:74,scoreReason:'Your growth skills are a solid match.',applyUrl:'https://linkedin.com/jobs',tags:['Growth','Analytics','A/B Testing','Retention']}];
+  }
+  document.getElementById('mMatchProgress').style.width = '100%';
+  await mSleep(300);
+  document.getElementById('mMatchLoading').style.display = 'none';
+  mRenderJobs();
+  document.getElementById('mFindBtn').disabled = false;
+}
+
+function mRenderJobs() {
+  const list = document.getElementById('mJobsList');
+  list.innerHTML = '';
+  mJobs.forEach((job, i) => {
+    const sc = job.score >= 80 ? 'rgba(34,197,94,0.15);color:#22C55E;border:1px solid rgba(34,197,94,0.25)' : job.score >= 60 ? 'rgba(245,158,11,0.15);color:#F59E0B;border:1px solid rgba(245,158,11,0.25)' : 'rgba(239,68,68,0.15);color:#EF4444;border:1px solid rgba(239,68,68,0.25)';
+    const emoji = job.score >= 80 ? '🟢' : job.score >= 60 ? '🟡' : '🔴';
+    list.innerHTML += `<div style="background:#0E1320;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start">
+      <div>
+        <div style="font-family:Syne,sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:3px">${job.title}</div>
+        <div style="font-size:13px;color:#4F8EF7;font-weight:500;margin-bottom:10px">${job.company}</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+          <span style="font-size:11px;background:rgba(255,255,255,0.06);color:rgba(232,234,240,0.5);padding:3px 10px;border-radius:100px">📍 ${job.location}</span>
+          <span style="font-size:11px;background:rgba(255,255,255,0.06);color:rgba(232,234,240,0.5);padding:3px 10px;border-radius:100px">💼 ${job.type}</span>
+          ${job.salary?`<span style="font-size:11px;background:rgba(34,197,94,0.1);color:#22C55E;padding:3px 10px;border-radius:100px">💰 ${job.salary}</span>`:''}
+        </div>
+        <div style="font-size:13px;color:rgba(232,234,240,0.55);line-height:1.6;margin-bottom:10px">${job.description}</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          ${(job.tags||[]).map(t=>`<span style="font-size:11px;background:rgba(255,255,255,0.06);color:rgba(232,234,240,0.5);padding:3px 10px;border-radius:100px">${t}</span>`).join('')}
+        </div>
+        <div style="font-size:11px;color:rgba(232,234,240,0.3);margin-top:8px;font-style:italic">${job.scoreReason}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+        <div style="font-size:12px;font-weight:700;padding:5px 12px;border-radius:100px;white-space:nowrap;background:${sc}">${emoji} ${job.score}%</div>
+        <button onclick="mPrepareApply(${i})" style="background:#2557D6;color:#fff;border:none;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap">✉️ Prepare</button>
+        <a href="${job.applyUrl}" target="_blank" style="background:rgba(255,255,255,0.05);color:#E8EAF0;border:1px solid rgba(255,255,255,0.1);padding:8px 14px;border-radius:8px;font-size:12px;text-decoration:none;white-space:nowrap;text-align:center">Apply →</a>
+      </div>
+    </div>`;
+  });
+  list.style.display = 'flex';
+  list.style.flexDirection = 'column';
+  list.style.gap = '12px';
+}
+
+function mPrepareApply(i) {
+  mSelectedJob = mJobs[i];
+  showMTab('apply');
+  document.getElementById('mApplyEmpty').style.display = 'none';
+  document.getElementById('mApplyContent').style.display = 'block';
+  const sc = mSelectedJob.score >= 80 ? 'rgba(34,197,94,0.15);color:#22C55E;border:1px solid rgba(34,197,94,0.25)' : mSelectedJob.score >= 60 ? 'rgba(245,158,11,0.15);color:#F59E0B;border:1px solid rgba(245,158,11,0.25)' : 'rgba(239,68,68,0.15);color:#EF4444;border:1px solid rgba(239,68,68,0.25)';
+  document.getElementById('mSelectedJob').innerHTML = `<div style="display:flex;justify-content:space-between;align-items:start;gap:16px"><div><div style="font-family:Syne,sans-serif;font-size:1rem;font-weight:700;color:#fff">${mSelectedJob.title}</div><div style="font-size:13px;color:#4F8EF7;margin:4px 0 10px">${mSelectedJob.company}</div><div style="font-size:13px;color:rgba(232,234,240,0.55);line-height:1.6">${mSelectedJob.description}</div></div><div style="font-size:12px;font-weight:700;padding:5px 12px;border-radius:100px;white-space:nowrap;background:${sc}">${mSelectedJob.score}% Match</div></div>`;
+  document.getElementById('mApplyLink').href = mSelectedJob.applyUrl;
+  document.getElementById('mCoverContent').textContent = 'Click ✨ Generate Cover Letter to create your personalised cover letter.';
+  document.getElementById('mCvTips').innerHTML = '<div style="font-size:14px;color:rgba(232,234,240,0.3);font-style:italic;padding:16px;background:#0E1320;border:1px solid rgba(255,255,255,0.07);border-radius:8px">CV tips appear after you generate your cover letter.</div>';
+}
+
+async function mGenerateCover() {
+  if (!mSelectedJob) return;
+  document.getElementById('mCoverContent').textContent = 'Generating your personalised cover letter...';
+  const pText = `Name:${mProfile.name} Title:${mProfile.title} Exp:${mProfile.exp} Skills:${mSkills.join(',')} Summary:${mProfile.summary} Experience:${mProfile.experience} Education:${mProfile.education}`;
+  const jText = `Role:${mSelectedJob.title} at ${mSelectedJob.company} - ${mSelectedJob.description}`;
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({ model:'claude-sonnet-4-6', max_tokens:1000,
+        system:`Write a compelling cover letter and CV tips. Format EXACTLY:
+COVER_LETTER:
+[3-4 paragraph cover letter]
+
+CV_TIPS:
+1. [tip]
+2. [tip]
+3. [tip]
+4. [tip]
+5. [tip]`,
+        messages:[{role:'user',content:`Candidate:
+${pText}
+
+Job:
+${jText}`}]
+      })
+    });
+    const data = await resp.json();
+    const text = data.content[0].text;
+    const cover = text.match(/COVER_LETTER:
+([\s\S]*?)(?=CV_TIPS:|$)/);
+    const tips = text.match(/CV_TIPS:
+([\s\S]*?)$/);
+    if (cover) document.getElementById('mCoverContent').textContent = cover[1].trim();
+    if (tips) {
+      const lines = tips[1].trim().split('
+').filter(l=>l.trim());
+      const icons = ['🎯','📊','💡','✍️','🔑'];
+      document.getElementById('mCvTips').innerHTML = `<div style="display:flex;flex-direction:column;gap:10px">${lines.map((l,i)=>`<div style="display:flex;gap:12px;font-size:13px;color:rgba(232,234,240,0.65);line-height:1.5;padding:12px;background:#0E1320;border-radius:8px;border:1px solid rgba(255,255,255,0.06)"><span style="font-size:15px;flex-shrink:0">${icons[i]||'💡'}</span><span>${l.replace(/^\d+\.\s*/,'')}</span></div>`).join('')}</div>`;
+    }
+  } catch(e) {
+    document.getElementById('mCoverContent').textContent = `Dear Hiring Manager,
+
+I am writing to express my strong interest in the ${mSelectedJob.title} position at ${mSelectedJob.company}.
+
+With ${mProfile.exp || 'extensive'} experience as ${mProfile.title || 'a professional'} and expertise in ${mSkills.slice(0,3).join(', ')}, I am confident I would be a strong addition to your team.
+
+I look forward to discussing this opportunity.
+
+Best regards,
+${mProfile.name || 'Your Name'}`;
+  }
+}
+
+function mToast(msg) {
+  const t = document.createElement('div');
+  t.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#22C55E;color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;z-index:99999';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(), 2500);
+}
+function mSleep(ms){return new Promise(r=>setTimeout(r,ms));}
+mLoadProfile();
 </script>
 </body>
 </html>
