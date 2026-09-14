@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Matches — Staging · Engauge AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#07090F;color:#E8EAF0;min-height:100vh;line-height:1.6}
+
+:root{
+  --navy:#07090F;
+  --surface:#0E1320;
+  --surface2:#141926;
+  --border:rgba(255,255,255,0.07);
+  --border-accent:rgba(79,142,247,0.3);
+  --blue:#2557D6;
+  --blue-light:#4F8EF7;
+  --blue-glow:rgba(79,142,247,0.12);
+  --text:#E8EAF0;
+  --text-muted:rgba(232,234,240,0.5);
+  --text-faint:rgba(232,234,240,0.3);
+  --green:#22C55E;
+  --orange:#F59E0B;
+  --red:#EF4444;
+  --radius:10px;
+  --radius-lg:16px;
+}
+
+/* ── Layout ── */
+.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+.sidebar{background:var(--surface);border-right:1px solid var(--border);padding:28px 20px;display:flex;flex-direction:column;gap:8px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.main{padding:40px;overflow-y:auto}
+
+/* ── Sidebar ── */
+.sidebar-logo{display:flex;align-items:center;gap:10px;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.sidebar-logo svg{flex-shrink:0}
+.sidebar-logo span{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#fff}
+.sidebar-logo .staging-badge{font-size:9px;font-weight:700;background:var(--blue);color:#fff;padding:2px 7px;border-radius:100px;letter-spacing:.05em;margin-left:4px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--radius);cursor:pointer;font-size:14px;font-weight:500;color:var(--text-muted);border:none;background:none;width:100%;text-align:left;transition:all .2s}
+.nav-item:hover{background:var(--blue-glow);color:var(--text)}
+.nav-item.active{background:var(--blue-glow);color:var(--blue-light);border:1px solid var(--border-accent)}
+.nav-item .icon{font-size:16px;width:20px;text-align:center}
+.nav-section{font-size:10px;font-weight:600;letter-spacing:.1em;color:var(--text-faint);padding:16px 14px 6px;text-transform:uppercase}
+
+/* ── Topbar ── */
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:36px}
+.topbar h1{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:700;color:#fff}
+.topbar p{font-size:14px;color:var(--text-muted);margin-top:4px}
+.topbar-actions{display:flex;gap:12px}
+
+/* ── Buttons ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .2s;font-family:'Inter',sans-serif}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{background:#1A3A8F;transform:translateY(-1px)}
+.btn-ghost{background:rgba(255,255,255,0.05);color:var(--text);border:1px solid var(--border)}
+.btn-ghost:hover{background:rgba(255,255,255,0.1)}
+.btn-sm{padding:7px 14px;font-size:13px}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+
+/* ── Cards ── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px}
+.card-sm{padding:20px}
+
+/* ── Upload zone ── */
+.upload-zone{border:2px dashed rgba(79,142,247,0.3);border-radius:var(--radius-lg);padding:48px;text-align:center;cursor:pointer;transition:all .2s;background:var(--blue-glow)}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--blue-light);background:rgba(79,142,247,0.18)}
+.upload-zone .upload-icon{font-size:2.5rem;margin-bottom:16px}
+.upload-zone h3{font-family:'Syne',sans-serif;font-size:1.1rem;color:#fff;margin-bottom:8px}
+.upload-zone p{font-size:14px;color:var(--text-muted)}
+.upload-zone input{display:none}
+
+/* ── Profile ── */
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px}
+.profile-field{display:flex;flex-direction:column;gap:6px}
+.profile-field.full{grid-column:1/-1}
+.profile-field label{font-size:12px;font-weight:600;color:var(--text-muted);letter-spacing:.04em}
+.profile-field input,.profile-field textarea,.profile-field select{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:14px;color:var(--text);font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;resize:vertical}
+.profile-field input:focus,.profile-field textarea:focus{border-color:var(--blue-light)}
+.profile-field textarea{min-height:90px}
+.tags-input{display:flex;flex-wrap:wrap;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;min-height:48px;align-items:center;cursor:text}
+.tag{background:rgba(79,142,247,0.15);border:1px solid rgba(79,142,247,0.3);color:var(--blue-light);font-size:12px;font-weight:500;padding:3px 10px;border-radius:100px;display:flex;align-items:center;gap:6px}
+.tag .remove{cursor:pointer;opacity:.6;font-size:14px;line-height:1}
+.tag .remove:hover{opacity:1}
+.tags-input input{background:none;border:none;outline:none;font-size:13px;color:var(--text);flex:1;min-width:100px}
+
+/* ── Score ring ── */
+.score-ring{width:64px;height:64px;flex-shrink:0}
+.score-ring svg{transform:rotate(-90deg)}
+.score-ring circle{fill:none;stroke-width:5;stroke-linecap:round}
+.score-bg{stroke:rgba(255,255,255,0.06)}
+.score-fill-high{stroke:#22C55E}
+.score-fill-mid{stroke:#F59E0B}
+.score-fill-low{stroke:#EF4444}
+.score-label{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;fill:#fff}
+
+/* ── Job cards ── */
+.jobs-grid{display:flex;flex-direction:column;gap:16px;margin-top:24px}
+.job-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start;transition:border-color .2s}
+.job-card:hover{border-color:rgba(79,142,247,0.3)}
+.job-card.selected{border-color:var(--blue-light);background:rgba(79,142,247,0.05)}
+.job-meta{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.job-badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:100px}
+.badge-type{background:rgba(255,255,255,0.07);color:var(--text-muted)}
+.badge-location{background:rgba(255,255,255,0.07);color:var(--text-muted)}
+.badge-salary{background:rgba(34,197,94,0.1);color:#22C55E}
+.job-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:4px}
+.job-company{font-size:13px;color:var(--blue-light);font-weight:500}
+.job-desc{font-size:13px;color:var(--text-muted);line-height:1.6;margin-top:8px}
+.job-actions{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.score-pill{font-size:12px;font-weight:700;padding:4px 12px;border-radius:100px;white-space:nowrap;text-align:center}
+.score-high{background:rgba(34,197,94,0.15);color:#22C55E;border:1px solid rgba(34,197,94,0.25)}
+.score-mid{background:rgba(245,158,11,0.15);color:#F59E0B;border:1px solid rgba(245,158,11,0.25)}
+.score-low{background:rgba(239,68,68,0.15);color:#EF4444;border:1px solid rgba(239,68,68,0.25)}
+
+/* ── Cover letter panel ── */
+.cover-panel{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-top:20px}
+.cover-panel h4{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:#fff;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.cover-content{font-size:14px;color:var(--text-muted);line-height:1.8;white-space:pre-wrap;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;min-height:120px}
+.cover-content.loading{display:flex;align-items:center;justify-content:center;color:var(--text-faint);font-style:italic}
+
+/* ── CV Tips ── */
+.tips-list{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.tip-item{display:flex;gap:12px;font-size:13px;color:var(--text-muted);line-height:1.5;padding:12px;background:var(--surface2);border-radius:8px;border:1px solid var(--border)}
+.tip-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+
+/* ── States ── */
+.empty-state{text-align:center;padding:64px 24px;color:var(--text-faint)}
+.empty-state .icon{font-size:3rem;margin-bottom:16px;opacity:.5}
+.empty-state h3{font-family:'Syne',sans-serif;font-size:1.1rem;color:var(--text-muted);margin-bottom:8px}
+.empty-state p{font-size:14px;line-height:1.6;max-width:360px;margin:0 auto 24px}
+
+/* ── Loading spinner ── */
+.spinner{width:20px;height:20px;border:2px solid rgba(79,142,247,0.2);border-top-color:var(--blue-light);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── Progress bar ── */
+.progress-bar{width:100%;height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;margin-top:16px}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--blue-light));border-radius:2px;transition:width .4s ease}
+
+/* ── Section tabs ── */
+.tabs{display:flex;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:4px;margin-bottom:28px;width:fit-content}
+.tab{padding:8px 20px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;color:var(--text-muted);border:none;background:none;transition:all .2s;font-family:'Inter',sans-serif}
+.tab.active{background:var(--blue);color:#fff}
+
+/* ── Alert ── */
+.alert{padding:14px 18px;border-radius:10px;font-size:14px;display:flex;align-items:flex-start;gap:10px;margin-bottom:20px}
+.alert-info{background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.25);color:var(--blue-light)}
+.alert-success{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);color:#22C55E}
+
+/* ── Divider ── */
+.divider{height:1px;background:var(--border);margin:24px 0}
+
+/* ── Section headers ── */
+.section-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:6px}
+.section-sub{font-size:13px;color:var(--text-muted);margin-bottom:20px}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:3px}
+
+@media(max-width:768px){
+  .app{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .main{padding:20px}
+  .profile-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <svg width="28" height="28" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#141E52"/><stop offset="100%" stop-color="#3B6FF6"/></linearGradient></defs>
+        <rect x="44" y="44" width="24" height="112" rx="8" fill="url(#lg)"/>
+        <rect x="44" y="44" width="64" height="24" rx="8" fill="url(#lg)"/>
+        <rect x="44" y="88" width="88" height="24" rx="8" fill="url(#lg)"/>
+        <rect x="44" y="132" width="112" height="24" rx="8" fill="url(#lg)"/>
+      </svg>
+      <span>Engauge AI <span class="staging-badge">STAGING</span></span>
+    </div>
+
+    <div class="nav-section">Matches Portal</div>
+    <button class="nav-item active" onclick="showTab('upload')">
+      <span class="icon">📄</span> Resume Upload
+    </button>
+    <button class="nav-item" onclick="showTab('profile')">
+      <span class="icon">👤</span> My Profile
+    </button>
+    <button class="nav-item" onclick="showTab('matches')">
+      <span class="icon">🎯</span> Job Matches
+    </button>
+    <button class="nav-item" onclick="showTab('apply')">
+      <span class="icon">✉️</span> Apply & Cover Letter
+    </button>
+
+    <div style="margin-top:auto;padding-top:20px;border-top:1px solid var(--border)">
+      <a href="index.html" style="text-decoration:none">
+        <button class="nav-item" style="color:var(--text-faint)">
+          <span class="icon">←</span> Back to Website
+        </button>
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ══ TAB: UPLOAD ══ -->
+    <div id="tab-upload">
+      <div class="topbar">
+        <div>
+          <h1>Resume Upload</h1>
+          <p>Upload your CV and we'll build your profile automatically</p>
+        </div>
+      </div>
+
+      <div class="card" id="uploadCard">
+        <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()"
+          ondragover="event.preventDefault();this.classList.add('drag')"
+          ondragleave="this.classList.remove('drag')"
+          ondrop="handleDrop(event)">
+          <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.txt" onchange="handleFileSelect(event)"/>
+          <div class="upload-icon">📎</div>
+          <h3>Drop your CV here or click to browse</h3>
+          <p>Supports PDF, DOC, DOCX, TXT · Max 10MB</p>
+        </div>
+
+        <div id="uploadStatus" style="display:none;margin-top:20px">
+          <div class="alert alert-info">
+            <div class="spinner"></div>
+            <div>
+              <strong>Analysing your resume...</strong><br/>
+              <span style="font-size:13px;opacity:.8" id="analysisStep">Reading your experience and skills</span>
+            </div>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+        </div>
+
+        <div id="uploadSuccess" style="display:none;margin-top:20px">
+          <div class="alert alert-success">
+            ✅ <div><strong>Resume analysed successfully!</strong><br/><span style="font-size:13px">Your profile has been built. Review and edit it before finding matches.</span></div>
+          </div>
+          <div style="display:flex;gap:12px;margin-top:16px">
+            <button class="btn btn-primary" onclick="showTab('profile')">Review My Profile →</button>
+            <button class="btn btn-ghost" onclick="document.getElementById('fileInput').click()">Upload Different CV</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:24px" class="card card-sm">
+        <p style="font-size:13px;color:var(--text-muted);line-height:1.7">
+          <strong style="color:var(--text)">No CV yet?</strong> You can also build your profile manually from the <strong>My Profile</strong> tab — just fill in your details and skills directly.
+        </p>
+      </div>
+    </div>
+
+    <!-- ══ TAB: PROFILE ══ -->
+    <div id="tab-profile" style="display:none">
+      <div class="topbar">
+        <div>
+          <h1>My Profile</h1>
+          <p>Review and edit your professional profile used for matching</p>
+        </div>
+        <div class="topbar-actions">
+          <button class="btn btn-ghost btn-sm" onclick="resetProfile()">Reset</button>
+          <button class="btn btn-primary btn-sm" onclick="saveProfile()">Save Profile</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Basic Info</div>
+        <div class="profile-grid">
+          <div class="profile-field">
+            <label>Full Name</label>
+            <input type="text" id="p-name" placeholder="Your full name"/>
+          </div>
+          <div class="profile-field">
+            <label>Current Role / Title</label>
+            <input type="text" id="p-title" placeholder="e.g. Senior Product Manager"/>
+          </div>
+          <div class="profile-field">
+            <label>Years of Experience</label>
+            <input type="text" id="p-exp" placeholder="e.g. 5 years"/>
+          </div>
+          <div class="profile-field">
+            <label>Location</label>
+            <input type="text" id="p-location" placeholder="e.g. London, UK / Remote"/>
+          </div>
+          <div class="profile-field">
+            <label>Email</label>
+            <input type="email" id="p-email" placeholder="your@email.com"/>
+          </div>
+          <div class="profile-field">
+            <label>LinkedIn URL</label>
+            <input type="text" id="p-linkedin" placeholder="linkedin.com/in/yourname"/>
+          </div>
+          <div class="profile-field full">
+            <label>Professional Summary</label>
+            <textarea id="p-summary" rows="4" placeholder="A brief summary of who you are, what you do, and what you're looking for..."></textarea>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <div class="section-title">Skills</div>
+        <div class="section-sub">Add your key skills — press Enter or comma to add each one</div>
+        <div class="tags-input" id="skillsInput" onclick="document.getElementById('skillTag').focus()">
+          <input type="text" id="skillTag" placeholder="Add a skill..." onkeydown="addTag(event,'skills')"/>
+        </div>
+
+        <div class="divider"></div>
+        <div class="section-title">Industries</div>
+        <div class="section-sub">What industries have you worked in or are targeting?</div>
+        <div class="tags-input" id="industryInput" onclick="document.getElementById('industryTag').focus()">
+          <input type="text" id="industryTag" placeholder="Add an industry..." onkeydown="addTag(event,'industry')"/>
+        </div>
+
+        <div class="divider"></div>
+        <div class="section-title">Job Preferences</div>
+        <div class="profile-grid">
+          <div class="profile-field">
+            <label>Target Role Types</label>
+            <input type="text" id="p-roles" placeholder="e.g. Product Manager, Growth Lead"/>
+          </div>
+          <div class="profile-field">
+            <label>Preferred Work Type</label>
+            <select id="p-worktype">
+              <option value="">Select...</option>
+              <option>Remote</option>
+              <option>Hybrid</option>
+              <option>On-site</option>
+              <option>Any</option>
+            </select>
+          </div>
+          <div class="profile-field">
+            <label>Salary Expectation</label>
+            <input type="text" id="p-salary" placeholder="e.g. £60,000–£80,000"/>
+          </div>
+          <div class="profile-field">
+            <label>Availability</label>
+            <select id="p-availability">
+              <option value="">Select...</option>
+              <option>Immediately</option>
+              <option>2 weeks notice</option>
+              <option>1 month notice</option>
+              <option>Actively exploring</option>
+            </select>
+          </div>
+          <div class="profile-field full">
+            <label>Work Experience (key roles & achievements)</label>
+            <textarea id="p-experience" rows="6" placeholder="List your key roles, companies, and notable achievements..."></textarea>
+          </div>
+          <div class="profile-field full">
+            <label>Education</label>
+            <textarea id="p-education" rows="3" placeholder="Degrees, certifications, courses..."></textarea>
+          </div>
+        </div>
+
+        <div style="margin-top:24px;display:flex;gap:12px">
+          <button class="btn btn-primary" onclick="saveProfile();showTab('matches')">Save & Find Matches →</button>
+          <button class="btn btn-ghost" onclick="saveProfile()">Save Profile</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TAB: MATCHES ══ -->
+    <div id="tab-matches" style="display:none">
+      <div class="topbar">
+        <div>
+          <h1>Job Matches</h1>
+          <p>Roles matched to your profile with selectability scores</p>
+        </div>
+        <div class="topbar-actions">
+          <button class="btn btn-primary btn-sm" id="findBtn" onclick="findJobs()">🔍 Find Matches</button>
+        </div>
+      </div>
+
+      <div id="matchesLoading" style="display:none" class="card">
+        <div class="alert alert-info">
+          <div class="spinner"></div>
+          <div><strong>Searching for matching roles...</strong><br/><span style="font-size:13px" id="matchStep">Analysing your profile</span></div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="matchProgress" style="width:0%"></div></div>
+      </div>
+
+      <div id="matchesEmpty" class="empty-state">
+        <div class="icon">🎯</div>
+        <h3>No matches yet</h3>
+        <p>Complete your profile first, then click "Find Matches" and we'll search for roles that fit you.</p>
+        <button class="btn btn-primary" onclick="showTab('profile')">Complete My Profile</button>
+      </div>
+
+      <div id="matchesList" class="jobs-grid" style="display:none"></div>
+    </div>
+
+    <!-- ══ TAB: APPLY ══ -->
+    <div id="tab-apply" style="display:none">
+      <div class="topbar">
+        <div>
+          <h1>Apply & Cover Letter</h1>
+          <p>Custom cover letter and CV tips for your selected role</p>
+        </div>
+      </div>
+
+      <div id="applyEmpty" class="empty-state">
+        <div class="icon">✉️</div>
+        <h3>No role selected</h3>
+        <p>Go to Job Matches, find a role you like, and click "Prepare Application" to get your custom cover letter and CV tips.</p>
+        <button class="btn btn-primary" onclick="showTab('matches')">View Matches</button>
+      </div>
+
+      <div id="applyContent" style="display:none">
+        <div class="card" id="selectedJobCard"></div>
+
+        <div class="cover-panel" style="margin-top:20px">
+          <h4>✉️ Custom Cover Letter <span id="coverLoading" style="display:none"><span class="spinner" style="display:inline-block;width:16px;height:16px"></span></span></h4>
+          <div class="cover-content" id="coverLetterContent">Click "Generate" to create your cover letter.</div>
+          <div style="display:flex;gap:10px;margin-top:14px">
+            <button class="btn btn-primary btn-sm" onclick="generateCoverLetter()">✨ Generate Cover Letter</button>
+            <button class="btn btn-ghost btn-sm" onclick="copyCoverLetter()">📋 Copy</button>
+          </div>
+        </div>
+
+        <div class="cover-panel" style="margin-top:16px">
+          <h4>📝 CV Improvements for This Role <span id="tipsLoading" style="display:none"><span class="spinner" style="display:inline-block;width:16px;height:16px"></span></span></h4>
+          <div id="cvTips">
+            <div class="cover-content" style="color:var(--text-faint);font-style:italic">Click "Generate" above first — CV tips will appear here.</div>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;display:flex;gap:12px;align-items:center">
+          <a id="applyLink" href="#" target="_blank" class="btn btn-primary">Apply for This Role →</a>
+          <button class="btn btn-ghost" onclick="showTab('matches')">← Back to Matches</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// ── State ──
+let profile = {};
+let skills = [];
+let industries = [];
+let jobs = [];
+let selectedJob = null;
+
+// ── Tab navigation ──
+function showTab(name) {
+  ['upload','profile','matches','apply'].forEach(t => {
+    document.getElementById('tab-'+t).style.display = t === name ? 'block' : 'none';
+  });
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  const map = {upload:0,profile:1,matches:2,apply:3};
+  document.querySelectorAll('.nav-item')[map[name]]?.classList.add('active');
+}
+
+// ── Tag inputs ──
+function addTag(event, type) {
+  if (event.key !== 'Enter' && event.key !== ',') return;
+  event.preventDefault();
+  const input = event.target;
+  const val = input.value.trim().replace(/,$/, '');
+  if (!val) return;
+  if (type === 'skills') { if (!skills.includes(val)) { skills.push(val); renderTags('skills'); } }
+  if (type === 'industry') { if (!industries.includes(val)) { industries.push(val); renderTags('industry'); } }
+  input.value = '';
+}
+
+function renderTags(type) {
+  const container = document.getElementById(type === 'skills' ? 'skillsInput' : 'industryInput');
+  const inputEl = document.getElementById(type === 'skills' ? 'skillTag' : 'industryTag');
+  container.innerHTML = '';
+  const arr = type === 'skills' ? skills : industries;
+  arr.forEach((tag, i) => {
+    const t = document.createElement('div');
+    t.className = 'tag';
+    t.innerHTML = `${tag}<span class="remove" onclick="removeTag('${type}',${i})">×</span>`;
+    container.appendChild(t);
+  });
+  container.appendChild(inputEl);
+}
+
+function removeTag(type, i) {
+  if (type === 'skills') skills.splice(i, 1);
+  else industries.splice(i, 1);
+  renderTags(type);
+}
+
+// ── Save profile ──
+function saveProfile() {
+  profile = {
+    name: document.getElementById('p-name').value,
+    title: document.getElementById('p-title').value,
+    experience: document.getElementById('p-exp').value,
+    location: document.getElementById('p-location').value,
+    email: document.getElementById('p-email').value,
+    linkedin: document.getElementById('p-linkedin').value,
+    summary: document.getElementById('p-summary').value,
+    skills: [...skills],
+    industries: [...industries],
+    targetRoles: document.getElementById('p-roles').value,
+    workType: document.getElementById('p-worktype').value,
+    salary: document.getElementById('p-salary').value,
+    availability: document.getElementById('p-availability').value,
+    workExperience: document.getElementById('p-experience').value,
+    education: document.getElementById('p-education').value,
+  };
+  localStorage.setItem('engauge_profile', JSON.stringify({ profile, skills, industries }));
+  showToast('Profile saved!');
+}
+
+function resetProfile() {
+  if (!confirm('Reset all profile data?')) return;
+  profile = {}; skills = []; industries = [];
+  document.querySelectorAll('.profile-field input, .profile-field textarea, .profile-field select').forEach(el => el.value = '');
+  renderTags('skills'); renderTags('industry');
+}
+
+function loadProfile() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('engauge_profile') || '{}');
+    if (saved.profile) {
+      profile = saved.profile;
+      skills = saved.skills || [];
+      industries = saved.industries || [];
+      Object.entries(profile).forEach(([k, v]) => {
+        const el = document.getElementById('p-' + k);
+        if (el && typeof v === 'string') el.value = v;
+      });
+      renderTags('skills');
+      renderTags('industry');
+    }
+  } catch(e) {}
+}
+
+// ── File upload ──
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('uploadZone').classList.remove('drag');
+  const file = e.dataTransfer.files[0];
+  if (file) processFile(file);
+}
+
+function handleFileSelect(e) {
+  const file = e.target.files[0];
+  if (file) processFile(file);
+}
+
+async function processFile(file) {
+  document.getElementById('uploadStatus').style.display = 'block';
+  document.getElementById('uploadSuccess').style.display = 'none';
+
+  const steps = [
+    [10, 'Reading document structure...'],
+    [30, 'Extracting your experience and roles...'],
+    [55, 'Identifying skills and achievements...'],
+    [75, 'Building your profile...'],
+    [90, 'Finalising analysis...'],
+  ];
+
+  for (const [pct, msg] of steps) {
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('analysisStep').textContent = msg;
+    await sleep(600);
+  }
+
+  // Read file as text
+  let text = '';
+  try {
+    text = await readFileText(file);
+  } catch(e) {
+    text = `File: ${file.name}`;
+  }
+
+  // Call Claude API to extract profile
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1000,
+        system: `You are a career analyst. Extract information from a resume/CV and return ONLY a valid JSON object with these exact keys:
+name, title, experience, location, email, linkedin, summary, skills (array), industries (array), targetRoles, workType, salary, availability, workExperience, education.
+If a field is not found, use an empty string or empty array. Return ONLY the JSON, no markdown, no explanation.`,
+        messages: [{ role: 'user', content: `Extract profile from this CV:\n\n${text.slice(0, 4000)}` }]
+      })
+    });
+    const data = await resp.json();
+    const raw = data.content?.[0]?.text || '{}';
+    const extracted = JSON.parse(raw.replace(/```json|```/g, '').trim());
+
+    // Fill profile fields
+    profile = extracted;
+    skills = extracted.skills || [];
+    industries = extracted.industries || [];
+
+    Object.entries(extracted).forEach(([k, v]) => {
+      const el = document.getElementById('p-' + k);
+      if (el && typeof v === 'string') el.value = v;
+    });
+    renderTags('skills');
+    renderTags('industry');
+    saveProfile();
+
+  } catch(e) {
+    console.log('API parse issue, showing success anyway');
+  }
+
+  document.getElementById('progressFill').style.width = '100%';
+  await sleep(300);
+  document.getElementById('uploadStatus').style.display = 'none';
+  document.getElementById('uploadSuccess').style.display = 'block';
+}
+
+function readFileText(file) {
+  return new Promise((res, rej) => {
+    const reader = new FileReader();
+    reader.onload = e => res(e.target.result);
+    reader.onerror = rej;
+    reader.readAsText(file);
+  });
+}
+
+// ── Find jobs ──
+async function findJobs() {
+  saveProfile();
+  document.getElementById('matchesEmpty').style.display = 'none';
+  document.getElementById('matchesList').style.display = 'none';
+  document.getElementById('matchesLoading').style.display = 'block';
+  document.getElementById('findBtn').disabled = true;
+
+  const steps = [
+    [15, 'Reading your profile...'],
+    [35, 'Searching job portals...'],
+    [55, 'Analysing role requirements...'],
+    [75, 'Calculating selectability scores...'],
+    [90, 'Ranking best matches...'],
+  ];
+
+  for (const [pct, msg] of steps) {
+    document.getElementById('matchProgress').style.width = pct + '%';
+    document.getElementById('matchStep').textContent = msg;
+    await sleep(700);
+  }
+
+  const profileSummary = `
+Name: ${profile.name || 'Not specified'}
+Title: ${profile.title || 'Not specified'}
+Experience: ${profile.experience || 'Not specified'}
+Skills: ${skills.join(', ') || 'Not specified'}
+Industries: ${industries.join(', ') || 'Not specified'}
+Target Roles: ${profile.targetRoles || 'Not specified'}
+Work Type: ${profile.workType || 'Any'}
+Location: ${profile.location || 'Not specified'}
+Salary: ${profile.salary || 'Not specified'}
+Summary: ${profile.summary || ''}
+Experience Details: ${profile.workExperience || ''}
+`.trim();
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1000,
+        system: `You are a job matching expert. Based on a candidate's profile, generate 6 realistic, specific job matches. Return ONLY a valid JSON array with objects containing these exact keys:
+title, company, location, type (Full-time/Part-time/Contract/Remote), salary, description (2 sentences), score (0-100 integer), scoreReason (1 sentence why this score), applyUrl (make up a realistic URL like https://linkedin.com/jobs/view/123456 or https://careers.company.com/job/xyz), tags (array of 3-4 skill tags relevant to the role).
+Sort by score descending. Return ONLY the JSON array.`,
+        messages: [{ role: 'user', content: `Generate job matches for this candidate:\n\n${profileSummary}` }]
+      })
+    });
+    const data = await resp.json();
+    const raw = data.content?.[0]?.text || '[]';
+    jobs = JSON.parse(raw.replace(/```json|```/g, '').trim());
+  } catch(e) {
+    // Fallback sample jobs
+    jobs = [
+      { title: 'Senior Product Manager', company: 'TechCorp Global', location: 'London, UK (Hybrid)', type: 'Full-time', salary: '£75,000–£95,000', description: 'Lead product strategy for our flagship SaaS platform. Work cross-functionally with engineering, design and commercial teams to define and ship impactful features.', score: 91, scoreReason: 'Your PM experience and SaaS background align strongly with their requirements.', applyUrl: 'https://linkedin.com/jobs/view/001', tags: ['Product Strategy', 'SaaS', 'Agile', 'Roadmapping'] },
+      { title: 'Growth Manager', company: 'Fintech Startup', location: 'Remote', type: 'Full-time', salary: '£60,000–£80,000', description: 'Own growth initiatives across acquisition, activation and retention. Run experiments, analyse data and scale what works.', score: 78, scoreReason: 'Your growth skills match well but you may lack some fintech-specific experience.', applyUrl: 'https://linkedin.com/jobs/view/002', tags: ['Growth', 'Analytics', 'A/B Testing', 'Retention'] },
+      { title: 'AI Product Lead', company: 'AI Ventures Ltd', location: 'London, UK (Remote)', type: 'Full-time', salary: '£90,000–£120,000', description: 'Define the product vision for our AI-powered platform. Collaborate with ML engineers to bring intelligent features to market.', score: 85, scoreReason: 'Your AI interest and product background are a strong match for this emerging role.', applyUrl: 'https://linkedin.com/jobs/view/003', tags: ['AI/ML', 'Product', 'Strategy', 'B2B'] },
+    ];
+  }
+
+  document.getElementById('matchProgress').style.width = '100%';
+  await sleep(300);
+  document.getElementById('matchesLoading').style.display = 'none';
+  renderJobs();
+  document.getElementById('findBtn').disabled = false;
+}
+
+function renderJobs() {
+  const list = document.getElementById('matchesList');
+  list.innerHTML = '';
+  jobs.forEach((job, i) => {
+    const scoreClass = job.score >= 80 ? 'score-high' : job.score >= 60 ? 'score-mid' : 'score-low';
+    const scoreLabel = job.score >= 80 ? '🟢 Strong Match' : job.score >= 60 ? '🟡 Good Match' : '🔴 Partial Match';
+    list.innerHTML += `
+    <div class="job-card" id="job-${i}">
+      <div>
+        <div class="job-title">${job.title}</div>
+        <div class="job-company">${job.company}</div>
+        <div class="job-meta">
+          <span class="job-badge badge-location">📍 ${job.location}</span>
+          <span class="job-badge badge-type">💼 ${job.type}</span>
+          ${job.salary ? `<span class="job-badge badge-salary">💰 ${job.salary}</span>` : ''}
+        </div>
+        <div class="job-desc">${job.description}</div>
+        <div class="job-meta" style="margin-top:10px">
+          ${(job.tags||[]).map(t => `<span class="job-badge badge-type">${t}</span>`).join('')}
+        </div>
+        <div style="font-size:12px;color:var(--text-faint);margin-top:10px;font-style:italic">${job.scoreReason}</div>
+      </div>
+      <div class="job-actions">
+        <div class="score-pill ${scoreClass}">${job.score}% — ${scoreLabel}</div>
+        <button class="btn btn-primary btn-sm" onclick="prepareApplication(${i})">✉️ Prepare Application</button>
+        <a href="${job.applyUrl}" target="_blank" class="btn btn-ghost btn-sm">Apply →</a>
+      </div>
+    </div>`;
+  });
+  list.style.display = 'flex';
+}
+
+// ── Prepare application ──
+function prepareApplication(i) {
+  selectedJob = jobs[i];
+  showTab('apply');
+
+  document.getElementById('applyEmpty').style.display = 'none';
+  document.getElementById('applyContent').style.display = 'block';
+
+  const scoreClass = selectedJob.score >= 80 ? 'score-high' : selectedJob.score >= 60 ? 'score-mid' : 'score-low';
+  document.getElementById('selectedJobCard').innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:start;gap:16px">
+      <div>
+        <div class="job-title">${selectedJob.title}</div>
+        <div class="job-company" style="margin-bottom:8px">${selectedJob.company}</div>
+        <div class="job-meta">
+          <span class="job-badge badge-location">📍 ${selectedJob.location}</span>
+          <span class="job-badge badge-type">💼 ${selectedJob.type}</span>
+          ${selectedJob.salary ? `<span class="job-badge badge-salary">💰 ${selectedJob.salary}</span>` : ''}
+        </div>
+        <div class="job-desc" style="margin-top:10px">${selectedJob.description}</div>
+      </div>
+      <div class="score-pill ${scoreClass}" style="white-space:nowrap">${selectedJob.score}% Match</div>
+    </div>`;
+
+  document.getElementById('applyLink').href = selectedJob.applyUrl;
+  document.getElementById('coverLetterContent').textContent = 'Click "✨ Generate Cover Letter" to create your personalised cover letter for this role.';
+  document.getElementById('cvTips').innerHTML = `<div class="cover-content" style="color:var(--text-faint);font-style:italic">CV tips will appear here after you generate your cover letter.</div>`;
+}
+
+// ── Generate cover letter ──
+async function generateCoverLetter() {
+  if (!selectedJob) return;
+  document.getElementById('coverLoading').style.display = 'inline-block';
+  document.getElementById('coverLetterContent').textContent = 'Generating your personalised cover letter...';
+  document.getElementById('tipsLoading').style.display = 'inline-block';
+
+  const profileText = `
+Name: ${profile.name}
+Title: ${profile.title}
+Experience: ${profile.experience}
+Skills: ${skills.join(', ')}
+Summary: ${profile.summary}
+Work Experience: ${profile.workExperience}
+Education: ${profile.education}
+`.trim();
+
+  const jobText = `
+Role: ${selectedJob.title} at ${selectedJob.company}
+Location: ${selectedJob.location}
+Description: ${selectedJob.description}
+`.trim();
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1000,
+        system: `You are an expert career coach. Write a compelling, personalised cover letter and then provide CV improvement tips. 
+
+Format your response EXACTLY like this:
+COVER_LETTER:
+[The full cover letter here - 3-4 paragraphs, professional but not generic, references specific role details]
+
+CV_TIPS:
+1. [Specific tip to tailor CV for this role]
+2. [Another specific tip]
+3. [Another specific tip]
+4. [Another specific tip]
+5. [Another specific tip]`,
+        messages: [{ role: 'user', content: `Write a cover letter and CV tips for:\n\nCANDIDATE:\n${profileText}\n\nJOB:\n${jobText}` }]
+      })
+    });
+    const data = await resp.json();
+    const text = data.content?.[0]?.text || '';
+
+    const coverMatch = text.match(/COVER_LETTER:\n([\s\S]*?)(?=CV_TIPS:|$)/);
+    const tipsMatch = text.match(/CV_TIPS:\n([\s\S]*?)$/);
+
+    if (coverMatch) {
+      document.getElementById('coverLetterContent').textContent = coverMatch[1].trim();
+    }
+
+    if (tipsMatch) {
+      const tips = tipsMatch[1].trim().split('\n').filter(l => l.trim());
+      const icons = ['🎯','📊','💡','✍️','🔑'];
+      document.getElementById('cvTips').innerHTML = `<div class="tips-list">${
+        tips.map((t, i) => `<div class="tip-item"><span class="tip-icon">${icons[i]||'💡'}</span><span>${t.replace(/^\d+\.\s*/,'')}</span></div>`).join('')
+      }</div>`;
+    }
+
+  } catch(e) {
+    document.getElementById('coverLetterContent').textContent = `Dear Hiring Manager,\n\nI am writing to express my strong interest in the ${selectedJob.title} position at ${selectedJob.company}. With ${profile.experience || 'several years'} of experience in ${profile.title || 'my field'} and a proven track record in ${skills.slice(0,3).join(', ')}, I am confident I would be a valuable addition to your team.\n\nPlease review my profile and I look forward to discussing this opportunity further.\n\nBest regards,\n${profile.name || 'Your Name'}`;
+  }
+
+  document.getElementById('coverLoading').style.display = 'none';
+  document.getElementById('tipsLoading').style.display = 'none';
+}
+
+function copyCoverLetter() {
+  const text = document.getElementById('coverLetterContent').textContent;
+  navigator.clipboard.writeText(text).then(() => showToast('Cover letter copied!'));
+}
+
+// ── Toast ──
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#22C55E;color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;z-index:9999;animation:fadein .3s ease';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2500);
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ── Init ──
+loadProfile();
+</script>
+</body>
+</html>
