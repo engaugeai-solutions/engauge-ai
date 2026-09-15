@@ -1106,6 +1106,21 @@ img { display: block; max-width: 100%; }
 }
 
 </style>
+<script>
+// Early unlock check - runs before body renders
+(function(){
+  try {
+    var h = window.location.href;
+    if (h.indexOf('1995') !== -1 && (h.indexOf('%4022') !== -1 || h.indexOf('@22') !== -1)) {
+      sessionStorage.setItem('mu','1');
+      document.addEventListener('DOMContentLoaded', function(){
+        var m = document.getElementById('matchesModal');
+        if(m){ m.style.display='block'; document.body.style.overflow='hidden'; }
+      });
+    }
+  } catch(e){}
+})();
+</script>
 </head>
 <body>
 
@@ -1763,7 +1778,7 @@ form.addEventListener('submit', function(e) {
 </script>
 
 <!-- MATCHES PORTAL MODAL -->
-<div id="matchesModal" style="display:none;position:fixed;inset:0;z-index:9999;background:#07090F;overflow-y:auto">
+<div id="matchesModal" data-portal="matches" style="display:none;position:fixed;inset:0;z-index:9999;background:#07090F;overflow-y:auto">
   <div style="display:grid;grid-template-columns:240px 1fr;min-height:100vh">
     <!-- Sidebar -->
     <div style="background:#0E1320;border-right:1px solid rgba(255,255,255,0.07);padding:24px 16px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh;overflow-y:auto">
@@ -2230,31 +2245,43 @@ function mToast(msg) {
 function mSleep(ms){return new Promise(r=>setTimeout(r,ms));}
 mLoadProfile();
 
-// Auto-unlock via URL param
-window.addEventListener('load', function() {
-  try {
-    const params = new URLSearchParams(window.location.search);
-    const navItem = document.getElementById('matches-nav-item');
-    const unlocked = params.get('m') === '1995@22';
-    if (unlocked) {
-      sessionStorage.setItem('matches_unlocked', 'yes');
-    }
-    if (unlocked || sessionStorage.getItem('matches_unlocked') === 'yes') {
-      if (navItem) {
-        navItem.style.display = 'block';
-        navItem.style.visibility = 'visible';
-        navItem.style.opacity = '1';
+// Auto-unlock - runs immediately
+(function checkUnlock() {
+  function tryUnlock() {
+    try {
+      var search = window.location.search || window.location.href;
+      var isMatch = search.indexOf('m=1995%4022') !== -1 || search.indexOf('m=1995@22') !== -1;
+      if (isMatch) {
+        sessionStorage.setItem('mu', '1');
       }
-      if (unlocked) {
-        // Auto-open the portal directly
-        setTimeout(function() {
-          document.getElementById('matchesModal').style.display = 'block';
+      var shouldOpen = isMatch || sessionStorage.getItem('mu') === '1';
+      if (shouldOpen) {
+        var modal = document.getElementById('matchesModal');
+        var nav = document.getElementById('matches-nav-item');
+        if (modal) {
+          modal.style.cssText = 'display:block!important;position:fixed;inset:0;z-index:9999;background:#07090F;overflow-y:auto';
           document.body.style.overflow = 'hidden';
-        }, 500);
+        }
+        if (nav) {
+          nav.style.cssText = 'display:block!important;visibility:visible!important';
+        }
+        return true;
       }
-    }
-  } catch(e) { console.log('Unlock error:', e); }
-});
+      return false;
+    } catch(e) { console.error('Unlock err:', e); return false; }
+  }
+  // Try immediately
+  if (!tryUnlock()) {
+    // Try on DOM ready
+    document.addEventListener('DOMContentLoaded', tryUnlock);
+    // Try on full load
+    window.addEventListener('load', tryUnlock);
+    // Try after delays
+    setTimeout(tryUnlock, 100);
+    setTimeout(tryUnlock, 500);
+    setTimeout(tryUnlock, 1500);
+  }
+})();
 </script>
 </body>
 </html>
