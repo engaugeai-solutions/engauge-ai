@@ -1896,7 +1896,7 @@ form.addEventListener('submit', function(e) {
 </div>
 
 <!-- Password prompt -->
-<div id="matchesPwModal" style="display:none;position:fixed;inset:0;z-index:10000;background:rgba(7,9,15,0.97);display:none;align-items:center;justify-content:center">
+<div id="matchesPwModal" style="display:none;position:fixed;inset:0;z-index:10000;background:rgba(7,9,15,0.97);align-items:center;justify-content:center">
   <div style="background:#0E1320;border:1px solid rgba(79,142,247,0.3);border-radius:16px;padding:40px;width:100%;max-width:380px;text-align:center">
     <div style="font-size:2rem;margin-bottom:16px">🔐</div>
     <h3 style="font-family:Syne,sans-serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:8px">Private Access</h3>
@@ -1937,7 +1937,7 @@ function checkPw() {
     document.body.style.overflow = 'hidden';
     document.getElementById('pwInput').value = '';
     document.getElementById('pwError').style.display = 'none';
-    document.getElementById('matches-nav-item').style.display = 'list-item';
+    document.getElementById('matches-nav-item').style.display = 'block';
   } else {
     document.getElementById('pwError').style.display = 'block';
     document.getElementById('pwInput').value = '';
@@ -2226,6 +2226,19 @@ function mToast(msg) {
 }
 function mSleep(ms){return new Promise(r=>setTimeout(r,ms));}
 mLoadProfile();
+
+// Auto-unlock via URL param: add ?m=1995@22 to URL
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('m') === '1995@22') {
+    sessionStorage.setItem('matches_unlocked', 'yes');
+    document.getElementById('matches-nav-item').style.display = 'block';
+  }
+  // Also check if already unlocked this session
+  if (sessionStorage.getItem('matches_unlocked') === 'yes') {
+    document.getElementById('matches-nav-item').style.display = 'block';
+  }
+})();
 </script>
 </body>
 </html>
