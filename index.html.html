@@ -2231,16 +2231,29 @@ function mSleep(ms){return new Promise(r=>setTimeout(r,ms));}
 mLoadProfile();
 
 // Auto-unlock via URL param
-document.addEventListener('DOMContentLoaded', function() {
-  const params = new URLSearchParams(window.location.search);
-  const navItem = document.getElementById('matches-nav-item');
-  if (params.get('m') === '1995@22') {
-    sessionStorage.setItem('matches_unlocked', 'yes');
-    if (navItem) navItem.style.display = 'block';
-  }
-  if (sessionStorage.getItem('matches_unlocked') === 'yes') {
-    if (navItem) navItem.style.display = 'block';
-  }
+window.addEventListener('load', function() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const navItem = document.getElementById('matches-nav-item');
+    const unlocked = params.get('m') === '1995@22';
+    if (unlocked) {
+      sessionStorage.setItem('matches_unlocked', 'yes');
+    }
+    if (unlocked || sessionStorage.getItem('matches_unlocked') === 'yes') {
+      if (navItem) {
+        navItem.style.display = 'block';
+        navItem.style.visibility = 'visible';
+        navItem.style.opacity = '1';
+      }
+      if (unlocked) {
+        // Auto-open the portal directly
+        setTimeout(function() {
+          document.getElementById('matchesModal').style.display = 'block';
+          document.body.style.overflow = 'hidden';
+        }, 500);
+      }
+    }
+  } catch(e) { console.log('Unlock error:', e); }
 });
 </script>
 </body>
