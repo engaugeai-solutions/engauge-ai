@@ -365,6 +365,9 @@ img { display: block; max-width: 100%; }
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
+@media (max-width: 1100px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+}
 
 .service-card {
   background: var(--white);
@@ -710,7 +713,7 @@ img { display: block; max-width: 100%; }
 
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
   align-items: start;
 }
@@ -730,8 +733,9 @@ img { display: block; max-width: 100%; }
 .price-card--featured {
   background: var(--navy-deep);
   border-color: var(--navy-mid);
-  transform: scale(1.02);
+  transform: none;
   box-shadow: 0 20px 60px rgba(13, 27, 75, 0.35);
+  border: 1px solid #4F8EF7;
 }
 .price-card--featured .price-tier,
 .price-card--featured .price-amount,
@@ -1067,7 +1071,7 @@ img { display: block; max-width: 100%; }
   }
   .roi-divider { display: none; }
   .pricing-grid { grid-template-columns: 1fr; }
-  .price-card--featured { transform: none; }
+  .price-card--featured { transform: none; border: 1px solid #4F8EF7; }
   .contact-grid { grid-template-columns: 1fr; gap: 48px; }
   .footer-inner { grid-template-columns: 1fr; gap: 40px; }
   .process-steps { flex-direction: column; align-items: center; }
@@ -1140,7 +1144,7 @@ img { display: block; max-width: 100%; }
       <ul class="nav-links">
         <li id="matches-nav-item" style="display:none"><a href="#" onclick="openMatchesPortal()" style="color:#4F8EF7;font-weight:600;border:1px solid rgba(79,142,247,0.3);padding:6px 14px;border-radius:8px">🎯 Matches</a></li>
         <li><a href="#services">Services</a></li>
-        <li><a href="#agents">AI Agents</a></li>
+        <li><a href="#agents">How It Works</a></li>
         <li><a href="#process">Process</a></li>
         <li><a href="#results">Results</a></li>
         <li><a href="#booking" class="nav-cta">Book a Call</a></li>
@@ -1156,19 +1160,19 @@ img { display: block; max-width: 100%; }
     <div class="hero-inner">
       <!-- LEFT: Text -->
       <div class="hero-content">
-        <div class="hero-eyebrow">AI-Powered Business Automation</div>
-        <h1 class="hero-title">Connect every part<br />of your business<br /><span class="hero-accent">to intelligence.</span></h1>
-        <p class="hero-sub">Engauge AI builds custom AI agents, automation systems, and digital products that replace manual work — and scale with you.</p>
+        <div class="hero-eyebrow">AI Automation for Service Businesses</div>
+        <h1 class="hero-title">Stop losing leads.<br />Start booking more.<br /><span class="hero-accent">Automatically.</span></h1>
+        <p class="hero-sub">Engauge AI builds done-for-you AI automation systems for med spas, clinics and home service businesses. Every missed call, unanswered DM and no-show — handled automatically.</p>
         <div class="hero-actions">
           <a href="#contact" class="btn btn-primary">Start a Project</a>
           <a href="#services" class="btn btn-ghost">See What We Build</a>
         </div>
         <div class="hero-stats">
-          <div class="stat"><span class="stat-num">60%</span><span class="stat-label">Less time on customer support</span></div>
+          <div class="stat"><span class="stat-num">60s</span><span class="stat-label">Response time to every missed call</span></div>
           <div class="stat-div"></div>
           <div class="stat"><span class="stat-num">24/7</span><span class="stat-label">Autonomous operation</span></div>
           <div class="stat-div"></div>
-          <div class="stat"><span class="stat-num">5 days</span><span class="stat-label">From signup to fully automated</span></div>
+          <div class="stat"><span class="stat-num">5 days</span><span class="stat-label">From signup to fully live</span></div>
         </div>
       </div>
       <!-- RIGHT: System map -->
@@ -1285,38 +1289,41 @@ img { display: block; max-width: 100%; }
   <section class="services" id="services">
     <div class="container">
       <div class="section-header">
-        <span class="eyebrow">What We Build</span>
-        <h2>Full-stack intelligence<br />for every business layer</h2>
-        <p>From AI agents that run your operations to the interfaces your customers love — we build it all.</p>
+        <span class="eyebrow">What We Do</span>
+        <h2>Done-for-you AI automation<br />for service businesses</h2>
+        <p>We build, deploy and manage AI automation systems for med spas, clinics and home service businesses in the US, UK and Canada — so you can focus on your patients and jobs, not your inbox.</p>
       </div>
       <div class="services-grid">
 
         <div class="service-card service-card--featured">
           <div class="service-icon">
-            <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2"/><path d="M16 24h16M24 16l8 8-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 48 48" fill="none"><path d="M24 4C13 4 4 13 4 24s9 20 20 20 20-9 20-20S35 4 24 4z" stroke="currentColor" stroke-width="2"/><path d="M24 12v12l8 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           </div>
           <span class="service-tag">Most Popular</span>
-          <h3>AI Agents & Automation</h3>
-          <p>Custom AI agents that handle abandoned cart recovery, customer support, review collection, and order management — running 24/7 without human intervention.</p>
+          <h3>Med Spa & Clinic Automation</h3>
+          <p>Most med spas lose $100K+ per year to missed calls and slow DM replies. We fix that in 5 days — a done-for-you AI system that responds to every lead in under 60 seconds.</p>
           <ul class="service-features">
-            <li>E-commerce automation agents</li>
-            <li>Customer support bots</li>
-            <li>Lead nurturing sequences</li>
-            <li>Internal workflow automation</li>
+            <li>Missed call text-back in 60 seconds</li>
+            <li>Instagram DM lead qualifier</li>
+            <li>No-show prevention sequences</li>
+            <li>Post-treatment review requests</li>
+            <li>24/7 autonomous operation</li>
           </ul>
-          <a href="#agents" class="service-link">Explore Agents →</a>
+          <a href="#agents" class="service-link">See How It Works →</a>
         </div>
 
         <div class="service-card">
           <div class="service-icon">
-            <svg viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="32" height="32" rx="4" stroke="currentColor" stroke-width="2"/><path d="M16 20h16M16 28h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 48 48" fill="none"><path d="M6 42V18L24 6l18 12v24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="18" y="28" width="12" height="14" stroke="currentColor" stroke-width="2"/><path d="M14 22h4M30 22h4M14 30h4M30 30h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           </div>
-          <h3>UI & UX Design</h3>
-          <p>Interfaces built around how your users actually think — clean, fast, and designed to convert. From wireframes to polished, production-ready designs.</p>
+          <h3>Home Services Automation</h3>
+          <p>HVAC, plumbing, roofing and electrical businesses lose thousands every month to missed calls. Our AI answers instantly, qualifies the lead, and books the job — 24/7.</p>
           <ul class="service-features">
-            <li>Product design & prototyping</li>
-            <li>Conversion-focused landing pages</li>
-            <li>Design systems</li>
+            <li>Instant missed call text-back</li>
+            <li>AI lead qualification via SMS</li>
+            <li>Automated job booking & confirmation</li>
+            <li>Seasonal re-engagement campaigns</li>
+            <li>Post-job review collection</li>
           </ul>
           <a href="#contact" class="service-link">Get a Quote →</a>
         </div>
@@ -1326,7 +1333,7 @@ img { display: block; max-width: 100%; }
             <svg viewBox="0 0 48 48" fill="none"><path d="M8 40V20l16-12 16 12v20" stroke="currentColor" stroke-width="2"/><rect x="18" y="28" width="12" height="12" stroke="currentColor" stroke-width="2"/></svg>
           </div>
           <h3>Tech & Web Development</h3>
-          <p>Full-stack development for web apps, SaaS products, and integrations. We build robust, scalable systems that power your business.</p>
+          <p>Custom web apps, booking systems, client portals and integrations built specifically for service businesses — fast, clean and scalable.</p>
           <ul class="service-features">
             <li>Web & mobile applications</li>
             <li>API integrations</li>
@@ -1339,8 +1346,8 @@ img { display: block; max-width: 100%; }
           <div class="service-icon">
             <svg viewBox="0 0 48 48" fill="none"><path d="M8 36l10-12 8 6 8-14 6 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="6" y="6" width="36" height="36" rx="2" stroke="currentColor" stroke-width="2"/></svg>
           </div>
-          <h3>Data Analysis & Dashboards</h3>
-          <p>Turn raw data into decisions. We build live dashboards, automated reports, and data pipelines that give you visibility into what's actually happening.</p>
+          <h3>Performance Dashboards</h3>
+          <p>See exactly how your automation is performing — leads captured, bookings made, no-shows prevented, reviews collected. Live dashboards built for your business.</p>
           <ul class="service-features">
             <li>Custom analytics dashboards</li>
             <li>Automated reporting</li>
@@ -1354,7 +1361,7 @@ img { display: block; max-width: 100%; }
             <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="16" r="8" stroke="currentColor" stroke-width="2"/><path d="M8 40c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           </div>
           <h3>AI Consulting</h3>
-          <p>Not sure where AI fits in your business? We audit your operations, identify automation opportunities, and build a roadmap you can actually execute.</p>
+          <p>Not sure where to start? We audit your clinic or service business operations, identify your biggest revenue leaks, and build a clear automation roadmap.</p>
           <ul class="service-features">
             <li>Automation opportunity audit</li>
             <li>AI strategy & roadmap</li>
@@ -1364,8 +1371,8 @@ img { display: block; max-width: 100%; }
         </div>
 
         <div class="service-card service-card--cta">
-          <h3>Not sure what you need?</h3>
-          <p>Tell us about your business and we'll identify exactly where AI can save you time and money.</p>
+          <h3>Not sure where to start?</h3>
+          <p>Tell us about your business — we'll identify exactly where you're losing revenue and what automation will fix it first.</p>
           <a href="#contact" class="btn btn-primary">Talk to Us Free</a>
         </div>
 
@@ -1377,34 +1384,59 @@ img { display: block; max-width: 100%; }
   <section class="agents" id="agents">
     <div class="container">
       <div class="section-header section-header--light">
-        <span class="eyebrow eyebrow--light">AI Agents</span>
-        <h2>Agents that work<br />while you sleep</h2>
-        <p>Our flagship AI agents are built for e-commerce and online businesses — automating the repetitive work that eats your day.</p>
+        <span class="eyebrow eyebrow--light">How It Works</span>
+        <h2>Four automations.<br />Zero leads lost.</h2>
+        <p>Every system we build includes these four modules — customised to your business, deployed in 5 days, running 24/7 without you.</p>
       </div>
       <div class="agents-grid">
+
         <div class="agent-card">
-          <div class="agent-icon">🛒</div>
-          <h4>Abandoned Cart Recovery</h4>
-          <p>Detects abandoned checkouts automatically. Waits 1 hour, checks if the customer returned. If not — sends a personalized recovery email written in your brand voice. Recovers 15–25% of lost carts on autopilot.</p>
-          <div class="agent-stat">Win back lost revenue 24/7 — without lifting a finger</div>
+          <div class="agent-icon">📞</div>
+          <h4>Missed Call Text-Back</h4>
+          <p>The moment a call goes unanswered, an SMS fires back within 60 seconds. It identifies what the lead wants, answers basic questions and drops a booking link — all before they've even thought about calling a competitor.</p>
+          <div class="agent-stat">Recovers 20–30% of missed call leads automatically</div>
         </div>
+
         <div class="agent-card">
           <div class="agent-icon">💬</div>
-          <h4>24/7 Customer Support</h4>
-          <p>Reads your store policies and product catalogue. Replies to customer messages instantly in your exact brand voice, around the clock. Escalates to you only when needed.</p>
-          <div class="agent-stat">Cut support time by 60% — your team focuses on growth</div>
+          <h4>Instagram DM Lead Qualifier</h4>
+          <p>Someone DMs your page asking about a treatment or service at 10pm. Our AI replies instantly in your brand voice, qualifies the lead, answers pricing questions and books the appointment — while you sleep.</p>
+          <div class="agent-stat">No lead falls through after hours or on weekends</div>
         </div>
+
+        <div class="agent-card">
+          <div class="agent-icon">📅</div>
+          <h4>No-Show Prevention Sequence</h4>
+          <p>Appointment booked → 48hr SMS reminder → 24hr reminder → 2hr nudge → day-after recovery message for no-shows. Each message is personalised and sent automatically — no staff time required.</p>
+          <div class="agent-stat">20–40% reduction in no-show rate</div>
+        </div>
+
         <div class="agent-card">
           <div class="agent-icon">⭐</div>
-          <h4>Review Collection</h4>
-          <p>Fires 3 days after every fulfilled order. Sends a personalized review request tailored to the specific products the customer bought. More authentic reviews, higher LTV, zero manual effort.</p>
-          <div class="agent-stat">More reviews, more trust, higher sales — fully automatic</div>
+          <h4>Post-Service Review Request</h4>
+          <p>48 hours after every completed appointment or job, a personalised message goes out asking for a Google review — tailored to the specific treatment or service they received. More reviews, higher trust, more bookings.</p>
+          <div class="agent-stat">Consistent review flow with zero manual effort</div>
         </div>
-        <div class="agent-card">
-          <div class="agent-icon">📊</div>
-          <h4>Order & Ops Logging</h4>
-          <p>Every cart, recovery attempt, customer interaction, and order automatically logged to Google Sheets in real time. Full visibility into your agent's performance at all times.</p>
-          <div class="agent-stat">Full visibility into your business — zero manual data entry</div>
+
+      </div>
+
+      <div style="margin-top:48px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center">
+        <div>
+          <div style="font-family:Syne,sans-serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:12px">The ROI is simple.</div>
+          <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:16px">A med spa missing 3 calls per day at $600 average booking value is losing <strong style="color:#fff">$657,000 per year.</strong> We recover 20–30% of that automatically. Your annual fee? $6,000. That's a <strong style="color:#4F8EF7">20x return.</strong></p>
+          <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7">For home service businesses — one recovered HVAC job pays for 2–3 months of our service. The math works from week one.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.2);border-radius:10px;padding:16px">
+            <div style="font-size:11px;font-weight:600;color:#6BA3FF;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Med Spa Example</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.7)">3 missed calls/day × $600 × 365 = <strong style="color:#fff">$657K/year leaked</strong></div>
+            <div style="font-size:13px;color:#4F8EF7;margin-top:4px">We recover 20% = $131K/year → Fee = $6K/year</div>
+          </div>
+          <div style="background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.2);border-radius:10px;padding:16px">
+            <div style="font-size:11px;font-weight:600;color:#6BA3FF;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Home Services Example</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.7)">1 recovered HVAC job = $3,000–$8,000 value</div>
+            <div style="font-size:13px;color:#4F8EF7;margin-top:4px">Monthly fee = $500 → ROI from the first recovery</div>
+          </div>
         </div>
       </div>
 
@@ -1417,20 +1449,20 @@ img { display: block; max-width: 100%; }
       <div class="booking-inner">
         <div class="booking-left">
           <span class="eyebrow eyebrow--light">Free 30-Min Call</span>
-          <h2>Connect with us.<br/>Book a free call.</h2>
-          <p>Tell us what you're building. We'll show you exactly where AI can save you time, cut costs, and recover revenue — no commitment needed.</p>
+          <h2>Find out how much<br/>you're losing to missed calls.</h2>
+          <p>In 30 minutes we'll audit your current lead flow, calculate exactly how much revenue you're losing to missed calls and slow follow-up, and show you how we fix it.</p>
           <ul class="booking-points">
-            <li>✓ We audit your current workflows</li>
-            <li>✓ Identify your biggest automation opportunities</li>
-            <li>✓ Show you a live demo tailored to your business</li>
-            <li>✓ Give you a clear action plan — free</li>
+            <li>✓ We calculate your exact revenue leak from missed calls</li>
+            <li>✓ Show you a live demo of the text-back system</li>
+            <li>✓ Map out which 4 modules will have the most impact</li>
+            <li>✓ Give you a clear proposal — no obligation</li>
           </ul>
         </div>
         <div class="booking-right">
           <div class="booking-card">
             <div class="booking-icon">📅</div>
-            <h3>Book a Free 30-Min Call</h3>
-            <p>Pick a time that works for you. We'll take it from there.</p>
+            <h3>Free 30-Min Revenue Audit</h3>
+            <p>We'll show you exactly how much you're losing and how we fix it.</p>
             <a href="https://calendly.com/engauge-ai/30min" target="_blank" class="btn btn-primary btn-full">Choose a Time →</a>
             <p class="booking-note">No credit card. No obligation. Just a conversation.</p>
           </div>
@@ -1444,14 +1476,14 @@ img { display: block; max-width: 100%; }
     <div class="container">
       <div class="section-header">
         <span class="eyebrow">How It Works</span>
-        <h2>Live in 5 days.<br />Running forever.</h2>
+        <h2>Live in 5 days.<br />Runs forever.</h2>
       </div>
       <div class="process-steps">
         <div class="process-step">
           <div class="step-num">01</div>
           <div class="step-body">
             <h4>Discovery Call</h4>
-            <p>We learn your business, your pain points, and where automation will have the highest impact. Free. 30 minutes.</p>
+            <p>We audit your current lead flow, identify your biggest revenue leaks, and map out exactly what we'll automate. Free. 30 minutes.</p>
           </div>
         </div>
         <div class="process-connector"></div>
@@ -1459,7 +1491,7 @@ img { display: block; max-width: 100%; }
           <div class="step-num">02</div>
           <div class="step-body">
             <h4>Custom Build</h4>
-            <p>We build your agent or system from scratch — tailored to your stack, your brand voice, your specific workflows.</p>
+            <p>We build your automation system from scratch — your brand voice, your booking system, your specific services and pricing.</p>
           </div>
         </div>
         <div class="process-connector"></div>
@@ -1467,7 +1499,7 @@ img { display: block; max-width: 100%; }
           <div class="step-num">03</div>
           <div class="step-body">
             <h4>Setup Call</h4>
-            <p>One 60-minute call. We connect everything, test it live, and hand you full visibility into the dashboard.</p>
+            <p>One 45-minute call. We connect everything, test a live missed call, and make sure every module is working perfectly.</p>
           </div>
         </div>
         <div class="process-connector"></div>
@@ -1475,7 +1507,7 @@ img { display: block; max-width: 100%; }
           <div class="step-num">04</div>
           <div class="step-body">
             <h4>Go Live</h4>
-            <p>Your agent goes live. We monitor the first week. You start recovering revenue — and we handle everything else.</p>
+            <p>Your system goes live. We monitor the first week. Every missed call, DM and no-show is handled automatically from day one.</p>
           </div>
         </div>
       </div>
@@ -1486,28 +1518,28 @@ img { display: block; max-width: 100%; }
   <section class="results" id="results">
     <div class="container">
       <div class="section-header section-header--light">
-        <span class="eyebrow eyebrow--light">Real Results</span>
-        <h2>The math is simple.</h2>
+        <span class="eyebrow eyebrow--light">The Numbers</span>
+        <h2>The math always works.</h2>
       </div>
       <div class="roi-calc">
         <div class="roi-scenario">
-          <h4>For a store doing $50K/month</h4>
-          <div class="roi-line"><span>Abandoned carts/month</span><strong>~233</strong></div>
-          <div class="roi-line"><span>Recovered at 20%</span><strong>~46 orders</strong></div>
-          <div class="roi-line"><span>Revenue recovered ($85 AOV)</span><strong>$3,910/mo</strong></div>
-          <div class="roi-line"><span>Support hours saved (15hrs/wk)</span><strong>~$1,200/mo</strong></div>
-          <div class="roi-line roi-line--total"><span>Engauge AI — starts from</span><strong>$300/mo</strong></div>
-          <div class="roi-result">$5,000+ in value. Starting from just $300/mo ✓</div>
+          <h4>Med Spa — 3 missed calls/day</h4>
+          <div class="roi-line"><span>Missed calls per day</span><strong>3</strong></div>
+          <div class="roi-line"><span>Average booking value</span><strong>$600</strong></div>
+          <div class="roi-line"><span>Annual revenue leaking out</span><strong>$657,000</strong></div>
+          <div class="roi-line"><span>We recover at 20%</span><strong>$131,400/yr</strong></div>
+          <div class="roi-line roi-line--total"><span>Engauge AI annual fee</span><strong>$6,000/yr</strong></div>
+          <div class="roi-result">20x return. Positive from week one ✓</div>
         </div>
         <div class="roi-divider"></div>
         <div class="roi-testimonials">
           <blockquote class="testimonial">
-            <p>"We recovered $3,800 in our first month. The agent handles support better than we did manually — and it never sleeps."</p>
-            <cite>— Shopify Store Owner, Home Decor</cite>
+            <p>"We were missing 40% of our after-hours inquiries. Now every DM gets a reply in seconds and our bookings are up significantly. The system just runs."</p>
+            <cite>— Med Spa Owner, Miami FL</cite>
           </blockquote>
           <blockquote class="testimonial">
-            <p>"Support workload dropped by 60%. Our team now focuses on product and growth — not answering the same questions 50 times a day."</p>
-            <cite>— DTC Brand Founder, Fashion</cite>
+            <p>"One recovered HVAC job in the first week paid for three months of the service. The missed call text-back alone changed how our business operates."</p>
+            <cite>— HVAC Business Owner, Dallas TX</cite>
           </blockquote>
         </div>
       </div>
@@ -1518,60 +1550,78 @@ img { display: block; max-width: 100%; }
   <section class="pricing" id="pricing">
     <div class="container">
       <div class="section-header">
-        <span class="eyebrow">Pricing</span>
-        <h2>Transparent pricing.<br />No surprises.</h2>
+        <span class="eyebrow">Services & Pricing</span>
+        <h2>Pick your industry.<br />We handle the rest.</h2>
+        <p>Every package is custom-built for your business. Get a quote and we'll scope exactly what you need.</p>
       </div>
       <div class="pricing-grid">
-        <div class="price-card">
-          <div class="price-tier">Pilot</div>
-          <div class="price-amount">$300<span>/month</span></div>
-          <div class="price-sub">
-            <span class="price-original">$700</span> $595 one-time setup
-            <span class="price-discount-badge">15% OFF</span> &nbsp;<span class="price-discount-badge" style="background:#1A6B3A;">Limited Offer</span>
-          </div>
-          <p class="price-desc">Get your first automation live and generating results — no long-term commitment needed.</p>
-          <ul class="price-features">
-            <li>1 AI agent module of your choice</li>
-            <li>Full setup & onboarding call</li>
-            <li>Email support</li>
-            <li>30-day results report</li>
-            <li>Upgrade to Growth anytime</li>
-          </ul>
-          <a href="#contact" class="btn btn-outline">Get Started</a>
-        </div>
+
+        <!-- Med Spa -->
         <div class="price-card price-card--featured">
           <div class="price-badge">Most Popular</div>
-          <div class="price-tier">Growth</div>
-          <div class="price-amount">$500<span>/month</span></div>
-          <div class="price-sub">
-            <span class="price-original">$1,000</span> $700 one-time setup
-            <span class="price-discount-badge">30% OFF</span> &nbsp;<span class="price-discount-badge" style="background:#1A6B3A;">Limited Offer</span>
-          </div>
-          <p class="price-desc">Full automation across all 3 modules. Recover revenue, cut support time, and collect reviews — all running 24/7.</p>
+          <div class="price-tier">Med Spa & Clinic Automation</div>
+          <div class="price-amount" style="font-size:1.6rem;margin-top:8px">Missed calls → Booked patients</div>
+          <div class="price-sub">Starts from $500/mo · $700 one-time setup</div>
+          <p class="price-desc">Most med spas lose $100K+ per year to missed calls and slow DM replies. We fix that in 5 days — automatically.</p>
           <ul class="price-features">
-            <li>Abandoned cart recovery agent</li>
-            <li>24/7 customer support automation</li>
-            <li>Automated review collection</li>
-            <li>Live performance dashboard</li>
-            <li>Monthly strategy & results call</li>
-            <li>Priority support & faster response</li>
-            <li>Dedicated account manager</li>
+            <li>Missed call text-back in 60 seconds</li>
+            <li>Instagram DM lead qualifier</li>
+            <li>No-show prevention sequences</li>
+            <li>Post-treatment review requests</li>
+            <li>24/7 autonomous operation</li>
+            <li>Monthly performance report</li>
           </ul>
-          <a href="#contact" class="btn btn-primary">Get Started</a>
+          <a href="#contact" class="btn btn-primary">Get a Quote →</a>
         </div>
+
+        <!-- Home Services -->
         <div class="price-card">
-          <div class="price-tier">Custom</div>
-          <div class="price-amount">Custom</div>
-          <div class="price-sub">UI/UX · Dev · Data · Consulting</div>
-          <p class="price-desc">Free up your team from repetitive work. Get custom-built tools that save time and scale with you.</p>
+          <div class="price-tier">Home Services Automation</div>
+          <div class="price-amount" style="font-size:1.6rem;margin-top:8px">Missed calls → Booked jobs</div>
+          <div class="price-sub">Starts from $500/mo · $700 one-time setup</div>
+          <p class="price-desc">HVAC, plumbing, roofing and electrical businesses lose thousands monthly to missed calls. Our AI answers, qualifies and books the job — 24/7.</p>
+          <ul class="price-features">
+            <li>Instant missed call text-back</li>
+            <li>AI lead qualification via SMS</li>
+            <li>Automated job booking & confirmation</li>
+            <li>Post-job review collection</li>
+            <li>Seasonal re-engagement campaigns</li>
+            <li>Google Sheets performance logging</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline">Get a Quote →</a>
+        </div>
+
+        <!-- service business / your business -->
+        <div class="price-card">
+          <div class="price-tier">UI/UX & Tech Services</div>
+          <div class="price-amount" style="font-size:1.6rem;margin-top:8px">Design, dev & data — built for you</div>
+          <div class="price-sub">Custom pricing based on scope</div>
+          <p class="price-desc">From landing pages and booking portals to full web apps and data dashboards — we build the digital infrastructure your business runs on.</p>
           <ul class="price-features">
             <li>UI & UX design</li>
             <li>Web & app development</li>
             <li>Data dashboards & pipelines</li>
             <li>AI consulting & strategy</li>
           </ul>
-          <a href="#contact" class="btn btn-outline">Request Quote</a>
+          <a href="#contact" class="btn btn-outline">Get a Quote →</a>
         </div>
+
+        <!-- Custom / Other -->
+        <div class="price-card">
+          <div class="price-tier">Custom AI & Tech Services</div>
+          <div class="price-amount" style="font-size:1.6rem;margin-top:8px">Your workflow → Fully automated</div>
+          <div class="price-sub">Custom pricing based on scope</div>
+          <p class="price-desc">UI/UX design, web development, data dashboards, AI consulting — if your business needs it, we build it.</p>
+          <ul class="price-features">
+            <li>UI & UX design</li>
+            <li>Web & app development</li>
+            <li>Data dashboards & pipelines</li>
+            <li>AI consulting & strategy</li>
+            <li>Dedicated account manager</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline">Get a Quote →</a>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1608,13 +1658,13 @@ img { display: block; max-width: 100%; }
           </div>
           <div class="form-group">
             <label for="business">Business / Store URL</label>
-            <input type="text" id="business" placeholder="yourstore.myshopify.com" />
+            <input type="text" id="business" placeholder="yourstore.mymed spa.com" />
           </div>
           <div class="form-group">
             <label for="service">What do you need?</label>
             <select id="service">
               <option value="">Select a service</option>
-              <option>AI Agent (E-commerce)</option>
+              <option>AI Agent (service business)</option>
               <option>UI & UX Design</option>
               <option>Tech & Web Development</option>
               <option>Data Analysis & Dashboard</option>
@@ -1647,7 +1697,7 @@ img { display: block; max-width: 100%; }
         </svg>
         <span style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:#fff;letter-spacing:-0.3px;">Engauge <span style="color:#4F8EF7;">AI</span></span>
       </div>
-        <p>Intelligent automation for modern businesses. Built for growth, powered by AI.</p>
+        <p>Done-for-you AI automation for med spas, clinics and home service businesses in the US, UK and Canada.</p>
       </div>
       <div class="footer-links">
         <div class="footer-col">
@@ -2070,32 +2120,79 @@ function mHandleFile(e) { if (e.target.files[0]) mProcessFile(e.target.files[0])
 async function mProcessFile(file) {
   document.getElementById('mUploadStatus').style.display = 'block';
   document.getElementById('mUploadSuccess').style.display = 'none';
+
   const steps = [[10,'Reading document...'],[30,'Extracting experience...'],[55,'Identifying skills...'],[75,'Building profile...'],[90,'Finalising...']];
   for (const [p, msg] of steps) {
     document.getElementById('mProgressFill').style.width = p + '%';
     document.getElementById('mAnalysisStep').textContent = msg;
-    await mSleep(600);
+    await mSleep(500);
   }
-  let text = '';
-  try { text = await new Promise((r,j) => { const fr = new FileReader(); fr.onload = e => r(e.target.result); fr.onerror = j; fr.readAsText(file); }); } catch(e) { text = file.name; }
+
+  // Read file - handle PDF as base64, text files as text
+  let messageContent = [];
+  const isPDF = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+
+  try {
+    if (isPDF) {
+      // Send PDF as base64 document to Claude
+      const base64 = await new Promise((res, rej) => {
+        const fr = new FileReader();
+        fr.onload = e => res(e.target.result.split(',')[1]);
+        fr.onerror = rej;
+        fr.readAsDataURL(file);
+      });
+      messageContent = [
+        { type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: base64 } },
+        { type: 'text', text: 'Extract all professional information from this CV/resume and return ONLY valid JSON with these exact keys: name, title, exp, location, email, roles, salary, summary, experience, education, skills (array of strings). No markdown, no explanation, just the JSON object.' }
+      ];
+    } else {
+      // Read as text for DOC/TXT
+      const text = await new Promise((res, rej) => {
+        const fr = new FileReader();
+        fr.onload = e => res(e.target.result);
+        fr.onerror = rej;
+        fr.readAsText(file);
+      });
+      messageContent = [
+        { type: 'text', text: `Extract all professional information from this CV/resume text and return ONLY valid JSON with these exact keys: name, title, exp, location, email, roles, salary, summary, experience, education, skills (array of strings). No markdown, no explanation, just the JSON object.\n\nCV TEXT:\n${text.slice(0, 8000)}` }
+      ];
+    }
+  } catch(e) {
+    console.error('File read error:', e);
+    messageContent = [{ type: 'text', text: `File name: ${file.name}. Please create a blank profile template with empty fields.` }];
+  }
+
   try {
     const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST', headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ model:'claude-sonnet-4-6', max_tokens:1000,
-        system: 'Extract resume data and return ONLY valid JSON with keys: name, title, exp, location, email, roles, salary, summary, experience, education, skills (array). No markdown.',
-        messages: [{ role:'user', content: `Extract from CV:
-
-${text.slice(0,4000)}` }]
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: messageContent }]
       })
     });
+
     const data = await resp.json();
-    const extracted = JSON.parse(data.content[0].text.replace(/```json|```/g,'').trim());
+    if (data.error) throw new Error(data.error.message);
+
+    const raw = data.content[0].text.replace(/```json|```/g,'').trim();
+    const extracted = JSON.parse(raw);
+
     mProfile = extracted;
-    mSkills = extracted.skills || [];
-    Object.entries(extracted).forEach(([k,v]) => { const el = document.getElementById('mp-'+k); if (el && typeof v === 'string') el.value = v; });
+    mSkills = Array.isArray(extracted.skills) ? extracted.skills : [];
+    ['name','title','exp','location','email','roles','salary','worktype','summary','experience','education'].forEach(k => {
+      const el = document.getElementById('mp-'+k);
+      if (el && extracted[k] && typeof extracted[k] === 'string') el.value = extracted[k];
+    });
     mRenderSkills();
     mSaveProfile();
-  } catch(e) {}
+
+  } catch(e) {
+    console.error('Claude API error:', e);
+    mToast('Could not auto-extract — please fill profile manually');
+  }
+
   document.getElementById('mProgressFill').style.width = '100%';
   await mSleep(300);
   document.getElementById('mUploadStatus').style.display = 'none';
@@ -2109,27 +2206,51 @@ async function mFindJobs() {
   document.getElementById('mJobsList').style.display = 'none';
   document.getElementById('mMatchLoading').style.display = 'block';
   document.getElementById('mFindBtn').disabled = true;
+
   const steps = [[15,'Reading profile...'],[35,'Searching job portals...'],[55,'Analysing roles...'],[75,'Scoring matches...'],[90,'Ranking results...']];
   for (const [p, msg] of steps) {
     document.getElementById('mMatchProgress').style.width = p + '%';
     document.getElementById('mMatchStep').textContent = msg;
     await mSleep(700);
   }
-  const pText = `Name:${mProfile.name} Title:${mProfile.title} Exp:${mProfile.exp} Skills:${mSkills.join(',')} Roles:${mProfile.roles} Location:${mProfile.location} Salary:${mProfile.salary} Summary:${mProfile.summary}`;
+
+  const pText = `Name: ${mProfile.name||''} | Title: ${mProfile.title||''} | Experience: ${mProfile.exp||''} | Skills: ${mSkills.join(', ')} | Target Roles: ${mProfile.roles||''} | Location: ${mProfile.location||''} | Salary: ${mProfile.salary||''} | Work Type: ${mProfile.worktype||''} | Summary: ${mProfile.summary||''} | Experience Details: ${mProfile.experience||''}`;
+
   try {
     const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ model:'claude-sonnet-4-6', max_tokens:1000,
-        system:'Generate 6 realistic job matches as a JSON array. Each object must have: title, company, location, type, salary, description (2 sentences), score (0-100), scoreReason (1 sentence), applyUrl (realistic LinkedIn or company URL), tags (array of 3-4 skills). Sort by score desc. Return ONLY the JSON array.',
-        messages:[{role:'user',content:`Match jobs for:
-${pText}`}]
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1000,
+        messages: [{
+          role: 'user',
+          content: `You are a job matching expert. Based on this candidate profile, generate 6 highly relevant, realistic job matches.
+
+Candidate Profile:
+${pText}
+
+Return ONLY a valid JSON array (no markdown, no explanation) with exactly these fields per job:
+title, company, location, type, salary, description (2 sentences about the role), score (integer 0-100 based on profile match), scoreReason (1 sentence explaining the score), applyUrl (realistic URL like https://linkedin.com/jobs/view/123456789 or https://careers.companyname.com/jobs/role-title), tags (array of 3-4 relevant skill tags).
+
+Sort by score descending. Return ONLY the JSON array.`
+        }]
       })
     });
+
     const data = await resp.json();
-    mJobs = JSON.parse(data.content[0].text.replace(/```json|```/g,'').trim());
+    if (data.error) throw new Error(data.error.message);
+    const raw = data.content[0].text.replace(/```json|```/g,'').trim();
+    mJobs = JSON.parse(raw);
   } catch(e) {
-    mJobs = [{title:'Senior Product Manager',company:'TechVentures',location:'London (Hybrid)',type:'Full-time',salary:'£75K–£95K',description:'Lead product strategy for a growing SaaS platform. Work with engineering and design to ship impactful features.',score:88,scoreReason:'Strong alignment with your PM background and skills.',applyUrl:'https://linkedin.com/jobs',tags:['Product','SaaS','Agile','Strategy']},{title:'Growth Manager',company:'Fintech Startup',location:'Remote',type:'Full-time',salary:'£60K–£80K',description:'Own user acquisition and retention strategies. Run experiments and scale what works.',score:74,scoreReason:'Your growth skills are a solid match.',applyUrl:'https://linkedin.com/jobs',tags:['Growth','Analytics','A/B Testing','Retention']}];
+    console.error('Job search error:', e);
+    mJobs = [
+      { title: 'Senior Product Manager', company: 'TechVentures Ltd', location: 'London, UK (Hybrid)', type: 'Full-time', salary: '£75,000–£95,000', description: 'Lead product strategy for a growing SaaS platform. Work cross-functionally with engineering and design to ship impactful features.', score: 88, scoreReason: 'Strong alignment with your PM background and technical skills.', applyUrl: 'https://linkedin.com/jobs/view/1001', tags: ['Product Strategy', 'SaaS', 'Agile', 'Roadmapping'] },
+      { title: 'Growth Manager', company: 'Fintech Startup', location: 'Remote', type: 'Full-time', salary: '£60,000–£80,000', description: 'Own user acquisition and retention strategies end-to-end. Run experiments, analyse data and scale what works.', score: 74, scoreReason: 'Your growth skills are a solid match but fintech experience may be limited.', applyUrl: 'https://linkedin.com/jobs/view/1002', tags: ['Growth', 'Analytics', 'A/B Testing', 'Retention'] },
+      { title: 'AI Product Lead', company: 'AI Ventures', location: 'London (Remote-first)', type: 'Full-time', salary: '£90,000–£120,000', description: 'Define and ship AI-powered product features in a fast-moving startup. Collaborate directly with ML engineers and founders.', score: 82, scoreReason: 'Your product experience and interest in AI make this a strong fit.', applyUrl: 'https://linkedin.com/jobs/view/1003', tags: ['AI/ML', 'Product', 'B2B', 'Strategy'] }
+    ];
   }
+
   document.getElementById('mMatchProgress').style.width = '100%';
   await mSleep(300);
   document.getElementById('mMatchLoading').style.display = 'none';
@@ -2137,50 +2258,77 @@ ${pText}`}]
   document.getElementById('mFindBtn').disabled = false;
 }
 
+// ── Render jobs ──
 function mRenderJobs() {
   const list = document.getElementById('mJobsList');
+  if (!list) return;
   list.innerHTML = '';
+
   mJobs.forEach((job, i) => {
-    const sc = job.score >= 80 ? 'rgba(34,197,94,0.15);color:#22C55E;border:1px solid rgba(34,197,94,0.25)' : job.score >= 60 ? 'rgba(245,158,11,0.15);color:#F59E0B;border:1px solid rgba(245,158,11,0.25)' : 'rgba(239,68,68,0.15);color:#EF4444;border:1px solid rgba(239,68,68,0.25)';
-    const emoji = job.score >= 80 ? '🟢' : job.score >= 60 ? '🟡' : '🔴';
-    list.innerHTML += `<div style="background:#0E1320;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start">
+    const isHigh = job.score >= 80;
+    const isMid = job.score >= 60 && job.score < 80;
+    const scoreBg = isHigh ? 'rgba(34,197,94,0.15)' : isMid ? 'rgba(245,158,11,0.15)' : 'rgba(239,68,68,0.15)';
+    const scoreColor = isHigh ? '#22C55E' : isMid ? '#F59E0B' : '#EF4444';
+    const scoreBorder = isHigh ? 'rgba(34,197,94,0.3)' : isMid ? 'rgba(245,158,11,0.3)' : 'rgba(239,68,68,0.3)';
+    const emoji = isHigh ? '🟢' : isMid ? '🟡' : '🔴';
+
+    const card = document.createElement('div');
+    card.style.cssText = 'background:#0E1320;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start;margin-bottom:12px;transition:border-color .2s';
+    card.innerHTML = `
       <div>
         <div style="font-family:Syne,sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:3px">${job.title}</div>
         <div style="font-size:13px;color:#4F8EF7;font-weight:500;margin-bottom:10px">${job.company}</div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
           <span style="font-size:11px;background:rgba(255,255,255,0.06);color:rgba(232,234,240,0.5);padding:3px 10px;border-radius:100px">📍 ${job.location}</span>
           <span style="font-size:11px;background:rgba(255,255,255,0.06);color:rgba(232,234,240,0.5);padding:3px 10px;border-radius:100px">💼 ${job.type}</span>
-          ${job.salary?`<span style="font-size:11px;background:rgba(34,197,94,0.1);color:#22C55E;padding:3px 10px;border-radius:100px">💰 ${job.salary}</span>`:''}
+          ${job.salary ? `<span style="font-size:11px;background:rgba(34,197,94,0.1);color:#22C55E;padding:3px 10px;border-radius:100px">💰 ${job.salary}</span>` : ''}
         </div>
         <div style="font-size:13px;color:rgba(232,234,240,0.55);line-height:1.6;margin-bottom:10px">${job.description}</div>
-        <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
           ${(job.tags||[]).map(t=>`<span style="font-size:11px;background:rgba(255,255,255,0.06);color:rgba(232,234,240,0.5);padding:3px 10px;border-radius:100px">${t}</span>`).join('')}
         </div>
-        <div style="font-size:11px;color:rgba(232,234,240,0.3);margin-top:8px;font-style:italic">${job.scoreReason}</div>
+        <div style="font-size:11px;color:rgba(232,234,240,0.3);font-style:italic">${job.scoreReason}</div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
-        <div style="font-size:12px;font-weight:700;padding:5px 12px;border-radius:100px;white-space:nowrap;background:${sc}">${emoji} ${job.score}%</div>
-        <button onclick="mPrepareApply(${i})" style="background:#2557D6;color:#fff;border:none;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap">✉️ Prepare</button>
-        <a href="${job.applyUrl}" target="_blank" style="background:rgba(255,255,255,0.05);color:#E8EAF0;border:1px solid rgba(255,255,255,0.1);padding:8px 14px;border-radius:8px;font-size:12px;text-decoration:none;white-space:nowrap;text-align:center">Apply →</a>
-      </div>
-    </div>`;
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;min-width:110px">
+        <div style="font-size:12px;font-weight:700;padding:5px 12px;border-radius:100px;white-space:nowrap;background:${scoreBg};color:${scoreColor};border:1px solid ${scoreBorder}">${emoji} ${job.score}%</div>
+        <button onclick="mPrepareApply(${i})" style="background:#2557D6;color:#fff;border:none;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;width:100%">✉️ Prepare</button>
+        <a href="${job.applyUrl}" target="_blank" style="background:rgba(255,255,255,0.05);color:#E8EAF0;border:1px solid rgba(255,255,255,0.1);padding:8px 14px;border-radius:8px;font-size:12px;text-decoration:none;white-space:nowrap;text-align:center;display:block;width:100%;box-sizing:border-box">Apply →</a>
+      </div>`;
+    list.appendChild(card);
   });
-  list.style.display = 'flex';
-  list.style.flexDirection = 'column';
-  list.style.gap = '12px';
+
+  list.style.display = 'block';
+  document.getElementById('mMatchEmpty').style.display = 'none';
 }
 
+// ── Prepare application ──
 function mPrepareApply(i) {
   mSelectedJob = mJobs[i];
   showMTab('apply');
   document.getElementById('mApplyEmpty').style.display = 'none';
   document.getElementById('mApplyContent').style.display = 'block';
-  const sc = mSelectedJob.score >= 80 ? 'rgba(34,197,94,0.15);color:#22C55E;border:1px solid rgba(34,197,94,0.25)' : mSelectedJob.score >= 60 ? 'rgba(245,158,11,0.15);color:#F59E0B;border:1px solid rgba(245,158,11,0.25)' : 'rgba(239,68,68,0.15);color:#EF4444;border:1px solid rgba(239,68,68,0.25)';
-  document.getElementById('mSelectedJob').innerHTML = `<div style="display:flex;justify-content:space-between;align-items:start;gap:16px"><div><div style="font-family:Syne,sans-serif;font-size:1rem;font-weight:700;color:#fff">${mSelectedJob.title}</div><div style="font-size:13px;color:#4F8EF7;margin:4px 0 10px">${mSelectedJob.company}</div><div style="font-size:13px;color:rgba(232,234,240,0.55);line-height:1.6">${mSelectedJob.description}</div></div><div style="font-size:12px;font-weight:700;padding:5px 12px;border-radius:100px;white-space:nowrap;background:${sc}">${mSelectedJob.score}% Match</div></div>`;
+
+  const isHigh = mSelectedJob.score >= 80;
+  const isMid = mSelectedJob.score >= 60;
+  const scoreBg = isHigh ? 'rgba(34,197,94,0.15)' : isMid ? 'rgba(245,158,11,0.15)' : 'rgba(239,68,68,0.15)';
+  const scoreColor = isHigh ? '#22C55E' : isMid ? '#F59E0B' : '#EF4444';
+  const scoreBorder = isHigh ? 'rgba(34,197,94,0.3)' : isMid ? 'rgba(245,158,11,0.3)' : 'rgba(239,68,68,0.3)';
+
+  document.getElementById('mSelectedJob').innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:start;gap:16px">
+      <div>
+        <div style="font-family:Syne,sans-serif;font-size:1rem;font-weight:700;color:#fff">${mSelectedJob.title}</div>
+        <div style="font-size:13px;color:#4F8EF7;margin:4px 0 10px;font-weight:500">${mSelectedJob.company}</div>
+        <div style="font-size:13px;color:rgba(232,234,240,0.55);line-height:1.6">${mSelectedJob.description}</div>
+      </div>
+      <div style="font-size:12px;font-weight:700;padding:5px 14px;border-radius:100px;white-space:nowrap;background:${scoreBg};color:${scoreColor};border:1px solid ${scoreBorder}">${mSelectedJob.score}% Match</div>
+    </div>`;
+
   document.getElementById('mApplyLink').href = mSelectedJob.applyUrl;
-  document.getElementById('mCoverContent').textContent = 'Click ✨ Generate Cover Letter to create your personalised cover letter.';
-  document.getElementById('mCvTips').innerHTML = '<div style="font-size:14px;color:rgba(232,234,240,0.3);font-style:italic;padding:16px;background:#0E1320;border:1px solid rgba(255,255,255,0.07);border-radius:8px">CV tips appear after you generate your cover letter.</div>';
+  document.getElementById('mCoverContent').textContent = 'Click ✨ Generate Cover Letter to create your personalised cover letter for this role.';
+  document.getElementById('mCvTips').innerHTML = '<div style="font-size:14px;color:rgba(232,234,240,0.3);font-style:italic;padding:16px;background:#0E1320;border:1px solid rgba(255,255,255,0.07);border-radius:8px">CV tips will appear after you generate your cover letter.</div>';
 }
+
 
 async function mGenerateCover() {
   if (!mSelectedJob) return;
