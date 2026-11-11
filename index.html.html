@@ -1,62 +1,88 @@
 <title>Engauge AI</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="AI agents and AI automation for growing businesses. AI receptionists that answer every call, and automations that run your operations 24/7.">
+<meta name="description" content="AI agents and AI automation for growing businesses. Every call answered, every task automated.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
-/* Layout: SaaS landing page. Glowing AI-hub hero, logo marquee, alternating feature showcases (phone demo, live workflow), pricing cards, CTA glow. */
+/* Layout: SaaS page that alternates section themes (blue hero → white → soft → dark → blue CTA) on one 1220px column. */
 :root{
-  color-scheme: dark;
-  --bg:#060914; --bg-2:#0A1024; --card:#0F1730; --card-2:#141E3D; --line:rgba(148,170,255,.14); --line-2:rgba(148,170,255,.24);
-  --text:#F1F4FF; --muted:#A3ADCC; --dim:#7581A6;
-  --blue:#4F9DFF; --blue-2:#7BB8FF; --teal:#3EE0C0; --amber:#FFB65C; --on-blue:#04101F;
+  color-scheme: light;
+  --navy:#0A1530; --ink:#060B1C; --blue:#0B63F6; --blue-d:#0739A8; --sky:#4F9DFF; --teal:#3EE0C0; --teal-d:#087D69; --amber:#FFB65C;
   --font:"Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --r:20px;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --r:22px;
+  /* default section theme = light */
+  --bg:#FFFFFF; --fg:var(--navy); --mut:#4A5778; --card:#FFFFFF; --card2:#F5F8FD; --ln:#E3E9F4; --acc:var(--blue); --acc2:var(--teal-d);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font:16px/1.65 var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+body{background:#fff;color:var(--navy);font:16px/1.65 var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ink)}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
-a{color:var(--blue-2)}
-:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:8px}
-h1,h2,h3,h4{margin:0;line-height:1.1;letter-spacing:-.03em;text-wrap:balance}
+:focus-visible{outline:2px solid var(--sky);outline-offset:3px;border-radius:8px}
+h1,h2,h3,h4{margin:0;line-height:1.08;letter-spacing:-.035em;text-wrap:balance}
 p{margin:0}
+a{color:var(--acc)}
+
+/* section themes */
+.t-light{--bg:#FFFFFF;--fg:var(--navy);--mut:#4A5778;--card:#FFFFFF;--card2:#F5F8FD;--ln:#E3E9F4;--acc:var(--blue);--acc2:var(--teal-d)}
+.t-soft{--bg:#F2F5FB;--fg:var(--navy);--mut:#4A5778;--card:#FFFFFF;--card2:#F7F9FD;--ln:#DFE6F2;--acc:var(--blue);--acc2:var(--teal-d)}
+.t-dark{--bg:var(--ink);--fg:#F1F4FF;--mut:#A6B0CE;--card:#0F1730;--card2:#141E3D;--ln:rgba(148,170,255,.16);--acc:var(--sky);--acc2:var(--teal)}
+.t-blue{--bg:var(--blue);--fg:#FFFFFF;--mut:rgba(255,255,255,.84);--card:rgba(255,255,255,.1);--card2:rgba(255,255,255,.14);--ln:rgba(255,255,255,.24);--acc:#FFFFFF;--acc2:#8FF3DE}
+section,.band{position:relative;background:var(--bg);color:var(--fg)}
+.t-blue{background:radial-gradient(ellipse 60% 70% at 85% 10%,rgba(120,180,255,.55),transparent 60%),radial-gradient(ellipse 50% 60% at 0% 100%,rgba(62,224,192,.25),transparent 60%),linear-gradient(140deg,#1170FF 0%,#0B5BE6 35%,#0739A8 75%,#06266F 100%)}
+.gridfx::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(180deg,#000 30%,transparent 95%);-webkit-mask-image:linear-gradient(180deg,#000 30%,transparent 95%);pointer-events:none}
+
+.hero-dark{background:radial-gradient(ellipse 55% 60% at 85% 15%,rgba(17,112,255,.45),transparent 65%),radial-gradient(ellipse 45% 50% at 0% 100%,rgba(62,224,192,.16),transparent 60%),var(--ink)}
+.t-dark2{--bg:#0A1230;--card:#111B3E;--card2:#131F47}
+.auto-grad{background:linear-gradient(180deg,#0A1230 0%,#0B1A4A 55%,#0739A8 100%)}
+.fade-light{background:linear-gradient(180deg,#0739A8 0%,#0B5BE6 30%,#5C9BFF 62%,#C9DCFF 84%,#F2F5FB 100%)}
+.case.t-light{background:#fff;box-shadow:0 40px 90px -30px rgba(3,20,70,.5)}
+.case.t-light .chips span{background:#F2F5FB;border-color:#E3E9F4;color:#4A5778}
+.case.t-light .res{background:#F5F8FD;border:1px solid #E3E9F4;box-shadow:none}
+.case.t-light .deco{border-color:rgba(11,99,246,.05)}
 .wrap{max-width:1220px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-section{position:relative}
 .sec{padding-block:120px}
-.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 8px;border-radius:999px;border:1px solid var(--line-2);background:rgba(79,157,255,.08);font-size:13.5px;font-weight:600;color:var(--blue-2)}
-.pill b{background:var(--blue);color:var(--on-blue);border-radius:999px;padding:3px 9px;font-size:11.5px;letter-spacing:.02em}
-.kicker{font-size:14px;font-weight:700;color:var(--teal);letter-spacing:.04em}
-.h2{font-size:clamp(34px,4.6vw,56px);font-weight:800;margin-top:14px}
-.grad{background:linear-gradient(92deg,var(--blue-2),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
-.lede{color:var(--muted);font-size:18px;max-width:60ch;margin-top:18px}
-.head{margin-bottom:60px;max-width:760px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font:600 13px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+.eyebrow::before{content:"";width:22px;height:2px;background:currentColor;border-radius:2px}
+.h2{font-size:clamp(36px,5vw,62px);font-weight:800;margin-top:18px}
+.hl{color:var(--acc)}
+.lede{color:var(--mut);font-size:18.5px;max-width:58ch;margin-top:20px}
+.head{margin-bottom:64px;max-width:780px}
 .head.center{margin-inline:auto;text-align:center}
+.head.center .eyebrow{justify-content:center}
 .head.center .lede{margin-inline:auto}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;font:700 15.5px/1 var(--font);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .2s, box-shadow .2s, background .2s, border-color .2s}
-.btn-primary{background:linear-gradient(180deg,#6AAEFF,var(--blue));color:var(--on-blue);box-shadow:0 10px 30px -8px rgba(79,157,255,.6), inset 0 1px 0 rgba(255,255,255,.35)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px -8px rgba(79,157,255,.75), inset 0 1px 0 rgba(255,255,255,.35)}
-.btn-ghost{color:var(--text);border-color:var(--line-2);background:rgba(255,255,255,.03)}
-.btn-ghost:hover{border-color:var(--blue);background:rgba(79,157,255,.08)}
+.split-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px 48px;margin-bottom:64px}
+.split-head .lede{margin-top:0;max-width:44ch}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 28px;border-radius:999px;font:700 15.5px/1 var(--font);text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:transform .2s, box-shadow .2s, background .2s, border-color .2s, color .2s}
 .btn svg{transition:transform .2s}.btn:hover svg{transform:translateX(3px)}
-.glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;opacity:.55}
+.btn-blue{background:var(--blue);color:#fff;box-shadow:0 12px 30px -10px rgba(11,99,246,.6)}
+.btn-blue:hover{background:#0A55D6;transform:translateY(-2px)}
+.btn-white{background:#fff;color:var(--blue-d);box-shadow:0 12px 30px -10px rgba(3,20,70,.5)}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 18px 40px -10px rgba(3,20,70,.6)}
+.btn-line{color:var(--fg);border-color:var(--ln);background:transparent}
+.btn-line:hover{border-color:var(--acc);color:var(--acc)}
+.t-blue .btn-line{border-color:rgba(255,255,255,.45);color:#fff}
+.t-blue .btn-line:hover{background:rgba(255,255,255,.1);border-color:#fff;color:#fff}
 
 /* header */
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;transition:background .3s, border-color .3s;border-bottom:1px solid transparent}
-header.scrolled{background:rgba(6,9,20,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--line)}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:76px}
-.logo{display:flex;align-items:center;gap:11px;color:var(--text);text-decoration:none;font-weight:800;font-size:20px;letter-spacing:-.03em}
-.logo-mark{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,var(--blue-2),var(--blue) 60%,#2E6FE0);display:grid;place-items:center;color:var(--on-blue);font-weight:800;font-size:19px;box-shadow:0 6px 18px -4px rgba(79,157,255,.6)}
-.nav-links{display:flex;gap:6px;align-items:center;padding:6px;border:1px solid var(--line);border-radius:999px;background:rgba(15,23,48,.6)}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:14.5px;font-weight:600;padding:9px 16px;border-radius:999px;transition:color .2s, background .2s}
-.nav-links a:hover{color:var(--text);background:rgba(255,255,255,.05)}
+header{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;transition:background .3s, box-shadow .3s;color:#fff}
+header.scrolled{background:rgba(6,11,28,.84);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(148,170,255,.14);color:#fff}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:78px}
+.logo{display:flex;align-items:center;gap:11px;color:inherit;text-decoration:none;font-weight:800;font-size:21px;letter-spacing:-.035em}
+.logo-mark{width:36px;height:36px;border-radius:11px;background:#fff;color:var(--blue);display:grid;place-items:center;font-weight:800;font-size:19px;box-shadow:0 6px 18px -6px rgba(0,0,0,.35)}
+footer .logo-mark{background:var(--blue);color:#fff}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-links a{color:inherit;opacity:.85;text-decoration:none;font-size:15px;font-weight:600;padding:10px 16px;border-radius:999px;transition:opacity .2s, background .2s}
+.nav-links a:hover{opacity:1;background:rgba(127,150,200,.14)}
 .nav-right{display:flex;align-items:center;gap:12px}
-.nav-right .btn{min-height:44px;padding:0 20px;font-size:14.5px}
-.menu-btn{display:none;background:rgba(255,255,255,.04);border:1px solid var(--line-2);color:var(--text);border-radius:12px;width:44px;height:44px;cursor:pointer;place-items:center}
+.nav-right .btn{min-height:46px;padding:0 22px;font-size:14.5px}
+header:not(.scrolled) .nav-right .btn{background:#fff;color:var(--blue-d);box-shadow:none}
+.menu-btn{display:none;background:transparent;border:1.5px solid currentColor;color:inherit;border-radius:12px;width:44px;height:44px;cursor:pointer;place-items:center;opacity:.9}
 @media (max-width:960px){
-  .nav-links{display:none;position:absolute;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));top:calc(100% + 6px);flex-direction:column;align-items:stretch;border-radius:18px;background:var(--card);padding:10px}
+  .nav-links{display:none;position:absolute;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));top:calc(100% + 4px);flex-direction:column;align-items:stretch;border-radius:18px;background:#fff;color:var(--navy);padding:10px;box-shadow:0 20px 50px -20px rgba(3,20,70,.5)}
   .nav-links.open{display:flex}
   .nav-links a{padding:14px 16px}
   .nav-right .btn{display:none}
@@ -64,248 +90,269 @@ header.scrolled{background:rgba(6,9,20,.82);backdrop-filter:blur(14px);-webkit-b
 }
 
 /* hero */
-.hero{padding-block:56px 110px;overflow:hidden}
-#net{position:absolute;inset:0;width:100%;height:100%;opacity:.55;pointer-events:none}
-.hero .glow.a{width:520px;height:520px;background:#2463E0;top:-160px;right:-80px}
-.hero .glow.b{width:420px;height:420px;background:#0FA88E;bottom:-200px;left:-120px;opacity:.35}
-.hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
-.hero h1{font-size:clamp(44px,6.4vw,82px);font-weight:800;letter-spacing:-.045em;line-height:1.02;margin-top:26px}
-.hero .lede{font-size:19.5px;margin-top:24px}
-.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
-.trust{display:flex;align-items:center;gap:14px;margin-top:40px;color:var(--muted);font-size:14.5px;flex-wrap:wrap}
-.avatars{display:flex}
-.avatars span{width:34px;height:34px;border-radius:50%;border:2px solid var(--bg);margin-left:-10px;display:grid;place-items:center;font-size:12px;font-weight:800;color:var(--on-blue)}
-.avatars span:first-child{margin-left:0}
-@media (max-width:1000px){.hero-grid{grid-template-columns:minmax(0,1fr)}}
+.hero{padding-block:170px 120px;overflow:hidden}
+#net{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:48px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:10px;padding:8px 16px 8px 8px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);font-size:14px;font-weight:600;backdrop-filter:blur(6px)}
+.badge b{background:#fff;color:var(--blue);border-radius:999px;padding:4px 10px;font:600 11.5px/1 var(--mono);letter-spacing:.06em}
+.hero h1{font-size:clamp(46px,6.6vw,88px);font-weight:800;letter-spacing:-.05em;line-height:.98;margin-top:28px}
+.hero h1 .soft{color:rgba(255,255,255,.62)}
+.hero .lede{font-size:20px;margin-top:26px}
+.ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px}
+.proof{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:44px;font-size:14.5px;color:var(--mut)}
+.proof span{display:inline-flex;align-items:center;gap:8px}
+.proof svg{color:var(--acc2)}
+@media (max-width:1000px){.hero-grid{grid-template-columns:minmax(0,1fr)}.hero{padding-block:130px 90px}}
 
-/* hub visual */
+/* hub */
 .hub{position:relative;width:100%;max-width:560px;aspect-ratio:1;margin-inline:auto}
-.hub svg.lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.hub .ring{position:absolute;border-radius:50%;border:1px dashed var(--line-2);inset:12%;animation:spin 60s linear infinite}
-.hub .ring.r2{inset:28%;border-style:solid;border-color:var(--line);animation-duration:40s;animation-direction:reverse}
+.hub svg.lines{position:absolute;inset:0;width:100%;height:100%}
+.ring{position:absolute;inset:12%;border-radius:50%;border:1.5px dashed rgba(255,255,255,.3);animation:spin 70s linear infinite}
+.ring.r2{inset:29%;border:1px solid rgba(255,255,255,.22);animation-duration:45s;animation-direction:reverse}
 @keyframes spin{to{transform:rotate(360deg)}}
-.core{position:absolute;left:50%;top:50%;width:30%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 35% 30%,#9CCBFF,#3E86F5 45%,#1A3E9E 80%);display:grid;place-items:center;text-align:center;box-shadow:0 0 0 10px rgba(79,157,255,.08),0 0 0 22px rgba(79,157,255,.05),0 0 80px 10px rgba(79,157,255,.45);animation:breathe 4s ease-in-out infinite}
-@keyframes breathe{50%{box-shadow:0 0 0 14px rgba(79,157,255,.1),0 0 0 30px rgba(79,157,255,.05),0 0 110px 20px rgba(79,157,255,.55)}}
-.core b{display:block;font-size:clamp(22px,3vw,34px);font-weight:800;letter-spacing:-.03em;color:#fff}
-.core small{display:block;font-size:clamp(9px,1vw,11px);font-weight:700;letter-spacing:.2em;color:rgba(255,255,255,.8)}
-.node{position:absolute;transform:translate(-50%,-50%);width:clamp(62px,15%,84px);aspect-ratio:1;border-radius:20px;background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line-2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:clamp(10px,1.2vw,12px);font-weight:600;color:var(--muted);box-shadow:0 14px 30px -12px rgba(0,0,0,.7);animation:float 6s ease-in-out infinite}
-.node svg{width:42%;height:auto;color:var(--blue-2)}
+.core{position:absolute;left:50%;top:50%;width:30%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:#fff;color:var(--blue);display:grid;place-items:center;text-align:center;box-shadow:0 0 0 12px rgba(255,255,255,.14),0 0 0 26px rgba(255,255,255,.07),0 30px 80px -10px rgba(2,15,60,.6);animation:breathe 4s ease-in-out infinite}
+@keyframes breathe{50%{box-shadow:0 0 0 16px rgba(255,255,255,.18),0 0 0 34px rgba(255,255,255,.06),0 30px 90px -10px rgba(2,15,60,.7)}}
+.core b{display:block;font-size:clamp(24px,3.2vw,38px);font-weight:800;letter-spacing:-.04em}
+.core small{display:block;font:600 clamp(8px,1vw,10.5px)/1 var(--mono);letter-spacing:.2em;color:var(--blue-d);margin-top:4px}
+.node{position:absolute;transform:translate(-50%,-50%);width:clamp(62px,15%,86px);aspect-ratio:1;border-radius:22px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:clamp(10px,1.2vw,12px);font-weight:700;color:var(--navy);box-shadow:0 18px 36px -14px rgba(2,15,60,.55);animation:float 6s ease-in-out infinite}
+.node svg{width:40%;height:auto;color:var(--blue)}
 .node:nth-of-type(2n){animation-delay:-3s}
-@keyframes float{50%{margin-top:-8px}}
-.toast{position:absolute;display:flex;align-items:center;gap:12px;padding:12px 16px 12px 12px;border-radius:16px;background:rgba(20,30,61,.92);border:1px solid var(--line-2);backdrop-filter:blur(10px);box-shadow:0 20px 40px -14px rgba(0,0,0,.8);font-size:13px;line-height:1.35;max-width:240px;animation:float 7s ease-in-out infinite}
-.toast b{display:block;font-size:13.5px;color:var(--text)}
-.toast span{color:var(--muted)}
-.toast i{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center}
-.toast.t1{left:0;top:40%}
-.toast.t2{right:0;bottom:6%;animation-delay:-2.5s}
-.toast.t3{right:4%;top:2%;animation-delay:-4s}
-@media (max-width:520px){.toast{max-width:190px;font-size:11.5px;padding:9px 12px 9px 9px}.toast b{font-size:12px}.toast i{width:28px;height:28px}.toast.t3{display:none}}
+@keyframes float{50%{margin-top:-9px}}
+.toast{position:absolute;display:flex;align-items:center;gap:12px;padding:12px 18px 12px 12px;border-radius:18px;background:#fff;color:var(--navy);box-shadow:0 24px 50px -16px rgba(2,15,60,.6);font-size:13px;line-height:1.35;max-width:250px;animation:float 7s ease-in-out infinite}
+.toast b{display:block;font-size:13.5px}
+.toast span{color:#5A6788}
+.toast i{flex:none;width:36px;height:36px;border-radius:11px;display:grid;place-items:center}
+.toast.t1{left:-2%;top:42%}
+.toast.t2{right:-2%;bottom:5%;animation-delay:-2.5s}
+.toast.t3{right:2%;top:1%;animation-delay:-4s}
+@media (max-width:1000px){.toast.t1{left:0}.toast.t2{right:0}}
+@media (max-width:520px){.toast{max-width:180px;font-size:11.5px;padding:9px 12px 9px 9px}.toast b{font-size:12px}.toast i{width:28px;height:28px}.toast.t3{display:none}}
 
 /* marquee */
-.marquee{padding-block:34px;border-block:1px solid var(--line);background:var(--bg-2);overflow:hidden}
-.marquee p{text-align:center;color:var(--dim);font-size:13.5px;font-weight:600;margin-bottom:22px}
-.track{display:flex;gap:14px;width:max-content;animation:scroll 40s linear infinite}
+.marquee{padding-block:40px;overflow:hidden;border-bottom:1px solid var(--ln)}
+.marquee p{text-align:center;font:600 12.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:24px}
+.track{display:flex;gap:44px;width:max-content;animation:scroll 45s linear infinite;align-items:center}
 .marquee:hover .track{animation-play-state:paused}
 @keyframes scroll{to{transform:translateX(-50%)}}
-.brand{display:flex;align-items:center;gap:10px;padding:12px 20px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--muted);font-weight:700;font-size:15px;white-space:nowrap}
-.brand i{width:10px;height:10px;border-radius:3px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--mut);font-weight:800;font-size:20px;letter-spacing:-.03em;white-space:nowrap;opacity:.8}
+.brand i{width:14px;height:14px;border-radius:4px}
 
 /* stats */
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:-1px}
-.stat{padding:34px 28px;border-radius:var(--r);background:linear-gradient(180deg,var(--card),var(--bg-2));border:1px solid var(--line)}
-.stat b{display:block;font-size:clamp(38px,4vw,52px);font-weight:800;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
-.stat span{color:var(--muted);font-size:15px}
-@media (max-width:900px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--ln);border-radius:28px;overflow:hidden;background:var(--card)}
+.stat{padding:40px 32px;border-right:1px solid var(--ln)}
+.stat:last-child{border-right:0}
+.stat b{display:block;font-size:clamp(42px,4.6vw,60px);font-weight:800;letter-spacing:-.05em;line-height:1;color:var(--acc);font-variant-numeric:tabular-nums}
+.stat span{display:block;color:var(--mut);font-size:15px;margin-top:12px}
+@media (max-width:900px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--ln)}}
+@media (max-width:460px){.stats{grid-template-columns:minmax(0,1fr)}.stat{border-right:0;border-bottom:1px solid var(--ln)}.stat:last-child{border-bottom:0}}
 
-/* two pillars */
+/* pillars */
 .pillars{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
-.pillar{position:relative;overflow:hidden;border-radius:28px;padding:44px;border:1px solid var(--line-2);background:var(--card);display:flex;flex-direction:column;gap:18px;min-height:380px;text-decoration:none;color:var(--text);transition:transform .3s, border-color .3s}
-.pillar:hover{transform:translateY(-4px);border-color:var(--blue)}
-.pillar .glow{width:340px;height:340px;right:-120px;top:-120px;opacity:.4}
-.pillar h3{font-size:clamp(28px,3vw,38px);font-weight:800}
-.pillar p{color:var(--muted);font-size:17px;max-width:44ch}
+.pillar{position:relative;overflow:hidden;border-radius:32px;padding:48px;display:flex;flex-direction:column;gap:18px;min-height:440px;text-decoration:none;transition:transform .3s, box-shadow .3s}
+.pillar:hover{transform:translateY(-6px)}
+.pillar.p-blue{background:linear-gradient(150deg,#1170FF,#0739A8);color:#fff;box-shadow:0 30px 60px -30px rgba(11,99,246,.7)}
+.pillar.p-dark{background:linear-gradient(150deg,#1A2A5E,#0F1730);color:#F1F4FF;border:1px solid rgba(148,170,255,.2);box-shadow:0 30px 60px -30px rgba(6,11,28,.7)}
+.pillar .num{font:600 13px/1 var(--mono);letter-spacing:.14em;opacity:.75}
+.pillar h3{font-size:clamp(34px,3.6vw,48px);font-weight:800;letter-spacing:-.045em}
+.pillar p{font-size:17.5px;opacity:.86;max-width:42ch}
 .pillar .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
-.pillar .tags span{padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--line);font-size:13.5px;font-weight:600;color:var(--text)}
-.pillar .more{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--blue-2)}
-.big-ico{width:60px;height:60px;border-radius:18px;display:grid;place-items:center;background:rgba(79,157,255,.12);border:1px solid var(--line-2);color:var(--blue-2)}
-.pillar.teal .big-ico{background:rgba(62,224,192,.1);color:var(--teal)}
-.pillar.teal .more{color:var(--teal)}
-@media (max-width:900px){.pillars{grid-template-columns:minmax(0,1fr)}.pillar{padding:32px;min-height:0}}
+.pillar .tags span{padding:9px 15px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);font-size:13.5px;font-weight:600}
+.pillar .more{display:inline-flex;align-items:center;gap:8px;font-weight:700}
+.pillar.p-dark .more{color:var(--teal)}
+.pillar .deco{position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;border:40px solid rgba(255,255,255,.07)}
+@media (max-width:900px){.pillars{grid-template-columns:minmax(0,1fr)}.pillar{padding:34px;min-height:0}}
 
-/* showcase (agents) */
-.show{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:72px;align-items:center}
-.feat-list{display:flex;flex-direction:column;gap:14px;margin-top:34px}
-.feat{display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding:18px;border-radius:18px;border:1px solid transparent;transition:background .2s, border-color .2s}
-.feat:hover{background:var(--card);border-color:var(--line)}
-.feat .ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:rgba(79,157,255,.12);color:var(--blue-2)}
-.feat h4{font-size:17.5px;font-weight:700;letter-spacing:-.01em}
-.feat p{color:var(--muted);font-size:15px;margin-top:4px}
-@media (max-width:1000px){.show{grid-template-columns:minmax(0,1fr);gap:48px}}
+/* agents */
+.show{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:80px;align-items:center}
+.feats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:40px}
+.feat{padding:22px;border-radius:20px;background:var(--card2);border:1px solid var(--ln);transition:transform .2s, border-color .2s, box-shadow .2s}
+.feat:hover{transform:translateY(-3px);border-color:rgba(11,99,246,.35);box-shadow:0 16px 30px -18px rgba(11,99,246,.4)}
+.feat .ic{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--blue);color:#fff;margin-bottom:14px}
+.feat h4{font-size:17px;font-weight:700;letter-spacing:-.015em}
+.feat p{color:var(--mut);font-size:14.5px;margin-top:6px}
+@media (max-width:1000px){.show{grid-template-columns:minmax(0,1fr);gap:56px}}
+@media (max-width:520px){.feats{grid-template-columns:minmax(0,1fr)}}
 
-.phone-stage{position:relative;display:grid;place-items:center;padding-block:20px}
-.phone-stage .glow{width:380px;height:380px;background:#2463E0;opacity:.4}
-.phone{position:relative;width:min(330px,100%);border-radius:46px;padding:12px;background:linear-gradient(160deg,#2A3558,#121931);box-shadow:0 40px 80px -30px rgba(0,0,0,.9),inset 0 0 0 1px rgba(255,255,255,.08)}
-.screen{border-radius:36px;background:#0A1022;overflow:hidden;min-height:600px;display:flex;flex-direction:column}
-.notch{width:110px;height:28px;border-radius:0 0 18px 18px;background:#121931;margin:0 auto}
-.ph-head{display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 16px 16px;border-bottom:1px solid var(--line)}
+.phone-stage{position:relative;display:grid;place-items:center;padding:40px 0}
+.phone-stage::before{content:"";position:absolute;width:86%;aspect-ratio:1;max-width:460px;border-radius:50%;background:radial-gradient(circle,rgba(11,99,246,.22),rgba(11,99,246,.06) 55%,transparent 70%)}
+.phone{position:relative;width:min(330px,100%);border-radius:48px;padding:12px;background:linear-gradient(160deg,#2A3558,#0E1430);box-shadow:0 50px 90px -30px rgba(6,20,70,.55),inset 0 0 0 1px rgba(255,255,255,.08)}
+.screen{border-radius:38px;background:#0A1022;color:#F1F4FF;overflow:hidden;min-height:600px;display:flex;flex-direction:column}
+.notch{width:110px;height:28px;border-radius:0 0 18px 18px;background:#0E1430;margin:0 auto}
+.ph-head{display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 16px 16px;border-bottom:1px solid rgba(148,170,255,.16)}
 .ph-av{width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#9CCBFF,#3E86F5 50%,#1A3E9E);display:grid;place-items:center;font-weight:800;color:#fff;position:relative}
-.ph-av::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--teal);opacity:.6;animation:ping 1.8s ease-out infinite}
+.ph-av::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--teal);animation:ping 1.8s ease-out infinite}
 @keyframes ping{from{transform:scale(.9);opacity:.8}to{transform:scale(1.25);opacity:0}}
 .ph-head b{font-size:15px}
-.ph-head small{color:var(--teal);font-size:12.5px;font-weight:600;font-variant-numeric:tabular-nums}
+.ph-head small{color:var(--teal);font:500 12px/1 var(--mono)}
 .bubbles{padding:16px 14px;display:flex;flex-direction:column;gap:10px;flex:1}
 .bub{max-width:84%;padding:10px 14px;border-radius:18px;font-size:13.5px;line-height:1.45;transition:opacity .4s, transform .4s}
-.bub.ai{background:var(--card-2);border:1px solid var(--line);border-bottom-left-radius:6px;align-self:flex-start}
-.bub.me{background:var(--blue);color:var(--on-blue);border-bottom-right-radius:6px;align-self:flex-end;font-weight:500}
+.bub.ai{background:#141E3D;border:1px solid rgba(148,170,255,.16);border-bottom-left-radius:6px;align-self:flex-start}
+.bub.me{background:var(--blue);color:#fff;border-bottom-right-radius:6px;align-self:flex-end}
 .bub.wait{opacity:0;transform:translateY(8px)}
 .booked{margin:0 14px 16px;padding:14px;border-radius:16px;background:rgba(62,224,192,.1);border:1px solid rgba(62,224,192,.35);display:flex;gap:12px;align-items:center;font-size:13px;transition:opacity .4s}
-.booked i{width:36px;height:36px;border-radius:10px;background:var(--teal);color:var(--on-blue);display:grid;place-items:center;flex:none}
+.booked i{width:36px;height:36px;border-radius:10px;background:var(--teal);color:#04101F;display:grid;place-items:center;flex:none}
 .booked b{display:block;font-size:13.5px}
-.booked span{color:var(--muted)}
+.booked span{color:#A6B0CE}
+.float-chip{position:absolute;background:#fff;color:var(--navy);border:1px solid var(--ln);border-radius:16px;padding:12px 16px;font-size:13px;font-weight:600;box-shadow:0 20px 40px -18px rgba(6,20,70,.45);display:flex;align-items:center;gap:10px;animation:float 6s ease-in-out infinite}
+.float-chip b{font-size:20px;font-weight:800;color:var(--blue);letter-spacing:-.03em}
+.float-chip.c1{left:0;top:18%}
+.float-chip.c2{right:0;bottom:16%;animation-delay:-3s}
+@media (max-width:520px){.float-chip{display:none}}
 
-/* automation */
-.auto-sec{background:linear-gradient(180deg,var(--bg),var(--bg-2) 30%,var(--bg-2) 70%,var(--bg));border-block:1px solid var(--line);overflow:hidden}
-.auto-sec .glow{width:600px;height:600px;background:#0E9C84;left:50%;top:10%;transform:translateX(-50%);opacity:.18}
-.flowbox{position:relative;border-radius:28px;border:1px solid var(--line-2);background:rgba(15,23,48,.7);padding:40px;backdrop-filter:blur(6px)}
-.flowbar{display:flex;align-items:center;gap:10px;margin-bottom:28px;color:var(--muted);font-size:14px;font-weight:600;flex-wrap:wrap}
+/* automation (dark) */
+.auto{overflow:hidden}
+.auto .orb{position:absolute;width:700px;height:700px;border-radius:50%;left:50%;top:-200px;transform:translateX(-50%);background:radial-gradient(circle,rgba(11,99,246,.32),transparent 65%);pointer-events:none}
+.flowbox{position:relative;border-radius:30px;border:1px solid var(--ln);background:linear-gradient(180deg,rgba(20,30,61,.85),rgba(15,23,48,.85));padding:40px}
+.flowbar{display:flex;align-items:center;gap:12px;margin-bottom:30px;color:var(--mut);font:500 13px/1 var(--mono);flex-wrap:wrap}
 .flowbar .dotz{display:flex;gap:6px}
-.flowbar .dotz i{width:11px;height:11px;border-radius:50%;background:var(--line-2)}
-.flowbar .run{margin-left:auto;display:inline-flex;align-items:center;gap:8px;color:var(--teal);font-size:13px}
+.flowbar .dotz i{width:11px;height:11px;border-radius:50%;background:rgba(148,170,255,.24)}
+.flowbar .run{margin-left:auto;display:inline-flex;align-items:center;gap:8px;color:var(--teal)}
 .flowbar .run i{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:blink 1.4s infinite}
 @keyframes blink{50%{opacity:.25}}
 .wf{display:grid;grid-template-columns:minmax(0,1fr) 64px minmax(0,1fr) 64px minmax(0,1.2fr);align-items:center}
-.wnode{padding:20px;border-radius:18px;background:var(--card-2);border:1px solid var(--line-2);display:flex;gap:14px;align-items:center}
+.wnode{padding:20px;border-radius:18px;background:var(--card2);border:1px solid var(--ln);display:flex;gap:14px;align-items:center}
 .wnode .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;flex:none}
-.wnode small{display:block;font-size:11.5px;font-weight:700;letter-spacing:.06em;color:var(--dim)}
+.wnode small{display:block;font:600 11px/1.2 var(--mono);letter-spacing:.1em;color:#7F8BB0;margin-bottom:4px}
 .wnode b{display:block;font-size:15px;line-height:1.3}
-.wnode.ai{border-color:rgba(79,157,255,.55);box-shadow:0 0 40px -10px rgba(79,157,255,.5)}
+.wnode.ai{background:linear-gradient(150deg,#1170FF,#0739A8);border-color:transparent;box-shadow:0 0 50px -10px rgba(11,99,246,.7)}
+.wnode.ai small{color:rgba(255,255,255,.75)}
 .outs{display:flex;flex-direction:column;gap:10px}
 .outs .wnode{padding:13px 16px}
 .outs .wnode .ic{width:34px;height:34px;border-radius:10px}
 .outs .wnode b{font-size:14px}
-.outs .ok{margin-left:auto;color:var(--teal)}
-.wire{position:relative;height:2px;background:repeating-linear-gradient(90deg,var(--line-2) 0 6px,transparent 6px 12px)}
+.outs .ok{margin-left:auto;color:var(--teal);flex:none}
+.wire{position:relative;height:2px;background:repeating-linear-gradient(90deg,rgba(148,170,255,.35) 0 6px,transparent 6px 12px)}
 .wire::after{content:"";position:absolute;top:50%;left:0;width:10px;height:10px;margin-top:-5px;border-radius:50%;background:var(--teal);box-shadow:0 0 12px var(--teal);animation:run 1.8s linear infinite}
-.wire.d2::after{animation-delay:.9s;background:var(--blue-2);box-shadow:0 0 12px var(--blue-2)}
+.wire.d2::after{animation-delay:.9s;background:var(--sky);box-shadow:0 0 12px var(--sky)}
 @keyframes run{from{left:0}to{left:calc(100% - 10px)}}
 @media (max-width:1000px){
-  .wf{grid-template-columns:minmax(0,1fr);gap:0}
-  .wire{width:2px;height:40px;margin:0 auto;background:repeating-linear-gradient(180deg,var(--line-2) 0 6px,transparent 6px 12px)}
+  .wf{grid-template-columns:minmax(0,1fr)}
+  .wire{width:2px;height:40px;margin:0 auto;background:repeating-linear-gradient(180deg,rgba(148,170,255,.35) 0 6px,transparent 6px 12px)}
   .wire::after{left:50%;top:0;margin:0 0 0 -5px;animation-name:runv}
   .flowbox{padding:24px}
 }
 @keyframes runv{from{top:0}to{top:calc(100% - 10px)}}
 .uses{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:28px}
-.use{padding:28px;border-radius:var(--r);background:var(--card);border:1px solid var(--line);transition:transform .25s, border-color .25s}
+.use{padding:30px;border-radius:var(--r);background:var(--card);border:1px solid var(--ln);transition:transform .25s, border-color .25s}
 .use:hover{transform:translateY(-4px);border-color:rgba(62,224,192,.5)}
-.use .ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:rgba(62,224,192,.1);color:var(--teal);margin-bottom:18px}
-.use h4{font-size:18.5px;font-weight:700;letter-spacing:-.015em}
-.use p{color:var(--muted);font-size:15px;margin-top:8px}
+.use .ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:rgba(62,224,192,.12);color:var(--teal);margin-bottom:18px}
+.use h4{font-size:19px;font-weight:700;letter-spacing:-.02em}
+.use p{color:var(--mut);font-size:15px;margin-top:8px}
 @media (max-width:1000px){.uses{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:620px){.uses{grid-template-columns:minmax(0,1fr)}}
 
 /* case study */
-.case{position:relative;overflow:hidden;border-radius:32px;border:1px solid var(--line-2);background:linear-gradient(135deg,var(--card-2),var(--card) 60%);padding:56px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
-.case .glow{width:420px;height:420px;background:#2463E0;right:-140px;bottom:-180px;opacity:.35}
-.case-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
-.case-tags span{padding:8px 14px;border-radius:999px;border:1px solid var(--line-2);font-size:13px;font-weight:600;color:var(--muted)}
-.results{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.res{padding:26px;border-radius:20px;background:rgba(6,9,20,.55);border:1px solid var(--line);backdrop-filter:blur(6px)}
-.res b{display:block;font-size:46px;font-weight:800;letter-spacing:-.04em;line-height:1}
-.res h4{font-size:16.5px;font-weight:700;margin-top:14px;letter-spacing:-.01em}
-.res p{color:var(--muted);font-size:14px;margin-top:4px}
-@media (max-width:1000px){.case{grid-template-columns:minmax(0,1fr);padding:32px}}
-@media (max-width:480px){.results{grid-template-columns:minmax(0,1fr)}}
+.case{position:relative;overflow:hidden;border-radius:36px;padding:64px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.case .deco{position:absolute;right:-120px;bottom:-160px;width:420px;height:420px;border-radius:50%;border:70px solid rgba(255,255,255,.06)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.chips span{padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);font:500 12.5px/1 var(--mono)}
+.results{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.res{padding:26px;border-radius:22px;background:#fff;color:var(--navy);box-shadow:0 20px 40px -24px rgba(2,15,60,.6)}
+.res b{display:block;font-size:48px;font-weight:800;letter-spacing:-.05em;line-height:1;color:var(--blue)}
+.res h4{font-size:16.5px;font-weight:700;margin-top:14px;letter-spacing:-.015em}
+.res p{color:#5A6788;font-size:14px;margin-top:4px}
+@media (max-width:1000px){.case{grid-template-columns:minmax(0,1fr);padding:36px}}
+@media (max-width:480px){.results{grid-template-columns:minmax(0,1fr)}.case{padding:26px}}
 
 /* calculator */
 .calc{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:24px}
-.calc-in,.calc-out{border-radius:28px;padding:40px;border:1px solid var(--line-2)}
-.calc-in{background:var(--card);display:flex;flex-direction:column;gap:30px}
-.field label{display:flex;justify-content:space-between;gap:12px;font-weight:600;font-size:15.5px}
-.field output{color:var(--blue-2);font-weight:800;font-variant-numeric:tabular-nums}
-.field input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:999px;margin-top:16px;background:linear-gradient(90deg,var(--blue) var(--p,20%),rgba(255,255,255,.08) var(--p,20%));cursor:pointer}
-.field input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:#fff;border:5px solid var(--blue);box-shadow:0 4px 14px rgba(79,157,255,.6)}
-.field input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#fff;border:5px solid var(--blue)}
-.calc-out{background:radial-gradient(ellipse 80% 70% at 100% 0%,rgba(79,157,255,.25),transparent 60%),var(--card-2);display:flex;flex-direction:column;justify-content:center;gap:18px}
-.calc-out small{color:var(--muted);font-weight:600}
-.calc-out .big{font-size:clamp(44px,5.4vw,68px);font-weight:800;letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums}
-.calc-row{display:flex;justify-content:space-between;gap:12px;padding-top:16px;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
-.calc-row b{color:var(--text);font-variant-numeric:tabular-nums}
-.calc-row b.t{color:var(--teal)}
-.fine{color:var(--dim);font-size:13px}
+.calc-in{border-radius:30px;padding:44px;background:var(--card);border:1px solid var(--ln);display:flex;flex-direction:column;gap:32px;box-shadow:0 24px 50px -36px rgba(6,20,70,.35)}
+.field label{display:flex;justify-content:space-between;gap:12px;font-weight:700;font-size:16px}
+.field output{color:var(--blue);font:600 16px/1 var(--mono);font-variant-numeric:tabular-nums}
+.field input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:999px;margin-top:18px;background:linear-gradient(90deg,var(--blue) var(--p,20%),#E3E9F4 var(--p,20%));cursor:pointer}
+.field input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:6px solid var(--blue);box-shadow:0 4px 14px rgba(11,99,246,.5)}
+.field input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#fff;border:6px solid var(--blue)}
+.calc-out{border-radius:30px;padding:44px;color:#fff;background:radial-gradient(ellipse 80% 70% at 100% 0%,rgba(120,180,255,.5),transparent 60%),linear-gradient(150deg,#1170FF,#0739A8);display:flex;flex-direction:column;justify-content:center;gap:18px}
+.calc-out small{font:600 12.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.calc-out .big{font-size:clamp(48px,5.8vw,74px);font-weight:800;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+.calc-row{display:flex;justify-content:space-between;gap:12px;padding-top:16px;border-top:1px solid rgba(255,255,255,.25);font-size:15px}
+.calc-row b{font-variant-numeric:tabular-nums}
+.fine{font-size:13px;opacity:.75}
+.calc-out .btn{align-self:flex-start;margin-top:6px}
 @media (max-width:900px){.calc{grid-template-columns:minmax(0,1fr)}.calc-in,.calc-out{padding:28px}}
 
 /* process */
-.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;position:relative}
-.steps::before{content:"";position:absolute;left:4%;right:4%;top:28px;height:2px;background:linear-gradient(90deg,var(--blue),var(--teal));opacity:.5}
-.st{position:relative;display:flex;flex-direction:column;gap:10px}
-.st .n{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:18px;background:var(--bg);border:2px solid var(--blue);color:var(--blue-2);margin-bottom:12px;box-shadow:0 0 0 8px var(--bg)}
-.st small{color:var(--teal);font-weight:700;font-size:13px}
-.st h4{font-size:20px;font-weight:700;letter-spacing:-.02em}
-.st p{color:var(--muted);font-size:15px}
-@media (max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:40px}.steps::before{display:none}}
-@media (max-width:520px){.steps{grid-template-columns:minmax(0,1fr)}}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.st{padding:32px;border-radius:24px;background:var(--card2);border:1px solid var(--ln);display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden}
+.st .n{font-size:72px;font-weight:800;letter-spacing:-.06em;line-height:.9;color:transparent;-webkit-text-stroke:1.5px rgba(11,99,246,.35);margin-bottom:14px}
+.st small{font:600 12.5px/1 var(--mono);letter-spacing:.1em;color:var(--blue)}
+.st h4{font-size:21px;font-weight:800;letter-spacing:-.03em}
+.st p{color:var(--mut);font-size:15px}
+.st:last-child{background:linear-gradient(150deg,#1170FF,#0739A8);color:#fff;border-color:transparent}
+.st:last-child .n{-webkit-text-stroke-color:rgba(255,255,255,.5)}
+.st:last-child small,.st:last-child p{color:rgba(255,255,255,.85)}
+@media (max-width:1000px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:540px){.steps{grid-template-columns:minmax(0,1fr)}}
 
-/* pricing */
+/* pricing (dark) */
 .plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:stretch}
-.plan{position:relative;border-radius:28px;padding:38px;border:1px solid var(--line-2);background:var(--card);display:flex;flex-direction:column;gap:22px}
-.plan.pop{background:linear-gradient(180deg,#16285A,var(--card-2) 50%);border-color:var(--blue);box-shadow:0 30px 70px -30px rgba(79,157,255,.6)}
-.plan .badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,var(--blue),var(--teal));color:var(--on-blue);font-size:12.5px;font-weight:800;padding:7px 16px;border-radius:999px;white-space:nowrap}
-.plan h3{font-size:22px;font-weight:800}
-.plan .for{color:var(--muted);font-size:15px;margin-top:8px}
-.price b{font-size:50px;font-weight:800;letter-spacing:-.045em;line-height:1}
-.price b small{font-size:17px;font-weight:600;color:var(--muted);letter-spacing:0}
-.price span{display:block;color:var(--muted);font-size:14.5px;margin-top:8px}
+.plan{position:relative;border-radius:30px;padding:40px;border:1px solid var(--ln);background:var(--card);display:flex;flex-direction:column;gap:24px}
+.plan.pop{background:linear-gradient(160deg,#1170FF,#0739A8 70%);border-color:transparent;box-shadow:0 40px 80px -30px rgba(11,99,246,.7);transform:translateY(-12px)}
+.plan .flag{position:absolute;top:22px;right:22px;background:#fff;color:var(--blue);font:600 11px/1 var(--mono);letter-spacing:.08em;padding:8px 12px;border-radius:999px}
+.plan h3{font-size:22px;font-weight:800;letter-spacing:-.03em}
+.plan .for{color:var(--mut);font-size:15px;margin-top:8px}
+.plan.pop .for{color:rgba(255,255,255,.85)}
+.price b{font-size:56px;font-weight:800;letter-spacing:-.055em;line-height:1}
+.price b small{font-size:17px;font-weight:600;opacity:.75;letter-spacing:0}
+.price span{display:block;color:var(--mut);font:500 13.5px/1.4 var(--mono);margin-top:10px}
+.plan.pop .price span{color:rgba(255,255,255,.85)}
 .checks{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:13px}
 .checks li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;font-size:15px}
-.checks li::before{content:"";width:22px;height:22px;border-radius:50%;background:rgba(62,224,192,.14) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233EE0C0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12l4 4 8-8'/%3E%3C/svg%3E") center/13px no-repeat}
+.checks li::before{content:"";width:22px;height:22px;border-radius:50%;background:rgba(14,159,134,.12) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23087D69' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12l4 4 8-8'/%3E%3C/svg%3E") center/13px no-repeat}
+.plan.pop .checks li::before{background-color:rgba(255,255,255,.18);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12l4 4 8-8'/%3E%3C/svg%3E")}
 .plan .btn{margin-top:auto;width:100%}
-@media (max-width:1000px){.plans{grid-template-columns:minmax(0,1fr);max-width:560px;margin-inline:auto}}
+@media (max-width:1000px){.plans{grid-template-columns:minmax(0,1fr);max-width:560px;margin-inline:auto}.plan.pop{transform:none}}
 
 /* faq */
-.faq{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
-.faq details{border:1px solid var(--line);border-radius:18px;background:var(--card);transition:border-color .2s}
-.faq details[open]{border-color:var(--line-2)}
-.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 26px;font-weight:700;font-size:17px}
+.faq-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;align-items:start}
+.faq{display:flex;flex-direction:column;gap:12px}
+.faq details{border:1px solid var(--ln);border-radius:20px;background:var(--card);transition:border-color .2s, box-shadow .2s}
+.faq details[open]{border-color:rgba(11,99,246,.4);box-shadow:0 16px 30px -22px rgba(11,99,246,.5)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 26px;font-weight:700;font-size:17px;letter-spacing:-.01em}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"";flex:none;width:30px;height:30px;border-radius:50%;background:rgba(79,157,255,.12) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237BB8FF' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center/14px no-repeat;transition:transform .25s}
+.faq summary::after{content:"";flex:none;width:32px;height:32px;border-radius:50%;background:var(--blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center/14px no-repeat;transition:transform .25s}
 .faq details[open] summary::after{transform:rotate(45deg)}
-.faq details p{color:var(--muted);padding:0 26px 24px;max-width:66ch}
+.faq details p{color:var(--mut);padding:0 26px 24px;max-width:64ch}
+@media (max-width:900px){.faq-grid{grid-template-columns:minmax(0,1fr);gap:28px}}
 
 /* cta */
-.cta{position:relative;overflow:hidden;border-radius:36px;padding:88px 40px;text-align:center;background:radial-gradient(ellipse 70% 90% at 50% 0%,rgba(79,157,255,.35),transparent 65%),linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line-2)}
-.cta h2{font-size:clamp(34px,5vw,60px);font-weight:800;max-width:18ch;margin-inline:auto}
-.cta p{color:var(--muted);font-size:18px;margin:18px auto 0;max-width:52ch}
-.cta .hero-ctas{justify-content:center}
-@media (max-width:600px){.cta{padding:56px 22px}}
+.cta{padding-block:20px 120px;text-align:center}
+.cta-card{position:relative;overflow:hidden;border-radius:36px;padding:110px 28px}
+.cta-card>*{position:relative}
+@media (max-width:600px){.cta-card{padding:64px 22px;border-radius:26px}}
+.cta h2{font-size:clamp(40px,6.4vw,84px);font-weight:800;letter-spacing:-.05em;line-height:1;max-width:16ch;margin:18px auto 0}
+.cta h2 .soft{color:rgba(255,255,255,.6)}
+.cta .lede{margin-inline:auto}
+.cta .ctas{justify-content:center}
 
 /* contact */
-.contact{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:start}
-.cps{display:flex;flex-direction:column;gap:14px;margin-top:34px}
-.cp{display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;align-items:center;padding:16px;border-radius:18px;border:1px solid var(--line);background:var(--card)}
-.cp .ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:rgba(79,157,255,.12);color:var(--blue-2)}
-.cp small{display:block;color:var(--dim);font-size:12.5px;font-weight:600}
-.cp span,.cp a{font-weight:700;user-select:all;word-break:break-word}
-form{border-radius:28px;padding:36px;background:var(--card);border:1px solid var(--line-2);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.contact{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:64px;align-items:start}
+.cps{display:flex;flex-direction:column;gap:14px;margin-top:36px}
+.cp{display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;align-items:center;padding:16px;border-radius:20px;border:1px solid var(--ln);background:var(--card)}
+.cp .ic{width:52px;height:52px;border-radius:15px;display:grid;place-items:center;background:var(--blue);color:#fff}
+.cp small{display:block;color:#6A7696;font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.cp span,.cp a{font-weight:700;word-break:break-word}
+.cp span{user-select:all}
+form{border-radius:30px;padding:40px;background:var(--card);border:1px solid var(--ln);box-shadow:0 30px 60px -40px rgba(6,20,70,.4);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 .fg{display:flex;flex-direction:column;gap:8px}
 .fg.full{grid-column:1/-1}
-.fg label{font-size:14px;font-weight:600;color:var(--muted)}
-.fg input,.fg select,.fg textarea{background:var(--bg);border:1px solid var(--line-2);border-radius:14px;color:var(--text);font:15px/1.4 var(--font);padding:14px 16px;min-height:50px;width:100%;transition:border-color .2s, box-shadow .2s}
+.fg label{font-size:14px;font-weight:700}
+.fg input,.fg select,.fg textarea{background:#F5F8FD;border:1.5px solid var(--ln);border-radius:14px;color:var(--navy);font:15px/1.4 var(--font);padding:14px 16px;min-height:52px;width:100%;transition:border-color .2s, box-shadow .2s, background .2s}
 .fg textarea{min-height:120px;resize:vertical}
-.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(79,157,255,.15)}
-.form-msg{grid-column:1/-1;font-size:14px}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;background:#fff;border-color:var(--blue);box-shadow:0 0 0 4px rgba(11,99,246,.12)}
+.form-msg{grid-column:1/-1;font-size:14px;font-weight:600}
 form .btn{grid-column:1/-1}
 @media (max-width:900px){.contact{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:540px){form{grid-template-columns:minmax(0,1fr);padding:24px}}
 
-footer{border-top:1px solid var(--line);padding-block:64px 40px;background:var(--bg-2)}
+footer{background:#fff;color:var(--navy);border-top:1px solid #E3E9F4;padding-block:72px 40px}
 .foot{display:grid;grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr));gap:40px}
-.foot p{color:var(--muted);font-size:15px;margin-top:18px;max-width:34ch}
-.foot h4{font-size:14px;font-weight:700;margin-bottom:16px;letter-spacing:0}
+.foot p{color:#4A5778;font-size:15px;margin-top:18px;max-width:34ch}
+.foot h4{font:600 12.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#6A7696;margin-bottom:18px}
 .foot ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:11px}
-.foot a{color:var(--muted);text-decoration:none;font-size:15px}
-.foot a:hover{color:var(--text)}
-.legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:52px;padding-top:26px;border-top:1px solid var(--line);color:var(--dim);font-size:14px}
+.foot a{color:#3B4868;text-decoration:none;font-size:15px}
+.foot a:hover{color:var(--blue)}
+.legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:56px;padding-top:26px;border-top:1px solid #E3E9F4;color:#6A7696;font-size:14px}
 @media (max-width:800px){.foot{grid-template-columns:repeat(2,minmax(0,1fr))}.foot>div:first-child{grid-column:1/-1}}
 </style>
 
@@ -320,38 +367,37 @@ footer{border-top:1px solid var(--line);padding-block:64px 40px;background:var(-
       <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-right">
-      <a class="btn btn-primary" href="https://calendly.com/engauge-ai/30min" target="_blank" rel="noopener">Book a demo</a>
+      <a class="btn btn-blue" href="https://calendly.com/engauge-ai/30min" target="_blank" rel="noopener">Book a demo</a>
       <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
   </div>
 </header>
 
 <main id="top">
-<!-- HERO -->
-<section class="hero">
+<!-- HERO (blue) -->
+<section class="hero t-dark hero-dark gridfx">
   <canvas id="net" aria-hidden="true"></canvas>
-  <div class="glow a"></div><div class="glow b"></div>
   <div class="wrap hero-grid">
     <div>
-      <span class="pill"><b>NEW</b> AI Receptionist now live with US businesses</span>
-      <h1>Your business, <span class="grad">running on AI.</span> 24/7.</h1>
-      <p class="lede">AI agents that answer every call and message, plus AI automation that takes repetitive work off your team. Built, launched and managed for you.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-primary" href="https://calendly.com/engauge-ai/30min" target="_blank" rel="noopener">Book a free demo
+      <span class="badge"><b>LIVE</b> AI Receptionist now answering for US businesses</span>
+      <h1>Every call answered. <span class="soft">Every task automated.</span></h1>
+      <p class="lede">AI agents that talk to your customers. AI automation that runs your operations. Built, launched and managed for you.</p>
+      <div class="ctas">
+        <a class="btn btn-white" href="https://calendly.com/engauge-ai/30min" target="_blank" rel="noopener">Book a free demo
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-ghost" href="#automation">Explore automation</a>
+        <a class="btn btn-line" href="#automation">Explore automation</a>
       </div>
-      <div class="trust">
-        <div class="avatars" aria-hidden="true"><span style="background:#7BB8FF">MS</span><span style="background:#3EE0C0">HV</span><span style="background:#FFB65C">DC</span><span style="background:#C3A6FF">RE</span></div>
-        For med spas, clinics, home services and growing SMEs
+      <div class="proof">
+        <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12l4 4 8-8"/></svg>Live in about 5 days</span>
+        <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12l4 4 8-8"/></svg>No tech team needed</span>
+        <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12l4 4 8-8"/></svg>Works with your tools</span>
       </div>
     </div>
 
-    <div class="hub" aria-label="Engauge AI connects calls, WhatsApp, calendar, CRM, email and sheets" role="img">
+    <div class="hub" role="img" aria-label="Engauge AI connects calls, WhatsApp, calendar, CRM, email and sheets">
       <div class="ring"></div><div class="ring r2"></div>
       <svg class="lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-        <defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#4F9DFF"/><stop offset="1" stop-color="#3EE0C0"/></linearGradient></defs>
-        <g stroke="url(#lg)" stroke-width=".4" fill="none" stroke-dasharray="1.6 1.6">
+        <g stroke="#ffffff" stroke-opacity=".7" stroke-width=".4" fill="none" stroke-dasharray="1.6 1.6">
           <path d="M50 50L50 12"><animate attributeName="stroke-dashoffset" from="0" to="-6.4" dur="1.2s" repeatCount="indefinite"/></path>
           <path d="M50 50L82.9 31"><animate attributeName="stroke-dashoffset" from="0" to="-6.4" dur="1.4s" repeatCount="indefinite"/></path>
           <path d="M50 50L82.9 69"><animate attributeName="stroke-dashoffset" from="0" to="-6.4" dur="1.1s" repeatCount="indefinite"/></path>
@@ -361,21 +407,21 @@ footer{border-top:1px solid var(--line);padding-block:64px 40px;background:var(-
         </g>
       </svg>
       <div class="core"><div><b>AI</b><small>ENGAUGE</small></div></div>
-      <div class="node" style="left:50%;top:12%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Calls</div>
-      <div class="node" style="left:82.9%;top:31%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>WhatsApp</div>
-      <div class="node" style="left:82.9%;top:69%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>Calendar</div>
-      <div class="node" style="left:50%;top:88%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>CRM</div>
-      <div class="node" style="left:17.1%;top:69%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Email</div>
-      <div class="node" style="left:17.1%;top:31%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>Sheets</div>
-      <div class="toast t1"><i style="background:rgba(62,224,192,.15);color:var(--teal)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12l4 4 8-8"/></svg></i><div><b>Appointment booked</b><span>Thu 2:30 PM · SMS sent</span></div></div>
-      <div class="toast t2"><i style="background:rgba(79,157,255,.15);color:var(--blue-2)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M9 14h6M9 18h4"/></svg></i><div><b>Invoice sent automatically</b><span>Synced to accounting</span></div></div>
-      <div class="toast t3"><i style="background:rgba(255,182,92,.15);color:var(--amber)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3"/></svg></i><div><b>Call answered</b><span>9:42 PM, after hours</span></div></div>
+      <div class="node" style="left:50%;top:12%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Calls</div>
+      <div class="node" style="left:82.9%;top:31%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>WhatsApp</div>
+      <div class="node" style="left:82.9%;top:69%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>Calendar</div>
+      <div class="node" style="left:50%;top:88%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>CRM</div>
+      <div class="node" style="left:17.1%;top:69%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Email</div>
+      <div class="node" style="left:17.1%;top:31%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>Sheets</div>
+      <div class="toast t1"><i style="background:#DDF9F2;color:#087D69"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12l4 4 8-8"/></svg></i><div><b>Appointment booked</b><span>Thu 2:30 PM · SMS sent</span></div></div>
+      <div class="toast t2"><i style="background:#E3EEFF;color:#0B63F6"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M9 14h6M9 18h4"/></svg></i><div><b>Invoice sent automatically</b><span>Synced to accounting</span></div></div>
+      <div class="toast t3"><i style="background:#FFF1DE;color:#B86A0B"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3"/></svg></i><div><b>Call answered</b><span>9:42 PM, after hours</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee">
+<!-- MARQUEE (white) -->
+<div class="band t-light marquee">
   <p>Connects with the tools you already use</p>
   <div class="track" id="track">
     <span class="brand"><i style="background:#4285F4"></i>Google Calendar</span>
@@ -393,36 +439,32 @@ footer{border-top:1px solid var(--line);padding-block:64px 40px;background:var(-
   </div>
 </div>
 
-<!-- STATS -->
-<section class="sec" style="padding-block:90px 20px">
-  <div class="wrap stats">
-    <div class="stat"><b data-count="0">0</b><span>missed calls for our live client</span></div>
-    <div class="stat"><b>24/7</b><span>agents that never clock out</span></div>
-    <div class="stat"><b><span data-count="60">60</span>s</b><span>max reply time to every lead</span></div>
-    <div class="stat"><b>~<span data-count="5">5</span> days</b><span>from kickoff to go-live</span></div>
-  </div>
-</section>
-
-<!-- TWO PILLARS -->
-<section class="sec">
+<!-- STATS + PILLARS (white) -->
+<section class="sec t-light">
   <div class="wrap">
-    <div class="head center">
-      <div class="kicker">WHAT WE DO</div>
-      <h2 class="h2">Two ways AI grows your business</h2>
+    <div class="stats">
+      <div class="stat"><b data-count="0">0</b><span>missed calls for our live client</span></div>
+      <div class="stat"><b>24/7</b><span>agents that never clock out</span></div>
+      <div class="stat"><b><span data-count="60">60</span>s</b><span>max reply time to every lead</span></div>
+      <div class="stat"><b>~<span data-count="5">5</span>d</b><span>from kickoff to go-live</span></div>
+    </div>
+
+    <div class="split-head" style="margin-top:120px">
+      <div><div class="eyebrow">What we do</div><h2 class="h2">Two ways to put <span class="hl">AI to work.</span></h2></div>
       <p class="lede">Win more customers with AI agents on the front line. Cut costs with automation behind the scenes. Most clients start with one and add the other.</p>
     </div>
     <div class="pillars">
-      <a class="pillar" href="#agents">
-        <div class="glow" style="background:#2463E0"></div>
-        <div class="big-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9 16h6"/></svg></div>
+      <a class="pillar p-blue" href="#agents">
+        <div class="deco"></div>
+        <span class="num">01 / FRONT OFFICE</span>
         <h3>AI Agents</h3>
         <p>Voice and chat agents that answer, qualify, book and follow up with every customer instantly, on every channel.</p>
         <div class="tags"><span>AI Receptionist</span><span>Calling agents</span><span>Chatbots</span><span>DM agents</span></div>
         <span class="more">See AI Agents →</span>
       </a>
-      <a class="pillar teal" href="#automation">
-        <div class="glow" style="background:#0E9C84"></div>
-        <div class="big-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 6h7M18 8.5v7M7.8 7.8l8.4 8.4"/></svg></div>
+      <a class="pillar p-dark" href="#automation">
+        <div class="deco"></div>
+        <span class="num">02 / BACK OFFICE</span>
         <h3>AI Automation</h3>
         <p>For SMEs that want operations to run themselves. We connect your software and automate the manual work in between.</p>
         <div class="tags"><span>Lead &amp; CRM</span><span>Invoicing</span><span>Reporting</span><span>Onboarding</span><span>Orders</span></div>
@@ -432,22 +474,23 @@ footer{border-top:1px solid var(--line);padding-block:64px 40px;background:var(-
   </div>
 </section>
 
-<!-- AGENTS SHOWCASE -->
-<section class="sec" id="agents" style="padding-top:40px">
+<!-- AGENTS (soft) -->
+<section class="sec t-dark t-dark2" id="agents">
   <div class="wrap show">
     <div>
-      <div class="kicker">AI AGENTS</div>
-      <h2 class="h2">An AI receptionist that <span class="grad">never misses a call</span></h2>
-      <p class="lede">A natural-sounding voice agent on your business number. It answers on the first ring, qualifies the caller, books the appointment and texts the confirmation, day or night.</p>
-      <div class="feat-list">
-        <div class="feat"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3"/></svg></div><div><h4>Inbound &amp; outbound calling</h4><p>Answers every call, plus outbound follow-ups, reminders and reactivation campaigns.</p></div></div>
-        <div class="feat"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M6 12h12M10 18h4"/></svg></div><div><h4>Lead qualification</h4><p>Asks your screening questions and sends hot leads to your team in real time.</p></div></div>
-        <div class="feat"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M9 15l2 2 4-4"/></svg></div><div><h4>Booking, confirmations &amp; no-show recovery</h4><p>Books into your calendar, confirms by SMS and rebooks anyone who misses.</p></div></div>
-        <div class="feat"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></div><div><h4>Chatbots for web, WhatsApp &amp; Instagram</h4><p>The same brain answers DMs and website chat in your brand voice.</p></div></div>
+      <div class="eyebrow">AI Agents</div>
+      <h2 class="h2">Your new receptionist <span class="hl">never sleeps.</span></h2>
+      <p class="lede">A natural-sounding voice agent on your business number. It picks up on the first ring, qualifies the caller, books the slot and texts the confirmation. At 2 PM or 2 AM.</p>
+      <div class="feats">
+        <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3"/></svg></div><h4>Inbound &amp; outbound calls</h4><p>Answers every call. Runs follow-ups, reminders and reactivation.</p></div>
+        <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M6 12h12M10 18h4"/></svg></div><h4>Lead qualification</h4><p>Asks your questions. Sends hot leads to your team instantly.</p></div>
+        <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M9 15l2 2 4-4"/></svg></div><h4>Booking &amp; no-show recovery</h4><p>Books, confirms by SMS and rebooks anyone who misses.</p></div>
+        <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></div><h4>Web, WhatsApp &amp; Instagram</h4><p>The same AI answers chats and DMs in your brand voice.</p></div>
       </div>
     </div>
     <div class="phone-stage">
-      <div class="glow"></div>
+      <div class="float-chip c1"><b>0</b> missed calls</div>
+      <div class="float-chip c2"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#087D69" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12l4 4 8-8"/></svg>Booked in 28 seconds</div>
       <div class="phone" role="img" aria-label="Phone showing the AI receptionist booking a caller's appointment">
         <div class="screen">
           <div class="notch"></div>
@@ -467,22 +510,22 @@ footer{border-top:1px solid var(--line);padding-block:64px 40px;background:var(-
   </div>
 </section>
 
-<!-- AUTOMATION -->
-<section class="sec auto-sec" id="automation">
-  <div class="glow"></div>
+<!-- AUTOMATION (dark) -->
+<section class="sec t-dark auto auto-grad" id="automation">
+  <div class="orb"></div>
   <div class="wrap" style="position:relative">
     <div class="head center">
-      <div class="kicker">AI AUTOMATION FOR SMEs</div>
-      <h2 class="h2">Put your operations <span class="grad">on autopilot</span></h2>
-      <p class="lede">Your team shouldn't spend hours copying data between apps, chasing invoices or building reports. We map your processes, connect your software and let AI handle the work in between.</p>
+      <div class="eyebrow">AI Automation for SMEs</div>
+      <h2 class="h2">Less busywork. <span class="hl">More business.</span></h2>
+      <p class="lede">Stop copying data between apps, chasing invoices and building reports by hand. We map your processes, connect your software and let AI handle the work in between.</p>
     </div>
 
     <div class="flowbox" role="img" aria-label="Example automation: a new order triggers an AI step that updates the CRM, sends an invoice and notifies the team">
-      <div class="flowbar"><div class="dotz" aria-hidden="true"><i></i><i></i><i></i></div>Example workflow · New order to fulfilment<span class="run"><i></i>Running</span></div>
+      <div class="flowbar"><div class="dotz" aria-hidden="true"><i></i><i></i><i></i></div>workflow / new-order-to-fulfilment<span class="run"><i></i>RUNNING</span></div>
       <div class="wf">
         <div class="wnode"><div class="ic" style="background:rgba(255,182,92,.15);color:var(--amber)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg></div><div><small>TRIGGER</small><b>New order or form submitted</b></div></div>
         <div class="wire" aria-hidden="true"></div>
-        <div class="wnode ai"><div class="ic" style="background:rgba(79,157,255,.18);color:var(--blue-2)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></svg></div><div><small>AI STEP</small><b>Reads, classifies &amp; decides next action</b></div></div>
+        <div class="wnode ai"><div class="ic" style="background:rgba(255,255,255,.18);color:#fff"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></svg></div><div><small>AI STEP</small><b>Reads, classifies &amp; decides</b></div></div>
         <div class="wire d2" aria-hidden="true"></div>
         <div class="outs">
           <div class="wnode"><div class="ic" style="background:rgba(62,224,192,.12);color:var(--teal)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/></svg></div><b>CRM updated</b><svg class="ok" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12l4 4 8-8"/></svg></div>
@@ -493,43 +536,43 @@ footer{border-top:1px solid var(--line);padding-block:64px 40px;background:var(-
     </div>
 
     <div class="uses">
-      <div class="use"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></div><h4>Lead capture &amp; CRM</h4><p>Every call, form and DM lands in your CRM, tagged, scored and assigned to the right person.</p></div>
-      <div class="use"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></div><h4>Invoicing &amp; payment follow-ups</h4><p>Invoices go out on time and polite reminders chase late payments automatically.</p></div>
-      <div class="use"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div><h4>Reporting &amp; dashboards</h4><p>Your weekly numbers, pulled from every tool and delivered to your inbox or Slack.</p></div>
-      <div class="use"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.7z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/></svg></div><h4>Orders &amp; inventory sync</h4><p>Orders, stock levels and supplier updates stay in sync across your store, sheets and team.</p></div>
-      <div class="use"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><h4>Customer onboarding</h4><p>Welcome messages, documents, accounts and tasks set up the moment a customer signs.</p></div>
-      <div class="use"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div><h4>Support &amp; inbox triage</h4><p>AI reads incoming emails and tickets, sorts them and drafts replies for your team to approve.</p></div>
+      <div class="use"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></div><h4>Lead capture &amp; CRM</h4><p>Every call, form and DM lands in your CRM, tagged, scored and assigned.</p></div>
+      <div class="use"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></div><h4>Invoicing &amp; payment follow-ups</h4><p>Invoices go out on time. Polite reminders chase late payments for you.</p></div>
+      <div class="use"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div><h4>Reporting &amp; dashboards</h4><p>Your weekly numbers, pulled from every tool and delivered to your inbox.</p></div>
+      <div class="use"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.7z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/></svg></div><h4>Orders &amp; inventory sync</h4><p>Orders, stock and supplier updates stay in sync across every system.</p></div>
+      <div class="use"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><h4>Customer onboarding</h4><p>Welcome messages, documents and tasks set up the moment a customer signs.</p></div>
+      <div class="use"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div><h4>Support &amp; inbox triage</h4><p>AI sorts incoming emails and tickets and drafts replies for approval.</p></div>
     </div>
   </div>
 </section>
 
-<!-- CASE STUDY -->
-<section class="sec" id="results">
+<!-- CASE STUDY (white with blue card) -->
+<section class="sec t-blue fade-light" id="results">
   <div class="wrap">
-    <div class="case">
-      <div class="glow"></div>
+    <div class="head center"><div class="eyebrow">Results</div><h2 class="h2">Real businesses. <span style="color:rgba(255,255,255,.7)">Real results.</span></h2></div>
+    <div class="case t-light">
+      <div class="deco"></div>
       <div style="position:relative">
-        <div class="kicker">CASE STUDY</div>
-        <h2 class="h2" style="font-size:clamp(30px,3.6vw,46px)">How a local US business stopped losing customers to the phone</h2>
-        <p class="lede">Calls were going to voicemail at busy times and after close, and no-shows were eating into the schedule. We deployed our AI Receptionist to run the front desk end to end.</p>
-        <div class="case-tags"><span>Local service business</span><span>United States</span><span>AI Receptionist</span></div>
+        <div class="eyebrow">Case study</div>
+        <h2 class="h2" style="font-size:clamp(32px,4vw,52px)">Zero missed calls. Fewer no-shows. <span class="hl">Happier customers.</span></h2>
+        <p class="lede">A local US service business was sending calls to voicemail at busy times and after close. We deployed our AI Receptionist to run the front desk end to end.</p>
+        <div class="chips"><span>Local service business</span><span>United States</span><span>AI Receptionist</span></div>
       </div>
       <div class="results">
-        <div class="res"><b class="grad">0</b><h4>Missed calls</h4><p>Every caller answered, day or night.</p></div>
-        <div class="res"><b class="grad">↓</b><h4>Reduced no-shows</h4><p>Auto confirmations and reminders.</p></div>
-        <div class="res"><b class="grad">↑</b><h4>Customer experience enhanced</h4><p>Instant answers, no hold or voicemail.</p></div>
-        <div class="res"><b class="grad">100%</b><h4>Operations automated</h4><p>Booking, confirmations and follow-ups.</p></div>
+        <div class="res"><b>0</b><h4>Missed calls</h4><p>Every caller answered, day or night.</p></div>
+        <div class="res"><b>↓</b><h4>Reduced no-shows</h4><p>Auto confirmations and reminders.</p></div>
+        <div class="res"><b>↑</b><h4>Customer experience enhanced</h4><p>Instant answers. No hold, no voicemail.</p></div>
+        <div class="res"><b>100%</b><h4>Operations automated</h4><p>Booking, confirmations and follow-ups.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CALCULATOR -->
-<section class="sec" id="calculator" style="padding-top:20px">
+<!-- CALCULATOR (soft) -->
+<section class="sec t-soft" id="calculator">
   <div class="wrap">
-    <div class="head">
-      <div class="kicker">REVENUE CALCULATOR</div>
-      <h2 class="h2">What are missed calls costing you?</h2>
+    <div class="split-head">
+      <div><div class="eyebrow">Revenue calculator</div><h2 class="h2">Missed calls are <span class="hl">missed money.</span></h2></div>
       <p class="lede">Drag the sliders to match your business. It's an estimate, but most owners are surprised.</p>
     </div>
     <div class="calc">
@@ -539,40 +582,40 @@ footer{border-top:1px solid var(--line);padding-block:64px 40px;background:var(-
         <div class="field"><label for="close">Callers who would have booked <output id="closeOut">30%</output></label><input type="range" id="close" min="5" max="80" step="5" value="30"></div>
       </div>
       <div class="calc-out" aria-live="polite">
-        <small>Estimated revenue lost every month</small>
+        <small>Revenue lost every month</small>
         <div class="big" id="lost">$10,800</div>
         <div class="calc-row"><span>Per year</span><b id="yearly">$129,600</b></div>
-        <div class="calc-row"><span>AI Receptionist from</span><b class="t">$200 / month</b></div>
+        <div class="calc-row"><span>AI Receptionist from</span><b>$200 / month</b></div>
         <p class="fine">Missed calls × 30 days × booking rate × customer value.</p>
-        <a class="btn btn-primary" href="https://calendly.com/engauge-ai/30min" target="_blank" rel="noopener">Stop the leak</a>
+        <a class="btn btn-white" href="https://calendly.com/engauge-ai/30min" target="_blank" rel="noopener">Stop the leak</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROCESS -->
-<section class="sec" style="padding-top:20px">
+<!-- PROCESS (white) -->
+<section class="sec t-light">
   <div class="wrap">
     <div class="head center">
-      <div class="kicker">HOW IT WORKS</div>
-      <h2 class="h2">Live in days, not months</h2>
+      <div class="eyebrow">How it works</div>
+      <h2 class="h2">Live in 5 days. <span class="hl">Runs forever.</span></h2>
       <p class="lede">No technical team needed. We build, launch and manage everything.</p>
     </div>
     <div class="steps">
-      <div class="st"><div class="n">1</div><small>Day 1</small><h4>Free discovery call</h4><p>We map your calls, processes and the places where time and leads slip away.</p></div>
-      <div class="st"><div class="n">2</div><small>Days 2–3</small><h4>Custom build</h4><p>We train your agent or design your automations and connect your tools.</p></div>
-      <div class="st"><div class="n">3</div><small>Day 4</small><h4>Test together</h4><p>You try it, push it and request changes until it works exactly right.</p></div>
-      <div class="st"><div class="n">4</div><small>Day 5+</small><h4>Go live &amp; improve</h4><p>We launch, monitor closely and keep tuning every month.</p></div>
+      <div class="st"><div class="n">01</div><small>DAY 1</small><h4>Free discovery call</h4><p>We map your calls, processes and where time and leads slip away.</p></div>
+      <div class="st"><div class="n">02</div><small>DAYS 2–3</small><h4>Custom build</h4><p>We train your agent or design your automations and connect your tools.</p></div>
+      <div class="st"><div class="n">03</div><small>DAY 4</small><h4>Test together</h4><p>You try it, push it and request changes until it's exactly right.</p></div>
+      <div class="st"><div class="n">04</div><small>DAY 5+</small><h4>Go live &amp; improve</h4><p>We launch, monitor closely and keep tuning every month.</p></div>
     </div>
   </div>
 </section>
 
-<!-- PRICING -->
-<section class="sec" id="pricing" style="padding-top:40px">
+<!-- PRICING (dark) -->
+<section class="sec t-soft" id="pricing">
   <div class="wrap">
     <div class="head center">
-      <div class="kicker">PRICING</div>
-      <h2 class="h2">Simple, transparent pricing</h2>
+      <div class="eyebrow">Pricing</div>
+      <h2 class="h2">Priced for <span class="hl">growing businesses.</span></h2>
       <p class="lede">A one-time build fee, then a flat monthly fee for hosting, monitoring and improvements.</p>
     </div>
     <div class="plans">
@@ -580,29 +623,34 @@ footer{border-top:1px solid var(--line);padding-block:64px 40px;background:var(-
         <div><h3>AI Receptionist</h3><p class="for">Every call answered, qualified and booked for one location.</p></div>
         <div class="price"><b>$200<small> /mo</small></b><span>+ $1,000 one-time setup</span></div>
         <ul class="checks"><li>24/7 inbound AI receptionist</li><li>Lead qualification &amp; booking</li><li>SMS confirmations &amp; reminders</li><li>Call summaries to your CRM or sheet</li><li>Monthly performance report</li></ul>
-        <a class="btn btn-ghost" href="https://calendly.com/engauge-ai/30min" target="_blank" rel="noopener">Book a demo</a>
+        <a class="btn btn-line" href="https://calendly.com/engauge-ai/30min" target="_blank" rel="noopener">Book a demo</a>
       </div>
       <div class="plan pop">
-        <span class="badge">MOST POPULAR</span>
+        <span class="flag">MOST POPULAR</span>
         <div><h3>Growth</h3><p class="for">Inbound and outbound calling with automated follow-up.</p></div>
         <div class="price"><b>$300<small> /mo</small></b><span>+ $2,000 one-time setup</span></div>
         <ul class="checks"><li>Everything in AI Receptionist</li><li>Outbound follow-up &amp; reactivation calls</li><li>Missed-call text-back &amp; no-show recovery</li><li>Live transfer for hot leads</li><li>Google review requests</li></ul>
-        <a class="btn btn-primary" href="https://calendly.com/engauge-ai/30min" target="_blank" rel="noopener">Book a demo</a>
+        <a class="btn btn-white" href="https://calendly.com/engauge-ai/30min" target="_blank" rel="noopener">Book a demo</a>
       </div>
       <div class="plan">
         <div><h3>AI Automation</h3><p class="for">For SMEs automating operations across their tools and teams.</p></div>
         <div class="price"><b>Custom</b><span>Scoped on a free process audit</span></div>
         <ul class="checks"><li>Process mapping &amp; automation plan</li><li>Lead, invoicing, reporting &amp; ops workflows</li><li>Chatbots &amp; custom AI agents</li><li>Integrations across your software</li><li>Dedicated account manager</li></ul>
-        <a class="btn btn-ghost" href="#contact">Get a quote</a>
+        <a class="btn btn-line" href="#contact">Get a quote</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="sec" id="faq" style="padding-top:20px">
-  <div class="wrap">
-    <div class="head center"><div class="kicker">FAQ</div><h2 class="h2">Questions, answered</h2></div>
+<!-- FAQ (white) -->
+<section class="sec t-light" id="faq">
+  <div class="wrap faq-grid">
+    <div>
+      <div class="eyebrow">FAQ</div>
+      <h2 class="h2">Questions? <span class="hl">Answered.</span></h2>
+      <p class="lede">Anything else, ask us on the demo call.</p>
+      <div class="ctas"><a class="btn btn-blue" href="https://calendly.com/engauge-ai/30min" target="_blank" rel="noopener">Book a demo</a></div>
+    </div>
     <div class="faq">
       <details open><summary>Will callers know they're talking to AI?</summary><p>The voice is natural and trained on your services and tone, so most callers simply get answered and booked. We can have it introduce itself as a virtual assistant if you prefer.</p></details>
       <details><summary>What if a caller asks something it can't handle?</summary><p>You set the rules. It can transfer the call to your team, take a detailed message, or text staff a summary so someone calls back.</p></details>
@@ -613,27 +661,26 @@ footer{border-top:1px solid var(--line);padding-block:64px 40px;background:var(-
   </div>
 </section>
 
-<!-- CTA -->
-<section class="sec" style="padding-top:20px">
-  <div class="wrap">
-    <div class="cta">
-      <h2>Ready to let AI run the busywork?</h2>
-      <p>Book a free 30-minute call. Hear the receptionist live and see which of your processes we can automate first.</p>
-      <div class="hero-ctas"><a class="btn btn-primary" href="https://calendly.com/engauge-ai/30min" target="_blank" rel="noopener">Book a free demo</a><a class="btn btn-ghost" href="#contact">Send us a message</a></div>
-    </div>
-  </div>
+<!-- CTA (blue) -->
+<section class="cta t-light">
+  <div class="wrap"><div class="cta-card t-blue gridfx">
+    <div class="eyebrow" style="justify-content:center">Get started</div>
+    <h2>Stop answering phones. <span class="soft">Start growing.</span></h2>
+    <p class="lede">Book a free 30-minute call. Hear the receptionist live and see which of your processes we can automate first.</p>
+    <div class="ctas"><a class="btn btn-white" href="https://calendly.com/engauge-ai/30min" target="_blank" rel="noopener">Book a free demo</a><a class="btn btn-line" href="#contact">Send us a message</a></div>
+  </div></div>
 </section>
 
-<!-- CONTACT -->
-<section class="sec" id="contact" style="padding-top:20px">
+<!-- CONTACT (soft) -->
+<section class="sec t-soft" id="contact">
   <div class="wrap contact">
     <div>
-      <div class="kicker">CONTACT</div>
-      <h2 class="h2">Let's talk about your business</h2>
+      <div class="eyebrow">Contact</div>
+      <h2 class="h2">Let's talk about <span class="hl">your business.</span></h2>
       <p class="lede">Tell us what you'd like to automate. We reply within 24 hours.</p>
       <div class="cps">
-        <div class="cp"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div><div><small>Email us</small><span>hello@engauge.ai</span></div></div>
-        <div class="cp"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></div><div><small>Book directly</small><a href="https://calendly.com/engauge-ai/30min" target="_blank" rel="noopener">calendly.com/engauge-ai/30min</a></div></div>
+        <div class="cp"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div><div><small>Email us</small><span>hello@engauge.ai</span></div></div>
+        <div class="cp"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></div><div><small>Book directly</small><a href="https://calendly.com/engauge-ai/30min" target="_blank" rel="noopener">calendly.com/engauge-ai/30min</a></div></div>
       </div>
     </div>
     <form id="contactForm" novalidate>
@@ -644,7 +691,7 @@ footer{border-top:1px solid var(--line);padding-block:64px 40px;background:var(-
         <select id="f-svc" name="service"><option>AI Receptionist / Calling Agent</option><option>AI Automation for my operations</option><option>AI Chatbot</option><option>Custom AI Agent</option><option>Not sure yet</option></select></div>
       <div class="fg full"><label for="f-msg">What would you like to automate?</label><textarea id="f-msg" name="message" placeholder="e.g. We miss calls after 6 PM and spend hours each week on invoices and reports."></textarea></div>
       <p class="form-msg" id="formMsg" role="status" hidden></p>
-      <button class="btn btn-primary" type="submit">Send message</button>
+      <button class="btn btn-blue" type="submit">Send message</button>
     </form>
   </div>
 </section>
@@ -668,37 +715,36 @@ const FORM_ENDPOINT = "";
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $ = id => document.getElementById(id);
 
-// header + menu
-const hdr=$('hdr'); const onScroll=()=>hdr.classList.toggle('scrolled',scrollY>10); addEventListener('scroll',onScroll,{passive:true}); onScroll();
+// header: transparent over blue hero, white after scroll
+const hdr=$('hdr'); const onScroll=()=>hdr.classList.toggle('scrolled',scrollY>40); addEventListener('scroll',onScroll,{passive:true}); onScroll();
 const menuBtn=$('menuBtn'), navLinks=$('navLinks');
 menuBtn.addEventListener('click',()=>{const o=navLinks.classList.toggle('open');menuBtn.setAttribute('aria-expanded',o)});
 navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{navLinks.classList.remove('open');menuBtn.setAttribute('aria-expanded','false')}));
 
-// marquee: duplicate for seamless loop
+// marquee loop
 const track=$('track'); track.innerHTML+=track.innerHTML; [...track.children].slice(track.children.length/2).forEach(el=>el.setAttribute('aria-hidden','true'));
 
-// hero particle network
+// hero particle network (white)
 (function(){
-  const c=$('net'); if(!c) return; const ctx=c.getContext('2d'); let w,h,pts=[],dpr=Math.min(devicePixelRatio||1,2);
+  const c=$('net'); const ctx=c.getContext('2d'); let w,h,pts=[],dpr=Math.min(devicePixelRatio||1,2);
   function size(){w=c.offsetWidth;h=c.offsetHeight;c.width=w*dpr;c.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
     const n=Math.round(Math.min(70,w*h/16000));pts=Array.from({length:n},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3}))}
   function draw(){ctx.clearRect(0,0,w,h);
     for(const p of pts){if(!reduce){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1}}
     for(let i=0;i<pts.length;i++){const a=pts[i];
-      for(let j=i+1;j<pts.length;j++){const b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<130){ctx.strokeStyle='rgba(123,184,255,'+(0.18*(1-d/130))+')';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}}
-      ctx.fillStyle='rgba(123,184,255,.55)';ctx.beginPath();ctx.arc(a.x,a.y,1.4,0,7);ctx.fill()}
+      for(let j=i+1;j<pts.length;j++){const b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<130){ctx.strokeStyle='rgba(255,255,255,'+(0.16*(1-d/130))+')';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}}
+      ctx.fillStyle='rgba(255,255,255,.5)';ctx.beginPath();ctx.arc(a.x,a.y,1.4,0,7);ctx.fill()}
     if(!reduce) requestAnimationFrame(draw)}
   size(); draw(); addEventListener('resize',()=>{size(); if(reduce) draw()});
 })();
 
-// count-up when stats come into view (final values shown at rest)
-const counters=document.querySelectorAll('[data-count]');
+// count-up (final values shown at rest)
 if('IntersectionObserver' in window && !reduce){
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting) return; io.unobserve(e.target);
     const el=e.target,end=+el.dataset.count; if(!end) return; let s=null;
     const step=t=>{s=s||t;const k=Math.min((t-s)/1200,1);el.textContent=Math.round(end*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(step)};
     requestAnimationFrame(step)}),{threshold:.6});
-  counters.forEach(c=>io.observe(c));
+  document.querySelectorAll('[data-count]').forEach(c=>io.observe(c));
 }
 
 // phone conversation replay (full chat visible at rest)
@@ -730,10 +776,10 @@ const form=$('contactForm'),msg=$('formMsg');
 form.addEventListener('submit',async e=>{
   e.preventDefault(); msg.hidden=false;
   const name=$('f-name').value.trim(),email=$('f-email').value.trim();
-  if(!name||!/^\S+@\S+\.\S+$/.test(email)){msg.style.color='var(--amber)';msg.textContent='Please add your name and a valid email so we can reply.';return}
-  if(!FORM_ENDPOINT){msg.style.color='var(--amber)';msg.textContent='The online form is not connected yet. Please email hello@engauge.ai or book a call using the link on this page.';return}
+  if(!name||!/^\S+@\S+\.\S+$/.test(email)){msg.style.color='#B4261A';msg.textContent='Please add your name and a valid email so we can reply.';return}
+  if(!FORM_ENDPOINT){msg.style.color='#8A5200';msg.textContent='The online form is not connected yet. Please email hello@engauge.ai or book a call using the link on this page.';return}
   try{const res=await fetch(FORM_ENDPOINT,{method:'POST',headers:{Accept:'application/json'},body:new FormData(form)});if(!res.ok)throw 0;
-    msg.style.color='var(--teal)';msg.textContent='Thanks, '+name.split(' ')[0]+'. We got your message and will reply within 24 hours.';form.reset()}
-  catch(_){msg.style.color='var(--amber)';msg.textContent='We could not send that just now. Please email hello@engauge.ai or book a call.'}
+    msg.style.color='#087D69';msg.textContent='Thanks, '+name.split(' ')[0]+'. We got your message and will reply within 24 hours.';form.reset()}
+  catch(_){msg.style.color='#B4261A';msg.textContent='We could not send that just now. Please email hello@engauge.ai or book a call.'}
 });
 </script>
